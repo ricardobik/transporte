@@ -22,6 +22,11 @@
             font-size: 24px;
             font-weight: 300;
         }
+        
+        .modal-edit {
+            width: 40% !important;
+            height: 40% !important;
+        }
 
     </style>
 
@@ -71,11 +76,11 @@
     </div>
 
     <!-- Modal Structure -->
-    <div id="modal-edit" class="modal modal-fixed-footer">
-        <div class="modal-content">
-            <span class="card-title">Editar Setor</span>
+    <form method="POST" name="form" action="" id="form">
+        <div id="modal-edit" class="modal modal-fixed-footer modal-edit">
+            <div class="modal-content">
+                <span class="card-title">Editar Setor</span>
 
-            <form method="POST" name="setor-form" action="" id="setor-form">
 
                 <div class="row">
                     <div class="input-field col s1">
@@ -89,16 +94,16 @@
                     </div>
                 </div>
 
-            </form>
-        </div>
-        <div class="modal-footer">
-            <div class="card-action right-align">
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Voltar</a>
-                <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="delete">Deletar</a>
-                <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="update">Enviar</a>
+            </div>
+            <div class="modal-footer">
+                <div class="card-action right-align">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Voltar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="delete">Deletar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="update">Enviar</a>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -152,71 +157,19 @@
             });
 
             //Get id from json and populate the modal field
-            //            $('#editarBtn').on('click', function() {
-            //                $.get("http://192.168.10.10:3004/setor/" + update.id, function(data, status) {
-            //                    $("#id").val(data.id);
-            //                    $("#nome").val(data.nome);
-            //
-            //                    //Reload Material Form
-            //                    Materialize.updateTextFields();
-            //
-            //                });
-            //            });
-
-            //Fill modal form
             $('#callModalEdit').on('click', function() {
                 fillSetor($update.id);
             });
 
-            //            $('#delete').on('click', function() {
-            //
-            //                $.ajax({
-            //                    type: "DELETE",
-            //                    url: "http://192.168.10.10:3004/setor/" + $update.id,
-            //                    dataType: "json",
-            //
-            //                    //if received a response from the server
-            //                    success: function(response) {
-            //
-            //                        //Reload dataTable
-            //                        $('#table-setor').DataTable().ajax.reload();
-            //                        Materialize.toast('Motorista Apagado com Sucesso', 5000)
-            //                    },
-            //
-            //                });
-            //            });
-            //
-            //            //Update setor
-            //            $("#update").click(function(e) {
-            //
-            //                //get de form data
-            //                data = $("#nome").serializeArray();
-            //
-            //                //make AJAX request
-            //                //$("#form").validate();
-            //                //if ($("#form").valid()) {
-            //                $.ajax({
-            //                    type: "PUT",
-            //                    url: "http://192.168.10.10:3004/setor/" + $update.id,
-            //                    data: data,
-            //                    dataType: "json",
-            //
-            //
-            //                    //if received a response from the server
-            //                    success: function(response) {
-            //
-            //                        //Reload dataTable
-            //                        $('#table-setor').DataTable().ajax.reload();
-            //                        Materialize.toast('Motorista Atualizado com Sucesso', 5000)
-            //
-            //                    },
-            //
-            //                });
-            //                //}
-            //                //Reload Material Form
-            //                //Materialize.updateTextFields();
-            //            }); //Update End
+            //Update request
+            $("#update").click(function(e) {
+                updateSetor($update.id, $("#form").serializeArray());
+            });
 
+            //Delete request
+            $('#delete').on('click', function() {
+                deleteSetor($update.id);
+            });
 
         });
 

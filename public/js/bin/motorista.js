@@ -51,34 +51,32 @@ var v = $("#form").validate({
 //Fill motorista Modal to Edit
 function FillMotorista(motoristaId) {
 
-    $("#form").validate();
-    if ($("#form").valid()) {
-        $.ajax({
-            type: "GET",
-            url: "http://192.168.10.10:3004/driver/" + motoristaId,
+    $.ajax({
+        type: "GET",
+        url: "http://192.168.10.10:3004/driver/" + motoristaId,
 
-            dataType: "json",
+        dataType: "json",
 
-            //if received a response from the server
-            success: function (data) {
+        //if received a response from the server
+        success: function (data) {
 
-                $("#id").val(data.id);
-                $("#nome").val(data.nome);
-                $("#cnh").val(data.cnh);
-                $("#cnhVencimento").val(data.cnhVencimento);
-                $("#telefone").val(data.telefone);
-                $("#setor").val(data.setor);
+            $("#id").val(data.id);
+            $("#nome").val(data.nome);
+            $("#cnh").val(data.cnh);
+            $("#cnhVencimento").val(data.cnhVencimento);
+            $("#telefone").val(data.telefone);
+            $("#setor").val(data.setor);
 
-                //Reload Material Form
-                Materialize.updateTextFields();
+            //Reload Material Form
+            Materialize.updateTextFields();
 
-                //Load material dropbox
-                $('#setor').material_select();
+            //Load material dropbox
+            $('#setor').material_select();
 
-            },
+        },
 
-        });
-    }
+    });
+
 };
 
 //Delete function
@@ -137,7 +135,7 @@ function saveMotorista(data) {
                 swal("Pronto!",
                     "Motorista gravado com sucesso.",
                     "success");
-                
+
             },
 
         });

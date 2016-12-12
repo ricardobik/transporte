@@ -97,40 +97,38 @@
             <div class="modal-content">
                 <span class="card-title">Editar Motorista</span>
 
-                <form method="POST" name="form" action="" id="form">
-                    <div class="row">
-                        <div class="input-field col s1">
-                            <input disabled name="id" id="id" type="text">
-                            <label for="disabled">ID</label>
-                        </div>
+                <div class="row">
+                    <div class="input-field col s1">
+                        <input disabled name="id" id="id" type="text">
+                        <label for="disabled">ID</label>
+                    </div>
 
-                        <div class="input-field col m11 s11">
-                            <input id="nome" name="nome" type="text" class="validate" required="">
-                            <label for="nome">Nome</label>
-                        </div>
+                    <div class="input-field col m11 s11">
+                        <input id="nome" name="nome" type="text" class="validate" required="">
+                        <label for="nome">Nome</label>
                     </div>
-                    <div class="row">
-                        <div class="input-field col m6">
-                            <input placeholder="" id="cnh" name="cnh" type="text" class="validate" required="">
-                            <label for="cnh">Nº CNH</label>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col m6">
+                        <input placeholder="" id="cnh" name="cnh" type="text" class="validate" required="">
+                        <label for="cnh">Nº CNH</label>
+                    </div>
 
-                        <div class="input-field col m6">
-                            <input placeholder="" id="cnhVencimento" name="cnhVencimento" type="text" class="validate" required="">
-                            <label for="data de vencimento">Data de Vencimento</label>
-                        </div>
+                    <div class="input-field col m6">
+                        <input placeholder="" id="cnhVencimento" name="cnhVencimento" type="text" class="validate" required="">
+                        <label for="data de vencimento">Data de Vencimento</label>
                     </div>
-                    <div class="row">
-                        <div class="input-field col m6">
-                            <input placeholder="" id="telefone" name="telefone" type="text" class="validate">
-                            <label for="telefone">Telefone</label>
-                        </div>
-                        <div class="input-field col m6" required="">
-                            <select id="setor" name="setor"></select>
-                            <label>Setor</label>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col m6">
+                        <input placeholder="" id="telefone" name="telefone" type="text" class="validate">
+                        <label for="telefone">Telefone</label>
                     </div>
-                </form>
+                    <div class="input-field col m6" required="">
+                        <select id="setor" name="setor"></select>
+                        <label>Setor</label>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <div class="card-action right-align">
@@ -186,7 +184,7 @@
             $('select').material_select();
 
             //Stop the submit request
-            $("#motorista-form").submit(function(e) {
+            $("#form").submit(function(e) {
                 e.preventDefault();
             });
 
@@ -209,16 +207,15 @@
                 FillMotorista($update.id);
             });
 
-            //Delete request
-            $('#delete').on('click', function() {
-                deleteMotorista($update.id);
-            });
-
             //Update request
             $("#update").click(function(e) {
                 updateMotorista($update.id, $("#form").serializeArray());
             });
 
+            //Delete request
+            $('#delete').on('click', function() {
+                deleteMotorista($update.id);
+            });
 
 
         });
