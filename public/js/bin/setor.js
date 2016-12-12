@@ -50,7 +50,7 @@ $.validator.setDefaults({
 });
 
 //Rules and Messages to Validate
-var v = $("#form").validate({
+$("#form").validate({
     
     rules: {
 
@@ -58,13 +58,11 @@ var v = $("#form").validate({
 
 });
 
-function fillSetor(setorId) {
-    console.log(setorId);
-
-   
+function fillSetor(id) {
+    
         $.ajax({
             type: "GET",
-            url: "http://192.168.10.10:3004/setor/" + setorId,
+            url: "http://192.168.10.10:3004/setor/" + id,
             dataType: "json",
 
             //if received a response from the server
@@ -85,7 +83,7 @@ function fillSetor(setorId) {
 };
 
 //Delete function
-function deleteSetor(setorId) {
+function deleteSetor(id) {
     swal({
             title: "Tem certeza?",
             text: "Esta ação excluirá o setor!",
@@ -102,7 +100,7 @@ function deleteSetor(setorId) {
 
                 $.ajax({
                     type: "DELETE",
-                    url: "http://192.168.10.10:3004/setor/" + setorId,
+                    url: "http://192.168.10.10:3004/setor/" + id,
                     dataType: "json",
 
                     //if received a response from the server

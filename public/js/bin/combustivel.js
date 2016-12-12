@@ -1,10 +1,10 @@
 //Fill table setor
-function fillSetorTable() {
+function fillCombustivelTable() {
 
     //Populates Table with Json
-    table = $('table#table-setor').DataTable({
+    table = $('table#table-combustivel').DataTable({
         ajax: {
-            url: "http://192.168.10.10:3004/setor",
+            url: "http://192.168.10.10:3004/combustivel",
             contentType: 'application/json; charset=UTF-8',
             dataType: 'json',
             dataSrc: ''
@@ -50,7 +50,7 @@ $.validator.setDefaults({
 });
 
 //Rules and Messages to Validate
-var v = $("#form").validate({
+$("#form").validate({
     
     rules: {
 
@@ -58,13 +58,11 @@ var v = $("#form").validate({
 
 });
 
-function fillSetor(setorId) {
-    console.log(setorId);
-
+function fillCombustivel(id) {
    
         $.ajax({
             type: "GET",
-            url: "http://192.168.10.10:3004/setor/" + setorId,
+            url: "http://192.168.10.10:3004/combustivel/" + id,
             dataType: "json",
 
             //if received a response from the server
@@ -85,10 +83,10 @@ function fillSetor(setorId) {
 };
 
 //Delete function
-function deleteSetor(setorId) {
+function deleteCombustivel(id) {
     swal({
             title: "Tem certeza?",
-            text: "Esta ação excluirá o setor!",
+            text: "Esta ação excluirá o combustivel!",
             type: "warning",
             showCancelButton: true,
             confirmButtonClass: 'btn-danger',
@@ -102,19 +100,19 @@ function deleteSetor(setorId) {
 
                 $.ajax({
                     type: "DELETE",
-                    url: "http://192.168.10.10:3004/setor/" + setorId,
+                    url: "http://192.168.10.10:3004/combustivel/" + id,
                     dataType: "json",
 
                     //if received a response from the server
                     success: function (response) {
                         //Reload dataTable
-                        $('#table-setor').DataTable().ajax.reload();
+                        $('#table-combustivel').DataTable().ajax.reload();
                         $('#modal-edit').modal('close');
                     },
 
                 });
 
-                swal("Excluído!", "O setor foi excluído!", "success");
+                swal("Excluído!", "O combustível foi excluído!", "success");
             } else {
                 swal("Cancelado", "Nada foi modificado", "error");
                 $('#modal-edit').modal('close');
@@ -154,7 +152,7 @@ function saveCombustivel(data) {
 };
 
 //Update function
-function updateSetor(id, data) {
+function updateCombustivel(id, data) {
 
     //do AJAX request
     $("#form").validate();
@@ -173,7 +171,7 @@ function updateSetor(id, data) {
 
             $.ajax({
                 type: "PUT",
-                url: "http://192.168.10.10:3004/setor/" + id,
+                url: "http://192.168.10.10:3004/combustivel/" + id,
                 data: data,
                 dataType: "json",
 
@@ -184,7 +182,7 @@ function updateSetor(id, data) {
                         "success");
 
                     //Reload dataTable
-                    $('#table-setor').DataTable().ajax.reload();
+                    $('#table-combustivel').DataTable().ajax.reload();
                     $('#modal-edit').modal('close');
 
                 },

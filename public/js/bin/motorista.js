@@ -16,7 +16,7 @@ $.validator.setDefaults({
 });
 
 //Rules and Messages to Validate
-var v = $("#form").validate({
+$("#form").validate({
     //ignore: [],
     debug: true,
     rules: {
@@ -80,7 +80,7 @@ function FillMotorista(motoristaId) {
 };
 
 //Delete function
-function deleteMotorista(motoristaId) {
+function deleteMotorista(id) {
     swal({
             title: "Tem certeza?",
             text: "Esta ação excluirá o motorista!",
@@ -97,7 +97,7 @@ function deleteMotorista(motoristaId) {
 
                 $.ajax({
                     type: "DELETE",
-                    url: "http://192.168.10.10:3004/driver/" + motoristaId,
+                    url: "http://192.168.10.10:3004/driver/" + id,
                     dataType: "json",
 
                     //if received a response from the server
@@ -146,7 +146,7 @@ function saveMotorista(data) {
 };
 
 //Update function
-function updateMotorista(motoristaId, data) {
+function updateMotorista(id, data) {
 
     //do AJAX request
     $("#form").validate();
@@ -165,7 +165,7 @@ function updateMotorista(motoristaId, data) {
 
             $.ajax({
                 type: "PUT",
-                url: "http://192.168.10.10:3004/driver/" + motoristaId,
+                url: "http://192.168.10.10:3004/driver/" + id,
                 data: data,
                 dataType: "json",
 
