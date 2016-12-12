@@ -117,6 +117,7 @@ function deleteSetor(setorId) {
                 swal("Excluído!", "O setor foi excluído!", "success");
             } else {
                 swal("Cancelado", "Nada foi modificado", "error");
+                $('#modal-edit').modal('close');
             }
         });
 
