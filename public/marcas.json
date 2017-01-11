@@ -1,0 +1,94 @@
+[
+  {
+    "Nome": "AGRALE",
+    "Id": 27
+  },
+  {
+    "Id": 249,
+    "Nome": "ASIA MOTORS"
+  },
+  {
+    "Id": 250,
+    "Nome": "CASE"
+  },
+  {
+    "Id": 1,
+    "Nome": "CHEVROLET"
+  },
+  {
+    "Id": 5,
+    "Nome": "CITROEN"
+  },
+  {
+    "Id": 3,
+    "Nome": "FIAT"
+  },
+  {
+    "Id": 13,
+    "Nome": "FORD"
+  },
+  {
+    "Id": 252,
+    "Nome": "HUBER WARCO"
+  },
+  {
+    "Id": 7,
+    "Nome": "HONDA"
+  },
+  {
+    "Id": 14,
+    "Nome": "HYUNDAI"
+  },
+  {
+    "Id": 85,
+    "Nome": "IVECO"
+  },
+  {
+    "Id": 16,
+    "Nome": "KIA"
+  },
+  {
+    "Id": 251,
+    "Nome": "MARCOPOLO"
+  },
+  {
+    "Id": 4,
+    "Nome": "MERCEDES-BENZ"
+  },
+  {
+    "Id": 253,
+    "Nome": "MASSEY FERGUSON"
+  },
+  {
+    "Id": 111,
+    "Nome": "MITSUBISHI"
+  },
+  {
+    "Id": 254,
+    "Nome": "NEW HOLLAND"
+  },
+  {
+    "Id": 22,
+    "Nome": "PEUGEOT"
+  },
+  {
+    "Id": 255,
+    "Nome": "BOLIVIA"
+  },
+  {
+    "Id": 24,
+    "Nome": "RENAULT"
+  },
+  {
+    "Id": 23,
+    "Nome": "TOYOTA"
+  },
+  {
+    "Id": 2,
+    "Nome": "VOLKSWAGEN"
+  },
+  {
+    "Id": 135,
+    "Nome": "YAMAHA"
+  }
+]

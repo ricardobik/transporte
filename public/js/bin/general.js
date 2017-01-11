@@ -49,31 +49,7 @@ function getSetor() {
         }
     });
 
-}
-
-function getMarcas() {
-    //Load Json marcas from FIPE API
-    $.ajax({
-        url: 'http://fipeapi.appspot.com/api/1/carros/marcas.json',
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-
-            $.each(json, function (key, value) {
-
-                $('#marcas').append(
-                    $("<option></option>")
-                    .attr('value', value.id)
-                    .text(value.name)
-                );
-
-                $('select').material_select();
-
-            });
-        }
-    });
-
-}
+};
 
 
 
@@ -103,7 +79,13 @@ $('.datepicker').pickadate({
     labelYearSelect: 'Selecione o ano'
 });
 
-swal.setDefaults({ 
+swal.setDefaults({
     confirmButtonText: "OK",
-    cancelButtonText: "Cancelar" 
+    cancelButtonText: "Cancelar"
+});
+
+
+$('select').on('contentChanged', function () {
+    // re-initialize (update)
+    $(this).material_select();
 });
