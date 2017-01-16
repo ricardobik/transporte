@@ -9,9 +9,6 @@ function fillVeiculoSelect(marcas, tipo) {
         dataType: 'json',
         success: function (json) {
 
-            //            if (!json.length) {
-            //                return;
-            //            }
             $.each(json, function (key, value) {
 
                 $.each(value, function (index, data) {
@@ -36,6 +33,7 @@ function fillVeiculoSelect(marcas, tipo) {
 
 function getMarcas() {
     //Load Json marcas from FIPE API
+
     $.ajax({
         url: 'http://192.168.10.10:3004/marca/',
 
@@ -53,13 +51,43 @@ function getMarcas() {
                 $('#marca').material_select();
 
             });
+
+
+        }
+    });
+};
+
+function getMarcasModal() {
+    //Load Json marcas from FIPE API
+
+    $.ajax({
+        url: 'http://192.168.10.10:3004/marca/',
+
+        type: 'GET',
+        dataType: 'json',
+        success: function (json) {
+
+            $.each(json, function (key, value) {
+
+                $('#marcaModal').append(
+                    $("<option></option>")
+                    .attr('value', value.id)
+                    .text(value.nome)
+                );
+                $('#marcaModal').material_select();
+
+            });
+
+
         }
     });
 };
 
 function getModelos(marca) {
-    console.log('http://192.168.10.10:3004/marca/' + marca + '/modelo');
-    //Load Json marcas from FIPE API
+
+    $("#modelo").empty().html(' ');
+    $("#loader").css('display', '');
+
     $.ajax({
         url: 'http://192.168.10.10:3004/marca/' + marca + '/modelo',
 
@@ -67,7 +95,15 @@ function getModelos(marca) {
         dataType: 'json',
         success: function (json) {
 
+            console.log(json);
+            if (json == '') {
+                $("#modelo").empty();
+                $("#modelo").html('');
+                $('#modelo').material_select();
+            };
+
             $.each(json, function (key, value) {
+
 
                 $('#modelo').append(
                     $("<option></option>")
@@ -77,6 +113,35 @@ function getModelos(marca) {
                 $('#modelo').material_select();
 
             });
+            $("#loader").css('display', 'none');
+        },
+        error: function (textStatus, errorThrown) {
+            console.log("errou");
+        }
+    });
+};
+
+function getCombustível() {
+    //Load Json marcas from FIPE API
+
+    $.ajax({
+        url: 'http://192.168.10.10:3004/combustivel',
+
+        type: 'GET',
+        dataType: 'json',
+        success: function (json) {
+
+            $.each(json, function (key, value) {
+
+                $('#combustivel').append(
+                    $("<option></option>")
+                    .attr('value', value.id)
+                    .text(value.nome)
+                );
+                $('#marca').material_select();
+
+            });
+
         }
     });
 };
