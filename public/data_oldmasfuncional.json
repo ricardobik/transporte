@@ -269,6 +269,38 @@
     {
       "id": 135,
       "nome": "YAMAHA"
+    },
+    {
+      "nome": "",
+      "id": 256
+    },
+    {
+      "nome": "VAI LÁ",
+      "id": 257
+    },
+    {
+      "nome": "VAI LÁ amigão",
+      "id": 258
+    },
+    {
+      "nome": "",
+      "id": 259
+    },
+    {
+      "nome": "",
+      "id": 260
+    },
+    {
+      "nome": "",
+      "id": 261
+    },
+    {
+      "nome": "dahora",
+      "id": 262
+    },
+    {
+      "nome": "FIDAMÃE",
+      "id": 263
     }
   ],
   "modelo": [
@@ -5096,45 +5128,36 @@
       "id": 2488,
       "marcaId": 85,
       "nome": "80S"
-    }
-  ],
-  "veiculo": [
-    {
-      "id": 0,
-      "descricao": "",
-      "anofabricacao": "",
-      "placa": "",
-      "combustivelId": "",
-      "setorId": "",
-      "modeloId": "",
-      "tipoId": "",
-      "renavam": "",
-      "estadoveiculo": ""
     },
     {
-      "tipo": "carro",
-      "placa": "drh-1000",
-      "marca": "5",
-      "modelo": "113",
-      "anofabricacao": "2015",
-      "combustivel": "1",
-      "renavam": "00011122233",
-      "setor": "1",
-      "info": "Informações",
-      "id": 1
+      "marcaId": "27",
+      "nome": "casagrande",
+      "id": 5029
     },
     {
-      "tipoid": "carro",
-      "placa": "drh-1000",
-      "marcaid": "5",
-      "modeloid": "113",
-      "anofabricacao": "2015",
-      "combustivelid": "1",
-      "renavam": "00011122233",
-      "estadoveiculo": "5",
-      "setorid": "1",
-      "info": "Informações",
-      "id": 2
+      "marcaId": "250",
+      "nome": "fergussom",
+      "id": 5030
+    },
+    {
+      "marcaId": "249",
+      "nome": "ASIA É A MÃE",
+      "id": 5031
+    },
+    {
+      "marcaId": "249",
+      "nome": "ASIA É A MÃE",
+      "id": 5032
+    },
+    {
+      "marcaId": "1",
+      "nome": "ASIA É A MÃE 2",
+      "id": 5033
+    },
+    {
+      "marcaId": "257",
+      "nome": "ASIA É A MÃE funfa",
+      "id": 5034
     }
   ]
 }

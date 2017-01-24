@@ -31,7 +31,7 @@ function fillVeiculoSelect(marcas, tipo) {
     });
 };
 
-function getMarcas() {
+function getMarcas(marca) {
     //Load Json marcas from FIPE API
 
     $.ajax({
@@ -43,49 +43,22 @@ function getMarcas() {
 
             $.each(json, function (key, value) {
 
-                $('#marca').append(
+                $('#' + marca).append(
                     $("<option></option>")
                     .attr('value', value.id)
                     .text(value.nome)
                 );
-                $('#marca').material_select();
-
+                $('#' + marca).material_select();
             });
-
-
         }
     });
 };
 
-function getMarcasModal() {
-    //Load Json marcas from FIPE API
-
-    $.ajax({
-        url: 'http://192.168.10.10:3004/marca/',
-
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-
-            $.each(json, function (key, value) {
-
-                $('#marcaModal').append(
-                    $("<option></option>")
-                    .attr('value', value.id)
-                    .text(value.nome)
-                );
-                $('#marcaModal').material_select();
-
-            });
-
-
-        }
-    });
-};
 
 function getModelos(marca) {
 
-    $("#modelo").empty().html(' ');
+    $("#modeloid").empty().html(' ');
+    $("#modeloid").append("<option value='' disabled selected>Escolha o modelo</option>");
     $("#loader").css('display', '');
 
     $.ajax({
@@ -95,22 +68,21 @@ function getModelos(marca) {
         dataType: 'json',
         success: function (json) {
 
-            console.log(json);
             if (json == '') {
-                $("#modelo").empty();
-                $("#modelo").html('');
-                $('#modelo').material_select();
+                $("#modeloid").empty();
+                $("#modeloid").html('');
+                $("#modeloid").append("<option value='' disabled selected>Não há modelo disponível</option>");
+                $('#modeloid').material_select();
             };
 
             $.each(json, function (key, value) {
 
-
-                $('#modelo').append(
+                $('#modeloid').append(
                     $("<option></option>")
                     .attr('value', value.id)
                     .text(value.nome)
                 );
-                $('#modelo').material_select();
+                $('#modeloid').material_select();
 
             });
             $("#loader").css('display', 'none');
@@ -121,7 +93,7 @@ function getModelos(marca) {
     });
 };
 
-function getCombustível() {
+function getCombustivel() {
     //Load Json marcas from FIPE API
 
     $.ajax({
@@ -133,15 +105,89 @@ function getCombustível() {
 
             $.each(json, function (key, value) {
 
-                $('#combustivel').append(
+                $('#combustivelid').append(
                     $("<option></option>")
                     .attr('value', value.id)
                     .text(value.nome)
                 );
-                $('#marca').material_select();
+                $('#combustivelid').material_select();
 
             });
 
         }
     });
+};
+
+// Validade Fields materialize.css
+$.validator.setDefaults({
+    errorClass: 'invalid',
+    validClass: "valid",
+    errorPlacement: function (error, element) {
+        $(element)
+            .closest("form")
+            .find("label[for='" + element.attr("id") + "']")
+            .attr('data-error', error.text())
+            .attr('class', 'active');
+
+    },
+    submitHandler: function (form) {
+        console.log('form ok');
+    }
+});
+
+//Rules and Messages to Validate
+$("#formVeiculo").validate({
+    //ignore: [],
+    debug: true,
+    rules: {
+        placa: {
+            required: true
+        },
+        marca: {
+
+        },
+        modelo: {
+            required: true
+        }
+    },
+    messages: {
+        nome: {
+            required: "O campo placa deve ser preenchido"
+        },
+        marca: {
+            required: "A marca do veículo deve ser preenchida",
+        },
+        modelo: {
+            required: "O modelo do veículo deve ser preenchido"
+        }
+
+    }
+});
+
+//Create function
+function saveVeiculo(data) {
+
+   
+
+    //make AJAX request
+    $("#formVeiculo").validate();
+    if ($("#formVeiculo").valid()) {
+        $.ajax({
+            type: "POST",
+            url: "http://192.168.10.10:3004/veiculo",
+            data: data,
+            dataType: "json",
+
+            //if received a response from the server
+            success: function (response) {
+                swal("Pronto!",
+                    "Veículo cadastrado com sucesso",
+                    "success");
+            },
+
+        });
+    }
+    //Reload Material Form
+    Materialize.updateTextFields();
+
 };
