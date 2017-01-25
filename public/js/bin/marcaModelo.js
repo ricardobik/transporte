@@ -16,8 +16,8 @@ $.validator.setDefaults({
 });
 
 //Rules and Messages to Validate
-$("#formMarcaModelo").validate({
-    ignore: [],
+$("form").validate({
+    //    ignore: [],
     debug: true,
     rules: {
         marcaCreate: {
@@ -30,6 +30,30 @@ $("#formMarcaModelo").validate({
         }
     }
 });
+
+//Get Brands to fill select
+function getMarcas(marca) {
+
+    $.ajax({
+        url: 'http://192.168.10.10:3004/marca/',
+
+        type: 'GET',
+        dataType: 'json',
+        success: function (json) {
+
+            $.each(json, function (key, value) {
+
+                $('#' + marca).append(
+                    $("<option></option>")
+                    .attr('value', value.id)
+                    .text(value.nome)
+                );
+                $('#' + marca).material_select();
+            });
+        }
+    });
+};
+
 
 //Fill motorista Modal to Edit
 //function FillMotorista(motoristaId) {
@@ -148,10 +172,69 @@ function saveMarcaModelo() {
             },
 
         });
+        $('#modeloModal').modal('close');
     }
-    $('#modeloModal').modal('close');
+
     //Reload Material Form
     Materialize.updateTextFields();
+
+};
+
+//Create Function for Type, Brand and Model
+function saveAll(type) {
+
+    var data = new Object();
+    var url, successMsg = "";
+
+    switch (type) {
+        case "0":
+            data.nome = $("#marca").val();
+            url = "http://192.168.10.10:3004/marca";
+            successMsg = "Marca adicionada com sucesso";
+            break;
+        case "1":
+            data.marcaId = $("#marcaSelect").val();
+            data.nome = $("#modelo").val();
+            url = "http://192.168.10.10:3004/modelo";
+            successMsg = "Modelo adicionado com sucesso";
+            break;
+        case "2":
+            data.nome = $("#tipo").val();
+            url = "http://192.168.10.10:3004/tipo";
+            successMsg = "Tipo de veículo adicionado com sucesso";
+            break;
+    };
+
+    //make AJAX request
+    $("#form").validate();
+    if ($("form").valid()) {
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            dataType: "json",
+
+            //if received a response from the server
+            success: function (response) {
+                swal("Pronto!",
+                    successMsg,
+                    "success");
+            },
+
+        });
+
+    }
+    //Empty all fields
+    $(':input', '#form')
+        .not(':button, :submit, :reset')
+        .val('')
+        .removeAttr('checked')
+        .removeAttr('selected');
+    
+
+    //Reload Material Form
+    Materialize.updateTextFields();
+
 
 };
 

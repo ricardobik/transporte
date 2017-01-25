@@ -33,10 +33,10 @@
                             <div class="input-field col m4" id="divTipo">
                                 <select id="tipoid" name="tipoid" required="" aria-required="true">
                                     <option value="" disabled selected>Escolha o tipo</option>
-                                    <option value="carro">Carro</option>
-                                    <option value="moto">Moto</option>
-                                    <option value="caminhao">Caminhão</option>
-                                    <option value="trator">Trator</option>
+                                    <option value="1">Carro</option>
+                                    <option value="2">Moto</option>
+                                    <option value="3">Caminhão</option>
+                                    <option value="4">Trator</option>
                                 </select>
                                 <label for="tipo">Tipo</label>
                             </div>
@@ -86,7 +86,7 @@
                 <!---This is the card actually using the transition. I have it set to opacity:0 to start so it seems invisible--->
                 <div id="more" class="card col m8 offset-m2 hide">
                     <div class="card-content">
-                        <span class="card-title" id="infoSpan">Informações do veículo </span>
+                        <span class="card-title" id="infoSpan" name="infoSpan">Informações do veículo </span>
                         <div class="row">
 
                             <div class="input-field col m3">
@@ -175,17 +175,17 @@
                         <select id="marcaModal" name="marcaModal">
                                <option value="" disabled selected>Escolha a marca</option>
                         </select>
-                        <label for="marca">Marca</label>
+                        <label for="marcaModal">Marca</label>
                     </div>
                     <div class="input-field col m12">
                         <input id="modeloModal" name="modeloModal" type="text" class="validate" required="" aria-required="true" style="text-transform:uppercase;">
-                        <label for="modelo">Digite o modelo</label>
+                        <label for="modeloModal">Digite o modelo</label>
                     </div>
                 </div>
                 <div class="row" id="divMarca">
                     <div class="input-field col m12">
                         <input id="marcaCreate" name="marcaCreate" type="text" class="validate" required="" aria-required="true" style="text-transform:uppercase;">
-                        <label for="marca">Digite a marca</label>
+                        <label for="marcaCreate">Digite a marca</label>
                     </div>
                 </div>
             </div>
@@ -221,6 +221,7 @@
             $("#divMarca").hide();
             $("#next").addClass("disabled");
 
+            //Enable next button only if model has changed
             $("#modeloid").change(function() {
                 if ($("#modeloid").val() !== "" || $("#modeloid").val() !== null) {
                     $("#next").removeClass("disabled");
@@ -236,12 +237,13 @@
                 $("#formVeiculo1").validate();
                 if ($("#formVeiculo1").valid()) {
                     slideIn("#more", 1350, -800, cardFirst);
+//                    $("#infoSpan").text("Informações do veículo " + $("#marcaid").val());
                 };
             });
 
             //Create new vehicle
             $("#createVeiculo").click(function() {
-                var data = $("#formVeiculo").serializeArray();
+                var data = $('form').serializeArray();
                 saveVeiculo(data);
             });
 
@@ -261,12 +263,10 @@
                 verifySwitch();
             });
 
-
+            //modal config
             $('.modal').modal({
                 dismissible: false
             });
-
-            $('select').material_select();
 
             //Load Navbar and dropdown menu
             $('#nav-bar').load("/modules/navbar.html", function() {
@@ -290,7 +290,6 @@
 
             //Enable Model after select Brand type
             $("#marcaid").change(function() {
-    
                 $("#modeloid").removeAttr("disabled");
                 getModelos($("#marcaid").val());
             });

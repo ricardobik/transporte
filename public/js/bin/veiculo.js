@@ -31,28 +31,6 @@ function fillVeiculoSelect(marcas, tipo) {
     });
 };
 
-function getMarcas(marca) {
-    //Load Json marcas from FIPE API
-
-    $.ajax({
-        url: 'http://192.168.10.10:3004/marca/',
-
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-
-            $.each(json, function (key, value) {
-
-                $('#' + marca).append(
-                    $("<option></option>")
-                    .attr('value', value.id)
-                    .text(value.nome)
-                );
-                $('#' + marca).material_select();
-            });
-        }
-    });
-};
 
 
 function getModelos(marca) {
@@ -163,6 +141,33 @@ $("#formVeiculo1").validate({
     }
 });
 
+//Rules and Messages to Validate
+$("form").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+        placa: {
+            required: true
+        },
+        marcaid: {
+            required: true
+        },
+        modeloid: {
+            required: true
+        }
+    },
+    messages: {
+        placa: {
+            required: "O campo placa deve ser preenchido"
+        },
+        placa: {
+            required: "O campo placa deve ser preenchido"
+        },
+        placa: {
+            required: "O campo placa deve ser preenchido"
+        }
+    }
+});
 
 
 
@@ -170,8 +175,8 @@ $("#formVeiculo1").validate({
 function saveVeiculo(data) {
 
     //make AJAX request
-    $("#formVeiculo").validate();
-    if ($("#formVeiculo").valid()) {
+    $("form").validate();
+    if ($("form").valid()) {
         $.ajax({
             type: "POST",
             url: "http://192.168.10.10:3004/veiculo",
