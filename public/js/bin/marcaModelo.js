@@ -17,7 +17,7 @@ $.validator.setDefaults({
 
 //Rules and Messages to Validate
 $("#formMarcaModelo").validate({
-    //ignore: [],
+    ignore: [],
     debug: true,
     rules: {
         marcaCreate: {

@@ -21,9 +21,10 @@
     <!-- Import Navbar -->
     <div id="nav-bar"></div>
 
-    <form method="POST" name="formVeiculo" action="" id="formVeiculo" novalidate="novalidate">
-        <div class="container">
-            <div class="row">
+    <!--    <form method="POST" name="formVeiculo1" action="" id="formVeiculo1" novalidate="novalidate">-->
+    <div class="container">
+        <div class="row">
+            <form method="POST" name="formVeiculo1" action="" id="formVeiculo1">
                 <!-- Div with submit result -->
                 <div class="card col m8 offset-m2" id="cardFirst">
                     <div class="card-content">
@@ -74,15 +75,18 @@
                     </div>
                     <div class="card-action right-align">
 
-                        <a class="btn waves-effect" onclick='slideIn("#more", 1350, -800, cardFirst);'>Próximo</a>
+                        <a class="btn waves-effect" id="next">Próximo</a>
                     </div>
 
-                </div>
-                <!---This is the card actually using the transition. I have it set to opacity:0 to start so it seems invisible--->
 
+                </div>
+            </form>
+
+            <form method="POST" name="formVeiculo2" action="" id="formVeiculo2" novalidate="novalidate">
+                <!---This is the card actually using the transition. I have it set to opacity:0 to start so it seems invisible--->
                 <div id="more" class="card col m8 offset-m2 hide">
                     <div class="card-content">
-                        <span class="card-title">Informações do veículo</span>
+                        <span class="card-title" id="infoSpan">Informações do veículo </span>
                         <div class="row">
 
                             <div class="input-field col m3">
@@ -134,19 +138,20 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!--action button-->
-            <div class="fixed-action-btn horizontal">
-                <a class="btn-floating btn-large red">
-                    <i class="large material-icons">add</i>
-                </a>
-                <ul>
-                    <li><a href="javascripti:void(0)" onclick="javascript:goSearch(); return false;" class="btn-floating purple"><i class="material-icons">search</i></a></li>
-                    <li><a href="javascripti:void(0)" onclick="javascript:goHome(); return false;" id="home" class="btn-floating green"><i class="material-icons">home</i></a></li>
-                </ul>
-            </div>
+            </form>
         </div>
+
+        <!--action button-->
+        <div class="fixed-action-btn horizontal">
+            <a class="btn-floating btn-large red">
+                <i class="large material-icons">add</i>
+            </a>
+            <ul>
+                <li><a href="javascripti:void(0)" onclick="javascript:goSearch(); return false;" class="btn-floating purple"><i class="material-icons">search</i></a></li>
+                <li><a href="javascripti:void(0)" onclick="javascript:goHome(); return false;" id="home" class="btn-floating green"><i class="material-icons">home</i></a></li>
+            </ul>
+        </div>
+    </div>
     </form>
 
     <!-- Modal Structure -->
@@ -201,6 +206,7 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
     <script type="text/javascript" src="/js/bin/sweetalert.min.js"></script>
 
+    <!--System scripts-->
     <script type="text/javascript" src="/js/bin/general.js"></script>
     <script type="text/javascript" src="/js/bin/veiculo.js"></script>
     <script type="text/javascript" src="/js/bin/marcaModelo.js"></script>
@@ -208,18 +214,43 @@
     <script>
         $(document).ready(function() {
 
-            $("#divMarca").hide();
+            getMarcas(marcaid.name);
+            getCombustivel();
+            getSetor();
 
-            $("#createVeiculo").click(function() {
-                var data = $("#formVeiculo").serializeArray();
-                saveVeiculo(data);
+            $("#divMarca").hide();
+            $("#next").addClass("disabled");
+
+            $("#modeloid").change(function() {
+                if ($("#modeloid").val() !== "" || $("#modeloid").val() !== null) {
+                    $("#next").removeClass("disabled");
+                } else {
+                    $("#next").addClass("disabled");
+                }
 
             });
 
+            //Validate first vehicles data
+            $("#next").click(function() {
+
+                $("#formVeiculo1").validate();
+                if ($("#formVeiculo1").valid()) {
+                    slideIn("#more", 1350, -800, cardFirst);
+                };
+            });
+
+            //Create new vehicle
+            $("#createVeiculo").click(function() {
+                var data = $("#formVeiculo").serializeArray();
+                saveVeiculo(data);
+            });
+
+            //create new Model/Brand
             $("#createMarcaModelo").click(function() {
                 saveMarcaModelo();
             });
 
+            //Call Modal to create new Model/Brand
             $("#callModalEdit").click(function() {
                 getMarcas(marcaModal.name);
                 verifySwitch();
@@ -230,9 +261,6 @@
                 verifySwitch();
             });
 
-            getMarcas(marcaid.name);
-            getCombustivel();
-            getSetor();
 
             $('.modal').modal({
                 dismissible: false
@@ -254,15 +282,15 @@
             //Load material select
             $('select').material_select();
 
-
+            //Enable Brand after select vehicle type
             $("#tipoid").change(function() {
                 $("#marcaid").removeAttr("disabled");
                 $("#marcaid").material_select();
             });
 
+            //Enable Model after select Brand type
             $("#marcaid").change(function() {
-                //console.log($("#marca").val());
-
+    
                 $("#modeloid").removeAttr("disabled");
                 getModelos($("#marcaid").val());
             });

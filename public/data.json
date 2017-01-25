@@ -5096,6 +5096,11 @@
       "id": 2488,
       "marcaId": 85,
       "nome": "80S"
+    },
+    {
+      "marcaId": "27",
+      "nome": "fgasdgaqsdf",
+      "id": 5029
     }
   ],
   "veiculo": [
@@ -5135,6 +5140,32 @@
       "setorid": "1",
       "info": "Informações",
       "id": 2
+    },
+    {
+      "tipoid": "carro",
+      "placa": "drh-1000",
+      "marcaid": "13",
+      "modeloid": "1629",
+      "anofabricacao": "2015",
+      "combustivelid": "1",
+      "renavam": "00011122233",
+      "estadoveiculo": "5",
+      "setorid": "1",
+      "info": "Informações",
+      "id": 3
+    },
+    {
+      "tipoid": "moto",
+      "placa": "IMG-0022",
+      "marcaid": "3",
+      "modeloid": "179",
+      "anofabricacao": "1985",
+      "combustivelid": "1",
+      "renavam": "55522211100",
+      "estadoveiculo": "3",
+      "setorid": "4",
+      "info": "Informações",
+      "id": 4
     }
   ]
 }

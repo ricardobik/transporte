@@ -136,38 +136,38 @@ $.validator.setDefaults({
 });
 
 //Rules and Messages to Validate
-$("#formVeiculo").validate({
-    //ignore: [],
+$("#formVeiculo1").validate({
+    ignore: [],
     debug: true,
     rules: {
         placa: {
             required: true
         },
-        marca: {
-
+        marcaid: {
+            required: true
         },
-        modelo: {
+        modeloid: {
             required: true
         }
     },
     messages: {
-        nome: {
+        placa: {
             required: "O campo placa deve ser preenchido"
         },
-        marca: {
-            required: "A marca do veículo deve ser preenchida",
+        placa: {
+            required: "O campo placa deve ser preenchido"
         },
-        modelo: {
-            required: "O modelo do veículo deve ser preenchido"
+        placa: {
+            required: "O campo placa deve ser preenchido"
         }
-
     }
 });
 
+
+
+
 //Create function
 function saveVeiculo(data) {
-
-   
 
     //make AJAX request
     $("#formVeiculo").validate();
