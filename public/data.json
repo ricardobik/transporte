@@ -5161,11 +5161,15 @@
   "tipo": [
     {
       "id": 0,
-      "nome": ""
+      "nome": "CARRO"
     },
     {
-      "nome": "Van",
+      "nome": "MOTO",
       "id": 1
+    },
+    {
+      "nome": "CAMINHÃO",
+      "id": 2
     }
   ]
 }

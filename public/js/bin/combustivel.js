@@ -1,36 +1,3 @@
-//Fill table setor
-function fillCombustivelTable() {
-
-    //Populates Table with Json
-    table = $('table#table-combustivel').DataTable({
-        ajax: {
-            url: "http://192.168.10.10:3004/combustivel",
-            contentType: 'application/json; charset=UTF-8',
-            dataType: 'json',
-            dataSrc: ''
-        },
-        columns: [{
-            data: "id"
-                }, {
-            data: "nome"
-                }],
-        "columnDefs": [{
-            "width": "50%",
-            "targets": 0
-                }, {
-            "width": "40%",
-            "targets": 1
-                }],
-        select: true,
-        fixedColumns: true,
-        lengthChange: false,
-        pageLength: 5,
-        dom: 'lrti<"right"p>',
-        language: {
-            url: "../../doc/Portuguese-Brasil.json"
-        }
-    });
-}
 
 // Validade Fields materialize.css
 $.validator.setDefaults({

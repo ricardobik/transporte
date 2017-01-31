@@ -197,7 +197,7 @@ function fillMotoristaTable() {
 
     table = $('table#table-motorista').DataTable({
         ajax: {
-            url: "http://192.168.10.10:3004/driver",
+            url: "http://192.168.10.10:3004/motorista",
             contentType: 'application/json; charset=UTF-8',
             dataType: 'json',
             dataSrc: ''

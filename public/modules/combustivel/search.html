@@ -16,28 +16,6 @@
 
 <body>
 
-    <style>
-        .card-title {
-            line-height: 48px;
-            font-size: 24px;
-            font-weight: 300;
-        }
-        
-        .modal-edit {
-            width: 40% !important;
-            height: 40% !important;
-/*            overflow-y: hidden !important;*/
-            max-height: 95%;
-/*            max-width: 95%;*/
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-        }
-
-    </style>
-
     <!-- Import Navbar -->
     <div id="nav-bar"></div>
 
@@ -45,9 +23,18 @@
         <div class="row">
             <div id="admin" class="col s10 offset-s1 ">
                 <div class="card material-table">
+
+                    <ul class="tabs">
+                        <li class="tab col s3"><a href="#test1">COMBUSTIVEL</a></li>
+                        <li class="tab col s3"><a class="active" href="#test2">MARCA</a></li>
+                        <li class="tab col s3 disabled"><a href="#test3">MODELO</a></li>
+                        <li class="tab col s3"><a href="#test4">DIPO</a></li>
+                    </ul>
+
+                    <!--
                     <div class="card-content">
                         <div class="table-header">
-                            <span class="card-title">Pesquisar Combustível</span>
+                            <span class="card-title">Pesquisar</span>
                             <div class="actions">
                                 <input id="search-input" type="text" class="search-header">
                                 <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
@@ -63,11 +50,18 @@
                             <tbody></tbody>
                         </table>
                     </div>
+-->
+
+                    <!--
                     <div class="card-action right-align">
-                        <!-- Modal Trigger -->
+                      
                         <a class="waves-effect waves-light btn disabled" name="callModalEdit" id="callModalEdit" href="#modal-edit">Editar</a>
                     </div>
+-->
+
+
                 </div>
+
                 <!--action button-->
                 <div class="fixed-action-btn horizontal">
                     <a class="btn-floating btn-large red">
@@ -83,6 +77,7 @@
     </div>
 
     <!-- Modal Structure -->
+    <!--
     <form method="POST" name="form" action="" id="form">
         <div id="modal-edit" class="modal modal-fixed-footer modal-edit">
             <div class="modal-content">
@@ -111,6 +106,7 @@
             </div>
         </div>
     </form>
+-->
 
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
