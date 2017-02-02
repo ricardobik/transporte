@@ -178,11 +178,15 @@ function fillMarca(id) {
 
 };
 
-function updateCombustivel(id, data) {
+function updateMarca(id, dados) {
 
+    var data = new Object();
+    data.id = id;
+    data.nome = $("#nomeMarca").val();
+        
     //do AJAX request
-    $("#form").validate();
-    if ($("#form").valid()) {
+    $("#formMa").validate();
+    if ($("#formMa").valid()) {
 
         swal({
             title: "Confirmação",

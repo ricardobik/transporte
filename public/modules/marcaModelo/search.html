@@ -146,10 +146,9 @@
             </div>
         </div>
     </div>
-    </div>
 
     <!-- Modal Structure Combustivel-->
-    <form method="POST" name="form-combustivel" action="" id="form-combustivel">
+    <form method="POST" name="formC" action="" id="formC">
         <div id="modal-combustivel" class="modal modal-fixed-footer modal-edit">
             <div class="modal-content">
                 <span class="card-title">Editar Combustível</span>
@@ -157,13 +156,13 @@
 
                 <div class="row">
                     <div class="input-field col s12 m1">
-                        <input disabled name="id" id="id" type="text">
-                        <label for="id">id</label>
+                        <input disabled name="idCombustivel" id="idCombustivel" type="text">
+                        <label for="idCombustivel">id</label>
                     </div>
 
                     <div class="input-field col m11 s12">
-                        <input id="nome" name="nome" type="text" class="validate" required="">
-                        <label for="nome">Nome</label>
+                        <input id="nomeCombustivel" name="nomeCombustivel" type="text" class="validate" required="">
+                        <label for="nomeCombustivel">Nome</label>
                     </div>
                 </div>
 
@@ -179,7 +178,7 @@
     </form>
 
     <!-- Modal Structure Marca-->
-    <form method="POST" name="form-marca" action="" id="form-marca">
+    <form method="POST" name="formMa" action="" id="formMa">
         <div id="modal-marca" class="modal modal-fixed-footer modal-edit">
             <div class="modal-content">
                 <span class="card-title">Editar Marca</span>
@@ -209,7 +208,7 @@
     </form>
 
     <!-- Modal Structure Modelo-->
-    <form method="POST" name="form-modelo" action="" id="form-modelo">
+    <form method="POST" name="formMo" action="" id="formMo">
         <div id="modal-modelo" class="modal modal-fixed-footer modal-edit">
             <div class="modal-content">
                 <span class="card-title">Editar Modelo</span>
@@ -290,56 +289,46 @@
 
     <script>
         $(document).ready(function() {
-
             var $update;
-
+            
             //Fill Tables with Json
             fillCombustivelTable();
             fillMarcaTable();
             fillTipoTable();
-
             getMarcas(marcaSelect.name);
-
+            
             //Call modal form
             $('.modal').modal({
                 dismissible: false
             });
-
             //Load material select
             $('select').material_select();
-
             //Enable Model after select Brand type
             $("#marcaSelect").change(function() {
                 getModelos($("#marcaSelect").val());
                 $("#table-modelo").removeClass("hide");
             });
-
             // #search-input is a <input type="text"> element
             $('#search-input-combustivel').on('keyup', function() {
                 tableCombustivel.search(this.value).draw();
             });
-
             // #search-input is a <input type="text"> element
             $('#search-input-marca').on('keyup', function() {
                 tableMarca.search(this.value).draw();
             });
-
             // #search-input is a <input type="text"> element
             $('#search-input-modelo').on('keyup', function() {
                 tableModelo.search(this.value).draw();
             });
-
             // #search-input is a <input type="text"> element
             $('#search-input-tipo').on('keyup', function() {
                 tableTipo.search(this.value).draw();
             });
-
             //Load Navbar and dropdown menu
             $('#nav-bar').load("/modules/navbar.html", function() {
                 $(".button-collapse").sideNav();
                 $('.dropdown-button').dropdown();
             });
-
             //Enable edit button and set id of Table Combustivel to Edit
             $('#table-combustivel tbody').on('click', 'tr', function() {
                 if ($(this).hasClass('selected')) {
@@ -352,7 +341,6 @@
                     $update = $(this).parents('table').DataTable().row(this).data();
                 }
             });
-
             //Enable edit button and set id of Table Combustivel to Edit
             $('#table-marca tbody').on('click', 'tr', function() {
                 if ($(this).hasClass('selected')) {
@@ -389,12 +377,10 @@
                     $update = $(this).parents('table').DataTable().row(this).data();
                 }
             });
-
             //Get id from json and populate the modal field
             $('#CallModalCombustivel').on('click', function() {
                 fillCombustivel($update.id);
             });
-
             //Get id from json and populate the modal field
             $('#CallModalMarca').on('click', function() {
                 fillMarca($update.id);
@@ -407,33 +393,33 @@
             $('#CallModalTipo').on('click', function() {
                 fillTipo($update.id);
             });
-
+            
             //Update request
             $("#updateCombustivel").click(function(e) {
-                updateCombustivel($update.id, $("#form").serializeArray());
+                updateCombustivel($update.id, $("form").serializeArray());
             });
-            //Update request
-            $("#updateCombustivel").click(function(e) {
-                updateMarca($update.id, $("#form").serializeArray());
+            
+            $("#updateMarca").click(function(e) {
+                updateMarca($update.id, $("form").serializeArray());
             });
-            //Update request
-            $("#updateCombustivel").click(function(e) {
-                updateModelo($update.id, $("#form").serializeArray());
+            
+            $("#updateModelo").click(function(e) {
+                updateModelo($update.id, $("form").serializeArray());
             });
-            //Update request
-            $("#updateCombustivel").click(function(e) {
-                updateTipo($update.id, $("#form").serializeArray());
+            
+            $("#updateTipo").click(function(e) {
+                updateTipo($update.id, $("form").serializeArray());
             });
-
+            
             //Delete request
             $('#deleteCombustivel').on('click', function() {
                 deleteCombustivel($update.id);
             });
-
         });
-
     </script>
 
 </body>
 
 </html>
+
+

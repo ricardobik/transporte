@@ -55,12 +55,62 @@ function fillModelo(data) {
             $("#nomeModelo").val(data.nome);
 
             $('#marcaModal').find('option[value="' + data.marcaId + '"]').prop('selected', true);
-            console.log(data.marcaId);
-
+            
             $('#marcaModal').material_select();
 
         },
 
     });
+
+};
+
+function updateModelo(id, dados) {
+
+    var data = new Object();
+    data.id = id;
+    data.nome = $("#nomeModelo").val();
+    
+    console.log(data);
+        
+    //do AJAX request
+    $("#formMo").validate();
+    if ($("#formMo").valid()) {
+
+        swal({
+            title: "Confirmação",
+            text: "Deseja salvar as informações?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Salvar",
+            closeOnConfirm: false,
+            html: false
+        }, function () {
+
+            $.ajax({
+                type: "PUT",
+                url: "http://192.168.10.10:3004/modelo/" + id,
+                data: data,
+                dataType: "json",
+
+                //if received a response from the server
+                success: function (response) {
+                    swal("Pronto!",
+                        "As alterações foram salvas com sucesso.",
+                        "success");
+
+                    //Reload dataTable
+                    $('#table-modelo').DataTable().ajax.reload();
+                    $('#modal-modelo').modal('close');
+
+                },
+
+            });
+
+        });
+
+    }
+    //Reload Material Form
+    Materialize.updateTextFields();
 
 };

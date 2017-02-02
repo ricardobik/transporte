@@ -16,13 +16,21 @@ $.validator.setDefaults({
 });
 
 //Rules and Messages to Validate
-$("#form").validate({
-
+$("form").validate({
+    ignore: [],
+    debug: true,
     rules: {
-
+        nomeCombustivel: {
+            required: true
+        }
+    },
+    messages: {
+        nomeCombustivel: {
+            required: "O campo nome não deve estar vazio"
+        }
     }
-
 });
+
 
 function fillCombustivel(id) {
 
@@ -34,8 +42,8 @@ function fillCombustivel(id) {
         //if received a response from the server
         success: function (data) {
 
-            $("#id").val(data.id);
-            $("#nome").val(data.nome);
+            $("#idCombustivel").val(data.id);
+            $("#nomeCombustivel").val(data.nome);
 
             //Reload Material Form
             Materialize.updateTextFields();
@@ -117,11 +125,15 @@ function saveCombustivel(data) {
 };
 
 //Update function
-function updateCombustivel(id, data) {
+function updateCombustivel(id, dados) {
 
+    var data = new Object();
+    data.nome = $("#nomeCombustivel").val();
+    data.id = id;
+    
     //do AJAX request
-    $("#form").validate();
-    if ($("#form").valid()) {
+    $("#formC").validate();
+    if ($("#formC").valid()) {
 
         swal({
             title: "Confirmação",
@@ -139,7 +151,7 @@ function updateCombustivel(id, data) {
                 url: "http://192.168.10.10:3004/combustivel/" + id,
                 data: data,
                 dataType: "json",
-
+ 
                 //if received a response from the server
                 success: function (response) {
                     swal("Pronto!",

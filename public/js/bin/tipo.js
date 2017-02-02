@@ -52,3 +52,54 @@ function fillTipo(id) {
     });
 
 };
+
+function updateTipo(id, dados) {
+
+    var data = new Object();
+    data.id = id;
+    data.nome = $("#nomeTipo").val();
+    
+    console.log(data);
+        
+    //do AJAX request
+    $("#formMa").validate();
+    if ($("#formMa").valid()) {
+
+        swal({
+            title: "Confirmação",
+            text: "Deseja salvar as informações?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Salvar",
+            closeOnConfirm: false,
+            html: false
+        }, function () {
+
+            $.ajax({
+                type: "PUT",
+                url: "http://192.168.10.10:3004/tipo/" + id,
+                data: data,
+                dataType: "json",
+
+                //if received a response from the server
+                success: function (response) {
+                    swal("Pronto!",
+                        "As alterações foram salvas com sucesso.",
+                        "success");
+
+                    //Reload dataTable
+                    $('#table-tipo').DataTable().ajax.reload();
+                    $('#modal-tipo').modal('close');
+
+                },
+
+            });
+
+        });
+
+    }
+    //Reload Material Form
+    Materialize.updateTextFields();
+
+};

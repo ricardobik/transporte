@@ -83,8 +83,8 @@
       "nome": "ETANOL"
     },
     {
-      "id": 3,
-      "nome": "DIESEL"
+      "nome": "DIESEL",
+      "id": 3
     },
     {
       "nome": "BIODIESEL",
@@ -93,10 +93,6 @@
     {
       "nome": "GASOLINA AD",
       "id": 5
-    },
-    {
-      "id": 6,
-      "nome": "ETANOL AD"
     }
   ],
   "setor": [
@@ -191,14 +187,6 @@
       "nome": "CASE"
     },
     {
-      "id": 1,
-      "nome": "CHEVROLET"
-    },
-    {
-      "id": 5,
-      "nome": "CITROEN"
-    },
-    {
       "id": 3,
       "nome": "FIAT"
     },
@@ -264,7 +252,7 @@
     },
     {
       "id": 2,
-      "nome": "VOLKSWAGEN"
+      "nome": "CAMINHÃOZÃO"
     },
     {
       "id": 135,
@@ -2740,8 +2728,7 @@
     },
     {
       "id": 4,
-      "marcaId": 27,
-      "nome": "MARRUA"
+      "nome": "MARRUA 100"
     },
     {
       "id": 781,
@@ -3410,8 +3397,7 @@
     },
     {
       "id": 171,
-      "marcaId": 3,
-      "nome": 147
+      "nome": "147 1000"
     },
     {
       "id": 174,
@@ -4455,8 +4441,7 @@
     },
     {
       "id": 302,
-      "marcaId": 7,
-      "nome": "CITY"
+      "nome": "CITY 1000"
     },
     {
       "id": 303,
@@ -5168,8 +5153,8 @@
       "id": 1
     },
     {
-      "nome": "CAMINHÃO",
-      "id": 2
+      "id": 2,
+      "nome": "CAMINHÃO"
     }
   ]
 }
