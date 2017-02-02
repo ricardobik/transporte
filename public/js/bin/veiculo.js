@@ -169,8 +169,6 @@ $("form").validate({
     }
 });
 
-
-
 //Create function
 function saveVeiculo(data) {
 

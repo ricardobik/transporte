@@ -1,4 +1,3 @@
-
 // Validade Fields materialize.css
 $.validator.setDefaults({
     errorClass: 'invalid',
@@ -18,7 +17,7 @@ $.validator.setDefaults({
 
 //Rules and Messages to Validate
 $("#form").validate({
-    
+
     rules: {
 
     }
@@ -26,27 +25,25 @@ $("#form").validate({
 });
 
 function fillCombustivel(id) {
-   
-        $.ajax({
-            type: "GET",
-            url: "http://192.168.10.10:3004/combustivel/" + id,
-            dataType: "json",
 
-            //if received a response from the server
-            success: function (data) {
+    $.ajax({
+        type: "GET",
+        url: "http://192.168.10.10:3004/combustivel/" + id,
+        dataType: "json",
 
-                console.log(data);
+        //if received a response from the server
+        success: function (data) {
 
-                $("#id").val(data.id);
-                $("#nome").val(data.nome);
+            $("#id").val(data.id);
+            $("#nome").val(data.nome);
 
-                //Reload Material Form
-                Materialize.updateTextFields();
+            //Reload Material Form
+            Materialize.updateTextFields();
 
-            },
+        },
 
-        });
-   
+    });
+
 };
 
 //Delete function
@@ -74,15 +71,16 @@ function deleteCombustivel(id) {
                     success: function (response) {
                         //Reload dataTable
                         $('#table-combustivel').DataTable().ajax.reload();
-                        $('#modal-edit').modal('close');
+                        $('#modal-combustivel').modal('close');
                     },
 
                 });
 
                 swal("Excluído!", "O combustível foi excluído!", "success");
+
             } else {
                 swal("Cancelado", "Nada foi modificado", "error");
-                $('#modal-edit').modal('close');
+                $('#modal-combustivel').modal('close');
             }
         });
 
@@ -150,7 +148,7 @@ function updateCombustivel(id, data) {
 
                     //Reload dataTable
                     $('#table-combustivel').DataTable().ajax.reload();
-                    $('#modal-edit').modal('close');
+                    $('#modal-combustivel').modal('close');
 
                 },
 
@@ -164,6 +162,37 @@ function updateCombustivel(id, data) {
 
 };
 
-var table = "";
+function fillCombustivelTable() {
+    //Populates Table with Json
+    tableCombustivel = $('table#table-combustivel').DataTable({
+        ajax: {
+            url: "http://192.168.10.10:3004/combustivel",
+            contentType: 'application/json; charset=UTF-8',
+            dataType: 'json',
+            dataSrc: ''
+        },
+        columns: [{
+            data: "id"
+                }, {
+            data: "nome"
+                }],
+        "columnDefs": [{
+            "width": "50%",
+            "targets": 0
+                }, {
+            "width": "40%",
+            "targets": 1
+                }],
+        select: true,
+        fixedColumns: true,
+        lengthChange: false,
+        pageLength: 5,
+        dom: 'lrti<"right"p>',
+        language: {
+            url: "../../doc/Portuguese-Brasil.json"
+        }
+    });
+}
+
 
 

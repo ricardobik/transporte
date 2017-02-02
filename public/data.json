@@ -75,8 +75,8 @@
   ],
   "combustivel": [
     {
-      "id": 1,
-      "nome": "GASOLINA"
+      "nome": "GASOLINA",
+      "id": 1
     },
     {
       "id": 2,
@@ -87,12 +87,12 @@
       "nome": "DIESEL"
     },
     {
-      "id": 4,
-      "nome": "BIODIESEL"
+      "nome": "BIODIESEL",
+      "id": 4
     },
     {
-      "id": 5,
-      "nome": "GASOLINA AD"
+      "nome": "GASOLINA AD",
+      "id": 5
     },
     {
       "id": 6,
