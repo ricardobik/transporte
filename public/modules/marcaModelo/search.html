@@ -215,7 +215,7 @@
                 <div class="row">
 
                     <div class="input-field col m12">
-                        <select id="marcaModal" name="marcaModal2">
+                        <select id="marcaModal" name="marcaModal">
                             <option value="" disabled selected>Escolha a marca</option>
                         </select>
                         <label for="marcaModal">Marca</label>
@@ -290,13 +290,13 @@
     <script>
         $(document).ready(function() {
             var $update;
-            
+
             //Fill Tables with Json
             fillCombustivelTable();
             fillMarcaTable();
             fillTipoTable();
             getMarcas(marcaSelect.name);
-            
+
             //Call modal form
             $('.modal').modal({
                 dismissible: false
@@ -393,33 +393,44 @@
             $('#CallModalTipo').on('click', function() {
                 fillTipo($update.id);
             });
-            
+
             //Update request
             $("#updateCombustivel").click(function(e) {
                 updateCombustivel($update.id, $("form").serializeArray());
             });
-            
+
             $("#updateMarca").click(function(e) {
                 updateMarca($update.id, $("form").serializeArray());
             });
-            
+
             $("#updateModelo").click(function(e) {
                 updateModelo($update.id, $("form").serializeArray());
             });
-            
+
             $("#updateTipo").click(function(e) {
                 updateTipo($update.id, $("form").serializeArray());
             });
-            
+
             //Delete request
             $('#deleteCombustivel').on('click', function() {
                 deleteCombustivel($update.id);
             });
+
+            $('#deleteMarca').on('click', function() {
+                deleteMarca($update.id);
+            });
+
+            $('#deleteModelo').on('click', function() {
+                deleteModelo($update.id);
+            });
+
+            $('#deleteTipo').on('click', function() {
+                deleteTipo($update.id);
+            });
         });
+
     </script>
 
 </body>
 
 </html>
-
-

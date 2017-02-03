@@ -75,24 +75,28 @@
   ],
   "combustivel": [
     {
-      "nome": "GASOLINA",
-      "id": 1
+      "id": 1,
+      "nome": "GASOLINA"
     },
     {
       "id": 2,
       "nome": "ETANOL"
     },
     {
-      "nome": "DIESEL",
-      "id": 3
+      "id": 3,
+      "nome": "DIESEL"
     },
     {
-      "nome": "BIODIESEL",
-      "id": 4
+      "id": 4,
+      "nome": "BIODIESEL"
     },
     {
-      "nome": "GASOLINA AD",
-      "id": 5
+      "id": 5,
+      "nome": "GASOLINA AD"
+    },
+    {
+      "id": 6,
+      "nome": "ETANOL AD"
     }
   ],
   "setor": [
@@ -187,6 +191,14 @@
       "nome": "CASE"
     },
     {
+      "id": 1,
+      "nome": "CHEVROLET"
+    },
+    {
+      "id": 5,
+      "nome": "CITROEN"
+    },
+    {
       "id": 3,
       "nome": "FIAT"
     },
@@ -252,27 +264,11 @@
     },
     {
       "id": 2,
-      "nome": "CAMINHÃOZÃO"
+      "nome": "VOLKSWAGEN"
     },
     {
       "id": 135,
       "nome": "YAMAHA"
-    },
-    {
-      "nome": "AMANCO",
-      "id": 256
-    },
-    {
-      "nome": "",
-      "id": 257
-    },
-    {
-      "nome": "nova iguaçu",
-      "id": 258
-    },
-    {
-      "nome": "PALMEIRAS",
-      "id": 259
     }
   ],
   "modelo": [
@@ -2728,7 +2724,8 @@
     },
     {
       "id": 4,
-      "nome": "MARRUA 100"
+      "marcaId": 27,
+      "nome": "MARRUA"
     },
     {
       "id": 781,
@@ -3397,7 +3394,8 @@
     },
     {
       "id": 171,
-      "nome": "147 1000"
+      "marcaId": 3,
+      "nome": 147
     },
     {
       "id": 174,
@@ -4441,7 +4439,8 @@
     },
     {
       "id": 302,
-      "nome": "CITY 1000"
+      "marcaId": 7,
+      "nome": "CITY"
     },
     {
       "id": 303,
@@ -5102,31 +5101,6 @@
       "marcaId": "27",
       "nome": "fgasdgaqsdf",
       "id": 5029
-    },
-    {
-      "marcaId": "27",
-      "nome": "tratorzão",
-      "id": 5030
-    },
-    {
-      "marcaId": "3",
-      "nome": "malemolencia",
-      "id": 5031
-    },
-    {
-      "marcaId": "27",
-      "nome": "malemolencia",
-      "id": 5032
-    },
-    {
-      "marcaId": "27",
-      "nome": "malemolencia",
-      "id": 5033
-    },
-    {
-      "marcaId": "27",
-      "nome": "malemolencia 2000",
-      "id": 5034
     }
   ],
   "veiculo": [
@@ -5143,18 +5117,10 @@
       "estadoveiculo": ""
     }
   ],
-  "tipo": [
-    {
-      "id": 0,
-      "nome": "CARRO"
-    },
-    {
-      "nome": "MOTO",
-      "id": 1
-    },
-    {
-      "id": 2,
-      "nome": "CAMINHÃO"
-    }
-  ]
+    "tipo": [
+        {
+            "id": "",
+            "nome": ""
+        }
+    ]
 }

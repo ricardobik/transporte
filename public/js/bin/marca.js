@@ -41,6 +41,7 @@ function getMarcas(input) {
         }
     });
 };
+
 //Switch marcaModelo verify
 function verifySwitch() {
     if ($("#switchMarcaModelo").prop('checked')) {
@@ -51,6 +52,7 @@ function verifySwitch() {
         $("#divMarca").hide();
     };
 };
+
 //Create function
 function saveMarcaModelo() {
     var data = new Object();
@@ -82,6 +84,7 @@ function saveMarcaModelo() {
     //Reload Material Form
     Materialize.updateTextFields();
 };
+
 //Create Function for Type, Brand and Model
 function saveAll(type) {
     var data = new Object();
@@ -224,5 +227,45 @@ function updateMarca(id, dados) {
     }
     //Reload Material Form
     Materialize.updateTextFields();
+
+};
+
+//Delete function
+function deleteMarca(id) {
+    swal({
+            title: "Tem certeza?",
+            text: "Esta ação excluirá a marca de Veículo!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: 'btn-danger',
+            confirmButtonText: 'Excluir',
+            cancelButtonText: "Cancelar",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+
+                $.ajax({
+                    type: "DELETE",
+                    url: "http://192.168.10.10:3004/marca/" + id,
+                    dataType: "json",
+
+                    //if received a response from the server
+                    success: function (response) {
+                        //Reload dataTable
+                        $('#table-marca').DataTable().ajax.reload();
+                        $('#modal-marca').modal('close');
+                    },
+
+                });
+
+                swal("Excluído!", "A marca foi excluída!", "success");
+
+            } else {
+                swal("Cancelado", "Nada foi modificado", "error");
+                $('#modal-marca').modal('close');
+            }
+        });
 
 };

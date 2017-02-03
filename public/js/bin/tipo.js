@@ -103,3 +103,43 @@ function updateTipo(id, dados) {
     Materialize.updateTextFields();
 
 };
+
+//Delete function
+function deleteTipo(id) {
+    swal({
+            title: "Tem certeza?",
+            text: "Esta ação excluirá o tipo de Veículo!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: 'btn-danger',
+            confirmButtonText: 'Excluir',
+            cancelButtonText: "Cancelar",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+
+                $.ajax({
+                    type: "DELETE",
+                    url: "http://192.168.10.10:3004/tipo/" + id,
+                    dataType: "json",
+
+                    //if received a response from the server
+                    success: function (response) {
+                        //Reload dataTable
+                        $('#table-tipo').DataTable().ajax.reload();
+                        $('#modal-tipo').modal('close');
+                    },
+
+                });
+
+                swal("Excluído!", "O tipo foi excluído!", "success");
+
+            } else {
+                swal("Cancelado", "Nada foi modificado", "error");
+                $('#modal-tipo').modal('close');
+            }
+        });
+
+};

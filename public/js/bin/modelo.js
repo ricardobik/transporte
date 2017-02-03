@@ -55,8 +55,10 @@ function fillModelo(data) {
             $("#nomeModelo").val(data.nome);
 
             $('#marcaModal').find('option[value="' + data.marcaId + '"]').prop('selected', true);
-            
+
             $('#marcaModal').material_select();
+            //Reload Material Form
+            Materialize.updateTextFields();
 
         },
 
@@ -69,9 +71,10 @@ function updateModelo(id, dados) {
     var data = new Object();
     data.id = id;
     data.nome = $("#nomeModelo").val();
-    
+    data.marcaId = $('#marcaModal').val();
+
     console.log(data);
-        
+
     //do AJAX request
     $("#formMo").validate();
     if ($("#formMo").valid()) {
@@ -112,5 +115,44 @@ function updateModelo(id, dados) {
     }
     //Reload Material Form
     Materialize.updateTextFields();
+
+};
+
+function deleteModelo(id) {
+    swal({
+            title: "Tem certeza?",
+            text: "Esta ação excluirá o modelo de Veículo!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: 'btn-danger',
+            confirmButtonText: 'Excluir',
+            cancelButtonText: "Cancelar",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+
+                $.ajax({
+                    type: "DELETE",
+                    url: "http://192.168.10.10:3004/modelo/" + id,
+                    dataType: "json",
+
+                    //if received a response from the server
+                    success: function (response) {
+                        //Reload dataTable
+                        $('#table-modelo').DataTable().ajax.reload();
+                        $('#modal-modelo').modal('close');
+                    },
+
+                });
+
+                swal("Excluído!", "O modelo foi excluído!", "success");
+
+            } else {
+                swal("Cancelado", "Nada foi modificado", "error");
+                $('#modal-modelo').modal('close');
+            }
+        });
 
 };
