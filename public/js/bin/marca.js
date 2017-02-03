@@ -85,6 +85,32 @@ function saveMarcaModelo() {
     Materialize.updateTextFields();
 };
 
+function createMarca(data) {
+
+    //make AJAX request
+    $("#form").validate();
+    if ($("#form").valid()) {
+        $.ajax({
+            type: "POST",
+            url: "http://192.168.10.10:3004/marca",
+            data: data,
+            dataType: "json",
+
+            //if received a response from the server
+            success: function (response) {
+                swal("Pronto!",
+                    "Marca de veículo gravada com sucesso.",
+                    "success");
+
+            },
+
+        });
+    }
+    //Reload Material Form
+    Materialize.updateTextFields();
+
+}
+
 //Create Function for Type, Brand and Model
 function saveAll(type) {
     var data = new Object();
@@ -186,7 +212,7 @@ function updateMarca(id, dados) {
     var data = new Object();
     data.id = id;
     data.nome = $("#nomeMarca").val();
-        
+
     //do AJAX request
     $("#formMa").validate();
     if ($("#formMa").valid()) {

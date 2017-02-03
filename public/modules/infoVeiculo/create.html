@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/sass/materialize.css" media="screen,projection" />
+    <!--Import SweetAlert with google style-->
+    <link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+    <!-- Import Navbar -->
+    <div id="nav-bar"></div>
+
+    <div class="container">
+        <div class="row">
+            <div id="admin" class="col s10 offset-s1">
+                <div class="card material-table">
+                    <ul class="tabs">
+                        <li class="tab col s3 offset-m1"><a class="active" href="#divCombustivel">COMBUSTIVEL</a></li>
+                        <li class="tab col s2"><a href="#divMarca">MARCA</a></li>
+                        <li class="tab col s2"><a href="#divModelo">MODELO</a></li>
+                        <li class="tab col s2"><a href="#divTipo">TIPO</a></li>
+                    </ul>
+
+                    <form method="POST" name="form" action="" id="form" novalidate="novalidate">
+                        <div id="divCombustivel">
+
+                            <div class="card-content">
+                                <span class="card-title">Cadastrar combustível</span>
+                                <div class="row">
+                                    <div class="input-field col m12 s12">
+                                        <i class="material-icons prefix">local_gas_station</i>
+                                        <input id="nomeCombustivel" type="text" class="validate" name="nomeCombustivel">
+                                        <label for="nomeCombustivel">Tipo</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action right-align">
+                                <a class="waves-effect waves-light btn" id="createCombustivel" name="createCombustivel"><i class="material-icons right">send</i>Salvar</a>
+                            </div>
+                        </div>
+
+                        <div id="divMarca">
+
+                            <div class="card-content">
+                                <span class="card-title">Cadastrar Marca</span>
+                                <div class="row">
+                                    <div class="input-field col m12 s12">
+                                        <i class="material-icons prefix">directions_car</i>
+                                        <input id="nomeMarca" type="text" class="validate" name="nomeMarca">
+                                        <label for="nomeMarca">Marca</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action right-align">
+                                <a class="waves-effect waves-light btn" id="createMarca" name="createMarca"><i class="material-icons right">send</i>Salvar</a>
+                            </div>
+                        </div>
+
+                        <div id="divModelo">
+
+                            <div class="card-content">
+                                <span class="card-title">Cadastrar Modelo</span>
+                                <div class="row">
+
+                                    <div class="input-field col m12" id="novoModelo">
+                                        <select id="marcaSelect" name="marcaSelect">
+                                            <option value="" disabled selected>Escolha a marca</option>
+                                        </select>
+                                        <label for="marcaSelect">Marca</label>
+                                    </div>
+
+                                    <div class="input-field col m12 s12">
+                                        <i class="material-icons prefix">directions_car</i>
+                                        <input id="nomeModelo" type="text" class="validate" name="nomeModelo">
+                                        <label for="nomeModelo">Modelo</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action right-align">
+                                <a class="waves-effect waves-light btn" id="createModelo" name="createModelo"><i class="material-icons right">send</i>Salvar</a>
+                            </div>
+                        </div>
+
+
+                        <div id="divTipo">
+
+                            <div class="card-content">
+                                <span class="card-title">Cadastrar Tipo</span>
+                                <div class="row">
+                                    <div class="input-field col m12 s12">
+                                        <i class="material-icons prefix">motorcycle</i>
+                                        <input id="nomeTipo" type="text" class="validate" name="nomeTipo">
+                                        <label for="nomeTipo">Tipo de Veículo</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action right-align">
+                                <a class="waves-effect waves-light btn" id="createTipo" name="createTipo"><i class="material-icons right">send</i>Salvar</a>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <!--action button-->
+                    <div class="fixed-action-btn horizontal">
+                        <a class="btn-floating btn-large red">
+                            <i class="large material-icons">add</i>
+                        </a>
+                        <ul>
+                            <li><a href="javascripti:void(0)" onclick="javascript:goSearch(); return false;" class="btn-floating purple"><i class="material-icons">search</i></a></li>
+                            <li><a href="javascripti:void(0)" onclick="javascript:goHome(); return false;" id="home" class="btn-floating green"><i class="material-icons">home</i></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/js/bin/materialize.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/js/bin/sweetalert.min.js"></script>
+
+    <!--System scripts-->
+    <script type="text/javascript" src="/js/bin/general.js"></script>
+    <script type="text/javascript" src="/js/bin/marca.js"></script>
+    <script type="text/javascript" src="/js/bin/modelo.js"></script>
+    <script type="text/javascript" src="/js/bin/combustivel.js"></script>
+    <script type="text/javascript" src="/js/bin/tipo.js"></script>
+    <script>
+        $(document).ready(function() {
+
+
+
+
+            //            $("#tipoCadastro").change(function() {
+            //
+            //                switch ($("#tipoCadastro").val()) {
+            //                    case "0":
+            //                        $("#novaMarca").removeClass("hide");
+            //                        $("#novoModelo").addClass("hide");
+            //                        $("#novoModelo2").addClass("hide");
+            //                        $("#novoTipo").addClass("hide");
+            //                        break;
+            //                    case "1":
+            //                        $("#novoModelo").removeClass("hide");
+            //                        $("#novoModelo2").removeClass("hide");
+            //                        $("#novaMarca").addClass("hide");
+            //                        $("#novoTipo").addClass("hide");
+            //                        break;
+            //                    case "2":
+            //                        $("#novoTipo").removeClass("hide");
+            //                        $("#novaMarca").addClass("hide");
+            //                        $("#novoModelo").addClass("hide");
+            //                        $("#novoModelo2").addClass("hide");
+            //                        break;
+            //                };
+            //            });
+
+            //Load material select
+            $('select').material_select();
+
+            getMarcas(marcaSelect.name);
+
+            //Load Navbar and dropdown menu
+            $('#nav-bar').load("/modules/navbar.html", function() {
+                $(".button-collapse").sideNav();
+                $('.dropdown-button').dropdown();
+            });
+
+            //Stop the submit request
+            $("#form").submit(function(e) {
+                e.preventDefault();
+            });
+
+            //get de form data and save
+            $("#createCombustivel").click(function(e) {
+                var data = Object();
+                data.nome = $("#nomeCombustivel").val();
+                createCombustivel(data);
+            });
+            $("#createMarca").click(function(e) {
+                var data = Object();
+                data.nome = $("#nomeMarca").val();
+                createMarca(data);
+            });
+            $("#createModelo").click(function(e) {
+                var data = Object();
+                data.marcaId = $("#marcaSelect").val();
+                data.nome = $("#nomeModelo").val();
+                createModelo(data);
+            });
+            $("#createTipo").click(function(e) {
+                var data = Object();
+                data.nome = $("#nomeTipo").val();
+                createTipo(data);
+            });
+
+            //Enable Brand after select vehicle type
+            //            $("#tipo").change(function() {
+            //                $("#marca").removeAttr("disabled");
+            //                $("#marca").material_select();
+            //            });
+
+            //Get de form data and save
+            //            $("#submit").click(function(e) {
+            //                saveAll($("#tipoCadastro").val());
+            //            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>

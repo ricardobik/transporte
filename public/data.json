@@ -97,6 +97,21 @@
     {
       "id": 6,
       "nome": "ETANOL AD"
+    },
+    {
+      "nomeCombustivel": "TITANIUM",
+      "nomeMarca": "",
+      "nomeModelo": "",
+      "nomeTipo": "",
+      "id": 7
+    },
+    {
+      "TITANIUM": "",
+      "id": 8
+    },
+    {
+      "nome": "TITANIUM",
+      "id": 9
     }
   ],
   "setor": [
@@ -269,6 +284,10 @@
     {
       "id": 135,
       "nome": "YAMAHA"
+    },
+    {
+      "nome": "FAMOSA",
+      "id": 256
     }
   ],
   "modelo": [
@@ -5117,10 +5136,22 @@
       "estadoveiculo": ""
     }
   ],
-    "tipo": [
-        {
-            "id": "",
-            "nome": ""
-        }
-    ]
+  "tipo": [
+    {
+      "id": 0,
+      "nome": "CARRO"
+    },
+    {
+      "id": 1,
+      "nome": "MOTO"
+    },
+    {
+      "nome": "MICKEY",
+      "id": 2
+    },
+    {
+      "nome": "MICKEY MOUSE",
+      "id": 3
+    }
+  ]
 }

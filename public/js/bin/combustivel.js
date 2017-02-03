@@ -96,7 +96,7 @@ function deleteCombustivel(id) {
 
 
 //Create function
-function saveCombustivel(data) {
+function createCombustivel(data) {
 
     //make AJAX request
     $("#form").validate();
@@ -120,8 +120,6 @@ function saveCombustivel(data) {
     //Reload Material Form
     Materialize.updateTextFields();
 
-
-    // });
 };
 
 //Update function

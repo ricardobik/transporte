@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/sass/materialize.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="/sass/table.css" media="screen" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+    <!-- Import Navbar -->
+    <div id="nav-bar"></div>
+
+    <div class="container">
+        <div class="row">
+            <div id="admin" class="col s10 offset-s1">
+                <div class="card material-table">
+                    <ul class="tabs">
+                        <li class="tab col s3 offset-m1"><a class="active" href="#divCombustivel">COMBUSTIVEL</a></li>
+                        <li class="tab col s2"><a href="#divMarca">MARCA</a></li>
+                        <li class="tab col s2"><a href="#divModelo">MODELO</a></li>
+                        <li class="tab col s2"><a href="#divTipo">TIPO</a></li>
+                    </ul>
+
+                    <div id="divCombustivel" class="search-page">
+                        <div class="card-content">
+                            <div class="table-header">
+                                <span class="card-title">Pesquisar Combustível</span>
+                                <div class="actions">
+                                    <input id="search-input-combustivel" type="text" class="search-header">
+                                    <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                                </div>
+                            </div>
+                            <table id="table-combustivel" class="search-page">
+                                <thead>
+                                    <tr>
+                                        <th> ID </th>
+                                        <th> NOME </th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <div class="card-action right-align">
+                            <a class="waves-effect waves-light btn disabled" name="CallModalCombustivel" id="CallModalCombustivel" href="#modal-combustivel">Editar</a>
+                        </div>
+                    </div>
+
+                    <div id="divMarca" class="search-page">
+                        <div class="card-content">
+                            <div class="table-header">
+                                <span class="card-title">Pesquisar Marca de Veículo</span>
+                                <div class="actions">
+                                    <input id="search-input-marca" type="text" class="search-header">
+                                    <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                                </div>
+                            </div>
+                            <table id="table-marca" class="search-page">
+                                <thead>
+                                    <tr>
+                                        <th> ID </th>
+                                        <th> NOME </th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <div class="card-action right-align">
+                            <a class="waves-effect waves-light btn disabled" name="CallModalMarca" id="CallModalMarca" href="#modal-marca">Editar</a>
+                        </div>
+                    </div>
+
+                    <div id="divModelo" class="search-page">
+                        <div class="card-content">
+                            <div class="table-header">
+                                <span class="card-title">Pesquisar Modelo</span>
+                                <div class="actions">
+                                    <select id="marcaSelect" name="marcaSelect" class="left">
+                                        <option value="" disabled selected>Escolha a marca</option>
+                                    </select>
+                                    <label for="marcaSelect"></label>
+                                </div>
+                                <input id="search-input-modelo" type="text" class="search-header col m3 offset-m1">
+                                <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                            </div>
+                            <table id="table-modelo" class="search-page hide">
+                                <thead>
+                                    <tr>
+                                        <th> ID </th>
+                                        <th> MARCA </th>
+                                        <th> MODELO </th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <div class="card-action right-align">
+                            <a class="waves-effect waves-light btn disabled" name="CallModalModelo" id="CallModalModelo" href="#modal-modelo">Editar</a>
+                        </div>
+                    </div>
+
+                    <div id="divTipo" class="search-page">
+                        <div class="card-content">
+                            <div class="table-header">
+                                <span class="card-title">Pesquisar Tipo de Veículo</span>
+                                <div class="actions">
+                                    <input id="search-input-tipo" type="text" class="search-header">
+                                    <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                                </div>
+                            </div>
+                            <table id="table-tipo" class="search-page">
+                                <thead>
+                                    <tr>
+                                        <th> ID </th>
+                                        <th> NOME </th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <div class="card-action right-align">
+                            <a class="waves-effect waves-light btn disabled" name="CallModalTipo" id="CallModalTipo" href="#modal-tipo">Editar</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!--action button-->
+            <div class="fixed-action-btn horizontal">
+                <a class="btn-floating btn-large red">
+                    <i class="large material-icons">add</i>
+                </a>
+                <ul>
+                    <li><a href="javascripti:void(0)" onclick="javascript:goCreate(); return false;" class="btn-floating purple"><i class="material-icons">edit</i></a></li>
+                    <li><a href="javascripti:void(0)" onclick="javascript:goHome(); return false;" id="home" class="btn-floating green"><i class="material-icons">home</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Structure Combustivel-->
+    <form method="POST" name="formC" action="" id="formC">
+        <div id="modal-combustivel" class="modal modal-fixed-footer modal-edit">
+            <div class="modal-content">
+                <span class="card-title">Editar Combustível</span>
+
+
+                <div class="row">
+                    <div class="input-field col s12 m1">
+                        <input disabled name="idCombustivel" id="idCombustivel" type="text">
+                        <label for="idCombustivel">id</label>
+                    </div>
+
+                    <div class="input-field col m11 s12">
+                        <input id="nomeCombustivel" name="nomeCombustivel" type="text" class="validate" required="">
+                        <label for="nomeCombustivel">Nome</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <div class="card-action right-align">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Voltar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="deleteCombustivel">Deletar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="updateCombustivel">Enviar</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Modal Structure Marca-->
+    <form method="POST" name="formMa" action="" id="formMa">
+        <div id="modal-marca" class="modal modal-fixed-footer modal-edit">
+            <div class="modal-content">
+                <span class="card-title">Editar Marca</span>
+
+
+                <div class="row">
+                    <div class="input-field col s12 m1">
+                        <input disabled name="idMarca" id="idMarca" type="text">
+                        <label for="idMarca">id</label>
+                    </div>
+
+                    <div class="input-field col m11 s12">
+                        <input id="nomeMarca" name="nomeMarca" type="text" class="validate" required="">
+                        <label for="nomeMarca">Nome</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <div class="card-action right-align">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Voltar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="deleteMarca">Deletar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="updateMarca">Enviar</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Modal Structure Modelo-->
+    <form method="POST" name="formMo" action="" id="formMo">
+        <div id="modal-modelo" class="modal modal-fixed-footer modal-edit">
+            <div class="modal-content">
+                <span class="card-title">Editar Modelo</span>
+                <div class="row">
+
+                    <div class="input-field col m12">
+                        <select id="marcaModal" name="marcaModal">
+                            <option value="" disabled selected>Escolha a marca</option>
+                        </select>
+                        <label for="marcaModal">Marca</label>
+                    </div>
+
+                    <div class="input-field col s12 m1">
+                        <input disabled name="idModelo" id="idModelo" type="text">
+                        <label for="idModelo">id</label>
+                    </div>
+                    <div class="input-field col m11 s12">
+                        <input id="nomeModelo" name="nomeModelo" type="text" class="validate" required="">
+                        <label for="nomeModelo">Nome</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="card-action right-align">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Voltar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="deleteModelo">Deletar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="updateModelo">Enviar</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Modal Structure Tipo-->
+    <form method="POST" name="form-tipo" action="" id="form-tipo">
+        <div id="modal-tipo" class="modal modal-fixed-footer modal-edit">
+            <div class="modal-content">
+                <span class="card-title">Editar Tipo de Veículo</span>
+
+
+                <div class="row">
+                    <div class="input-field col s12 m1">
+                        <input disabled name="idTipo" id="idTipo" type="text">
+                        <label for="idTipo">id</label>
+                    </div>
+
+                    <div class="input-field col m11 s12">
+                        <input id="nomeTipo" name="nomeTipo" type="text" class="validate" required="">
+                        <label for="nomeTipo">Nome</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <div class="card-action right-align">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Voltar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="deleteTipo">Deletar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="updateTipo">Enviar</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/js/bin/materialize.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/js/bin/sweetalert.min.js"></script>
+
+    <!--Import DataTables-->
+    <script type="text/javascript" src="/js/bin/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" src="/js/bin/general.js"></script>
+    <script type="text/javascript" src="/js/bin/combustivel.js"></script>
+    <script type="text/javascript" src="/js/bin/modelo.js"></script>
+    <script type="text/javascript" src="/js/bin/marca.js"></script>
+    <script type="text/javascript" src="/js/bin/tipo.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            var $update;
+
+            //Fill Tables with Json
+            fillCombustivelTable();
+            fillMarcaTable();
+            fillTipoTable();
+            getMarcas(marcaSelect.name);
+
+            //Call modal form
+            $('.modal').modal({
+                dismissible: false
+            });
+            
+            //Load material select
+            $('select').material_select();
+            
+            //Enable Model after select Brand type
+            $("#marcaSelect").change(function() {
+                getModelos($("#marcaSelect").val());
+                $("#table-modelo").removeClass("hide");
+            });
+            
+            // #search-input is a <input type="text"> element
+            $('#search-input-combustivel').on('keyup', function() {
+                tableCombustivel.search(this.value).draw();
+            });
+            $('#search-input-marca').on('keyup', function() {
+                tableMarca.search(this.value).draw();
+            });
+            $('#search-input-modelo').on('keyup', function() {
+                tableModelo.search(this.value).draw();
+            });
+            $('#search-input-tipo').on('keyup', function() {
+                tableTipo.search(this.value).draw();
+            });
+            
+            //Load Navbar and dropdown menu
+            $('#nav-bar').load("/modules/navbar.html", function() {
+                $(".button-collapse").sideNav();
+                $('.dropdown-button').dropdown();
+            });
+            
+            //Enable edit button and set id of Table Combustivel to Edit
+            $('#table-combustivel tbody').on('click', 'tr', function() {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                    $('#CallModalCombustivel').addClass('disabled');
+                } else {
+                    $('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                    $('#CallModalCombustivel').removeClass('disabled');
+                    $update = $(this).parents('table').DataTable().row(this).data();
+                }
+            });
+            //Enable edit button and set id of Table Combustivel to Edit
+            $('#table-marca tbody').on('click', 'tr', function() {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                    $('#CallModalMarca').addClass('disabled');
+                } else {
+                    $('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                    $('#CallModalMarca').removeClass('disabled');
+                    $update = $(this).parents('table').DataTable().row(this).data();
+                }
+            });
+            //Enable edit button and set id of Table Combustivel to Edit
+            $('#table-modelo tbody').on('click', 'tr', function() {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                    $('#CallModalModelo').addClass('disabled');
+                } else {
+                    $('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                    $('#CallModalModelo').removeClass('disabled');
+                    $update = $(this).parents('table').DataTable().row(this).data();
+                }
+            });
+            //Enable edit button and set id of Table Combustivel to Edit
+            $('#table-tipo tbody').on('click', 'tr', function() {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                    $('#CallModalTipo').addClass('disabled');
+                } else {
+                    $('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                    $('#CallModalTipo').removeClass('disabled');
+                    $update = $(this).parents('table').DataTable().row(this).data();
+                }
+            });
+            
+            //Get id from json and populate the modal field
+            $('#CallModalCombustivel').on('click', function() {
+                fillCombustivel($update.id);
+            });
+            $('#CallModalMarca').on('click', function() {
+                fillMarca($update.id);
+            });
+            $('#CallModalModelo').on('click', function() {
+                fillModelo($update);
+            });
+            $('#CallModalTipo').on('click', function() {
+                fillTipo($update.id);
+            });
+
+            //Update request
+            $("#updateCombustivel").click(function(e) {
+                updateCombustivel($update.id);
+            });
+            $("#updateMarca").click(function(e) {
+                updateMarca($update.id);
+            });
+            $("#updateModelo").click(function(e) {
+                updateModelo($update.id);
+            });
+            $("#updateTipo").click(function(e) {
+                updateTipo($update.id);
+            });
+
+            //Delete request
+            $('#deleteCombustivel').on('click', function() {
+                deleteCombustivel($update.id);
+            });
+            $('#deleteMarca').on('click', function() {
+                deleteMarca($update.id);
+            });
+            $('#deleteModelo').on('click', function() {
+                deleteModelo($update.id);
+            });
+            $('#deleteTipo').on('click', function() {
+                deleteTipo($update.id);
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

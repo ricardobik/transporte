@@ -143,3 +143,29 @@ function deleteTipo(id) {
         });
 
 };
+
+function createTipo(data) {
+
+    //make AJAX request
+    $("#form").validate();
+    if ($("#form").valid()) {
+        $.ajax({
+            type: "POST",
+            url: "http://192.168.10.10:3004/tipo",
+            data: data,
+            dataType: "json",
+
+            //if received a response from the server
+            success: function (response) {
+                swal("Pronto!",
+                    "Tipo de veículo gravado com sucesso.",
+                    "success");
+
+            },
+
+        });
+    }
+    //Reload Material Form
+    Materialize.updateTextFields();
+
+};

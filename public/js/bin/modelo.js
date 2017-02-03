@@ -118,6 +118,32 @@ function updateModelo(id, dados) {
 
 };
 
+function createModelo(data) {
+
+    //make AJAX request
+    $("#form").validate();
+    if ($("#form").valid()) {
+        $.ajax({
+            type: "POST",
+            url: "http://192.168.10.10:3004/modelo",
+            data: data,
+            dataType: "json",
+
+            //if received a response from the server
+            success: function (response) {
+                swal("Pronto!",
+                    "Modelo gravado com sucesso.",
+                    "success");
+
+            },
+
+        });
+    }
+    //Reload Material Form
+    Materialize.updateTextFields();
+
+};
+
 function deleteModelo(id) {
     swal({
             title: "Tem certeza?",
