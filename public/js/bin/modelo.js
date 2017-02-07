@@ -1,3 +1,41 @@
+function getModelosSelect(marca) {
+
+    $("#modeloid").empty().html(' ');
+    $("#modeloid").append("<option value='' disabled selected>Escolha o modelo</option>");
+    $("#loader").css('display', '');
+
+    $.ajax({
+        url: 'http://192.168.10.10:3004/marca/' + marca + '/modelo',
+
+        type: 'GET',
+        dataType: 'json',
+        success: function (json) {
+
+            if (json == '') {
+                $("#modeloid").empty();
+                $("#modeloid").html('');
+                $("#modeloid").append("<option value='' disabled selected>Não há modelo disponível</option>");
+                $('#modeloid').material_select();
+            };
+
+            $.each(json, function (key, value) {
+
+                $('#modeloid').append(
+                    $("<option></option>")
+                    .attr('value', value.id)
+                    .text(value.nome)
+                );
+                $('#modeloid').material_select();
+
+            });
+            $("#loader").css('display', 'none');
+        },
+        error: function (textStatus, errorThrown) {
+            console.log("errou");
+        }
+    });
+};
+
 function getModelos(marca) {
     console.log(marca);
 

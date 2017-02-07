@@ -208,7 +208,8 @@
     <!--System scripts-->
     <script type="text/javascript" src="/js/bin/general.js"></script>
     <script type="text/javascript" src="/js/bin/veiculo.js"></script>
-    <script type="text/javascript" src="/js/bin/marcaModelo.js"></script>
+    <script type="text/javascript" src="/js/bin/marca.js"></script>
+    <script type="text/javascript" src="/js/bin/modelo.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -290,7 +291,7 @@
             //Enable Model after select Brand type
             $("#marcaid").change(function() {
                 $("#modeloid").removeAttr("disabled");
-                getModelos($("#marcaid").val());
+                getModelosSelect($("#marcaid").val());
             });
 
         });

@@ -117,7 +117,6 @@ function deleteMotorista(id) {
 
 };
 
-
 //Create function
 function saveMotorista(data) {
 

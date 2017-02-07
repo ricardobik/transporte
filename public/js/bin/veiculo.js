@@ -1,76 +1,3 @@
-function fillVeiculoSelect(marcas, tipo) {
-
-    //Load Json veiculos from FIPE API
-    $.ajax({
-
-        url: 'https://fipe-parallelum.rhcloud.com/api/v1/' + tipo + '/marcas/' + marcas + '/modelos',
-
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-
-            $.each(json, function (key, value) {
-
-                $.each(value, function (index, data) {
-
-                    $('#veiculos').append(
-                        $("<option></option>")
-                        .attr('value', data.codigo)
-                        .text(data.nome)
-                    );
-                })
-
-                $('select').material_select();
-
-            });
-        },
-        error: function (textStatus, errorThrown) {
-            alert(textStatus);
-        }
-
-    });
-};
-
-
-
-function getModelos(marca) {
-
-    $("#modeloid").empty().html(' ');
-    $("#modeloid").append("<option value='' disabled selected>Escolha o modelo</option>");
-    $("#loader").css('display', '');
-
-    $.ajax({
-        url: 'http://192.168.10.10:3004/marca/' + marca + '/modelo',
-
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-
-            if (json == '') {
-                $("#modeloid").empty();
-                $("#modeloid").html('');
-                $("#modeloid").append("<option value='' disabled selected>Não há modelo disponível</option>");
-                $('#modeloid').material_select();
-            };
-
-            $.each(json, function (key, value) {
-
-                $('#modeloid').append(
-                    $("<option></option>")
-                    .attr('value', value.id)
-                    .text(value.nome)
-                );
-                $('#modeloid').material_select();
-
-            });
-            $("#loader").css('display', 'none');
-        },
-        error: function (textStatus, errorThrown) {
-            console.log("errou");
-        }
-    });
-};
-
 function getCombustivel() {
     //Load Json marcas from FIPE API
 
@@ -173,7 +100,7 @@ $("form").validate({
 function saveVeiculo(data) {
 
     //make AJAX request
-    $("form").validate();
+    var validator = $("form").validate();
     if ($("form").valid()) {
         $.ajax({
             type: "POST",
@@ -186,11 +113,90 @@ function saveVeiculo(data) {
                 swal("Pronto!",
                     "Veículo cadastrado com sucesso",
                     "success");
+                slideOut("#cardFirst", 1350, -800, more);
+
+                validator.resetForm();
+//                this.formVeiculo2.reset();
+                Materialize.updateTextFields(); //updating labels from inputs
             },
 
         });
     }
     //Reload Material Form
     Materialize.updateTextFields();
+
+};
+
+function fillVeiculoTable() {
+
+    table = $('table#table-veiculo').DataTable({
+        ajax: {
+            url: "http://192.168.10.10:3004/veiculo",
+            contentType: 'application/json; charset=UTF-8',
+            dataType: 'json',
+            dataSrc: ''
+        },
+        columns: [{
+            data: "id"
+                }, {
+            data: "marcaid"
+                }, {
+            data: "modeloid"
+                }, {
+            data: "placa"
+                }],
+        "columnDefs": [{
+            "width": "10%",
+            "targets": 0
+                }, {
+            "width": "30%",
+            "targets": 1
+                }, {
+            "width": "40%",
+            "targets": 2
+                }, {
+            "width": "50%",
+            "targets": 3
+                }],
+        select: true,
+        fixedColumns: true,
+        lengthChange: false,
+        pageLength: 5,
+        dom: 'lrti<"right"p>',
+        language: {
+            url: "../../doc/Portuguese-Brasil.json"
+        }
+    });
+
+}
+
+//Fill motorista Modal to Edit
+function FillMotorista(Id) {
+
+    $.ajax({
+        type: "GET",
+        url: "http://192.168.10.10:3004/veiculo/" + Id,
+
+        dataType: "json",
+
+        //if received a response from the server
+        success: function (data) {
+
+            $("#id").val(data.id);
+            $("#nome").val(data.nome);
+            $("#cnh").val(data.cnh);
+            $("#cnhVencimento").val(data.cnhVencimento);
+            $("#telefone").val(data.telefone);
+            $("#setor").val(data.setor);
+
+            //Reload Material Form
+            Materialize.updateTextFields();
+
+            //Load material dropbox
+            $('#setor').material_select();
+
+        },
+
+    });
 
 };
