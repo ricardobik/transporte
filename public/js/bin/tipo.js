@@ -169,3 +169,29 @@ function createTipo(data) {
     Materialize.updateTextFields();
 
 };
+
+//insert into select to create veiculo
+function getTipo() {
+    
+    //Load Json marcas from FIPE API
+    $.ajax({
+        url: urlApi + "tipo",
+
+        type: 'GET',
+        dataType: 'json',
+        success: function (json) {
+
+            $.each(json, function (key, value) {
+
+                $('#tipoid').append(
+                    $("<option></option>")
+                    .attr('value', value.id)
+                    .text(value.nome)
+                );
+                $('#tipoid').material_select();
+
+            });
+
+        }
+    });
+};

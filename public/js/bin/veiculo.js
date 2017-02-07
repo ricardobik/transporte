@@ -72,7 +72,7 @@ $("form").validate({
 });
 
 //Create function
-function saveVeiculo(data) {
+function createVeiculo(data) {
 
     //make AJAX request
     var validator = $("form").validate();
@@ -91,7 +91,7 @@ function saveVeiculo(data) {
                 slideOut("#cardFirst", 1350, -800, more);
 
                 validator.resetForm();
-//                this.formVeiculo2.reset();
+                //                this.formVeiculo2.reset();
                 Materialize.updateTextFields(); //updating labels from inputs
             },
 
@@ -148,30 +148,47 @@ function fillVeiculoTable() {
 //Fill motorista Modal to Edit
 function FillVeiculo(Id) {
 
-//    $.ajax({
-//        type: "GET",
-//        url: urlApi + "veiculo/" + Id,
-//
-//        dataType: "json",
-//
-//        //if received a response from the server
-//        success: function (data) {
-//
-//            $("#id").val(data.id);
-//            $("#nome").val(data.nome);
-//            $("#cnh").val(data.cnh);
-//            $("#cnhVencimento").val(data.cnhVencimento);
-//            $("#telefone").val(data.telefone);
-//            $("#setor").val(data.setor);
-//
-//            //Reload Material Form
-//            Materialize.updateTextFields();
-//
-//            //Load material dropbox
-//            $('#setor').material_select();
-//
-//        },
-//
-//    });
+    $.ajax({
+        type: "GET",
+        url: urlApi + "veiculo/" + Id,
+
+        dataType: "json",
+
+        //if received a response from the server
+        success: function (data) {
+
+            $("#id").val(data.id);
+            $("#tipoid").val(data.tipoid);
+            $("#placa").val(data.placa);
+            
+            getMarcaSelect(data.marcaid);
+            
+            //TODO getModelosSelect(data.modeloid);
+            
+
+
+            $('#modeloid').append(
+                $("<option></option>")
+                .attr('value', data.modeloid)
+                .text(data.modeloid)
+            );
+
+
+            $("#anofabricacao").val(data.anofabricacao);
+            $("#combustivelid").val(data.combustivelid);
+            $("#renavam").val(data.renavam);
+            $("#estadoveiculo").val(data.estadoveiculo);
+            $("#setorid").val(data.setorid);
+            $("#info").val(data.info);
+
+            //Reload Material Form
+            Materialize.updateTextFields();
+
+            //Load material dropbox
+            $('select').material_select();
+
+        },
+
+    });
 
 };

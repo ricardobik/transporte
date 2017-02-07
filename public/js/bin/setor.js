@@ -206,7 +206,7 @@ function getSetor() {
 
             $.each(json, function (key, value) {
 
-                $('#setor').append(
+                $('#setorid').append(
                     $("<option></option>")
                     .attr('value', value.id)
                     .text(value.nome)

@@ -78,10 +78,6 @@
                     <div class="input-field col m4" id="divTipo">
                         <select id="tipoid" name="tipoid" required="" aria-required="true">
                             <option value="" disabled selected>Escolha o tipo</option>
-                            <option value="1">Carro</option>
-                            <option value="2">Moto</option>
-                            <option value="3">Caminhão</option>
-                            <option value="4">Trator</option>
                         </select>
                         <label for="tipo">Tipo</label>
                     </div>
@@ -94,10 +90,10 @@
                 </div>
                 <div class="row">
                     <div class="input-field col m5 s11">
-                        <select id="marcaid" name="marcaid" disabled>
-                            <option value="" disabled selected>Escolha a marca</option>
+                        <select id="marcaid" name="marcaid">
+<!--                            <option value=""  selected>Escolha a marca</option>-->
                         </select>
-                        <label for="marca">Marca</label>
+                        <label for="marcaid">Marca</label>
                     </div>
 
                     <!--Load when choosing Modelo-->
@@ -110,25 +106,72 @@
                     </div>
 
                     <div class="input-field col s12 m6">
-                        <select id="modeloid" name="modeloid" disabled>
-                            <option value="" disabled selected>Escolha o modelo</option>
+                        <select id="modeloid" name="modeloid">
+<!--                            <option value="" disabled selected>Escolha o modelo</option>-->
                         </select>
                         <label>Modelo</label>
                     </div>
                 </div>
-                <a class="" name="callModalEdit" id="callModalEdit" href="#modal">Não encontrou marca ou modelo específico? Cadastre aqui</a>
-            </div>
-            <div class="card-action right-align">
 
-                <a class="btn waves-effect" id="next">Próximo</a>
+                <div class="divider"></div>
+
+                <span class="card-title" id="infoSpan" name="infoSpan">Informações adicionais </span>
+                <div class="row">
+
+                    <div class="input-field col m3">
+                        <input id="anofabricacao" name="anofabricacao" type="text" class="validate">
+                        <label for="ano">Ano</label>
+                    </div>
+                    <div class="input-field col m5 offset-m4" id="divCombustivel">
+                        <select id="combustivelid" name="combustivelid" required="" aria-required="true">
+<!--                            <option value="" disabled selected>Selecione</option>-->
+                        </select>
+                        <label for="Combustivel">Combustível</label>
+                    </div>
+
+                    <div class="input-field col m4">
+                        <input id="renavam" name="renavam" type="text" class="validate">
+                        <label for="renavam">Renavam</label>
+                    </div>
+
+                    <div class="input-field col m5 offset-m3">
+                        <select id="estadoveiculo" name="estadoveiculo" required="" aria-required="true">
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="5">Ótimo</option>
+                            <option value="4">Bom</option>
+                            <option value="3">Regular</option>
+                            <option value="2">Ruim</option>
+                            <option value="1">Péssimo</option>
+                        </select>
+                        <label for="tipo">Estado atual do veículo</label>
+                    </div>
+                    <div class="input-field col m12">
+                        <select id="setorid" name="setorid" required="" aria-required="true">
+<!--                            <option value="" disabled selected>Selecione</option>-->
+                        </select>
+                        <label for="setor">Setor do veículo</label>
+                    </div>
+
+                    <div class="input-field col m12">
+                        <i class="material-icons prefix">mode_edit</i>
+                        <textarea id="info" name="info" class="materialize-textarea"></textarea>
+                        <label for="informacoes">Informações adicionais</label>
+                    </div>
+
+                </div>
+
             </div>
-        <div class="modal-footer">
-            <div class="card-action right-align">
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Voltar</a>
-                <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="delete">Deletar</a>
-                <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="update">Enviar</a>
+
+
+
+
+            <div class="modal-footer">
+                <div class="card-action right-align">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Voltar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="delete">Deletar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="update">Enviar</a>
+                </div>
             </div>
-        </div>
         </div>
     </form>
 
@@ -144,12 +187,17 @@
 
     <script type="text/javascript" src="/js/bin/general.js"></script>
     <script type="text/javascript" src="/js/bin/veiculo.js"></script>
+    <script type="text/javascript" src="/js/bin/tipo.js"></script>
+    <script type="text/javascript" src="/js/bin/marca.js"></script>
+    <script type="text/javascript" src="/js/bin/modelo.js"></script>
 
 
     <script>
         $(document).ready(function() {
 
             var $update;
+
+            getTipo();
 
             //Fill Table with Json
             fillVeiculoTable();

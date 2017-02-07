@@ -175,6 +175,33 @@ function fillMarca(id) {
 
 };
 
+function getMarcaSelect(id) {
+
+    //    $("#modeloid").empty().html(' ');
+    //    $("#modeloid").append("<option value='' disabled selected>Escolha o modelo</option>");
+    //    $("#loader").css('display', '');
+    console.log("aiiiiii");
+    $.ajax({
+        url: "http://192.168.10.10:3004/marca/" + id,
+
+        type: 'GET',
+        dataType: 'json',
+        success: function (json) {
+
+            $('#marcaid').append(
+                $("<option></option>")
+                .attr('value', json.id)
+                .text(json.nome)
+            );
+            $('#marcaid').material_select();
+            
+        },
+        error: function (textStatus, errorThrown) {
+            console.log("errou");
+        }
+    });
+};
+
 function updateMarca(id, dados) {
 
     var data = new Object();
