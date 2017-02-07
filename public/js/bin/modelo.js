@@ -5,7 +5,7 @@ function getModelosSelect(marca) {
     $("#loader").css('display', '');
 
     $.ajax({
-        url: 'http://192.168.10.10:3004/marca/' + marca + '/modelo',
+        url: urlApi +  "marca/" + marca + "/modelo",
 
         type: 'GET',
         dataType: 'json',
@@ -44,7 +44,7 @@ function getModelos(marca) {
     tableModelo = $('table#table-modelo').DataTable({
         destroy: true,
         ajax: {
-            url: 'http://192.168.10.10:3004/marca/' + marca + '/modelo',
+            url: urlApi + "marca/" + marca + "/modelo",
             contentType: 'application/json; charset=UTF-8',
             dataType: 'json',
             dataSrc: ''
@@ -83,7 +83,7 @@ function fillModelo(data) {
 
     $.ajax({
         type: "GET",
-        url: 'http://192.168.10.10:3004/modelo/' + data.id,
+        url: urlApi + "modelo/" + data.id,
         dataType: "json",
 
         //if received a response from the server
@@ -130,7 +130,7 @@ function updateModelo(id, dados) {
 
             $.ajax({
                 type: "PUT",
-                url: "http://192.168.10.10:3004/modelo/" + id,
+                url: urlApi + "modelo/" + id,
                 data: data,
                 dataType: "json",
 
@@ -163,7 +163,7 @@ function createModelo(data) {
     if ($("#form").valid()) {
         $.ajax({
             type: "POST",
-            url: "http://192.168.10.10:3004/modelo",
+            url: urlApi + "modelo",
             data: data,
             dataType: "json",
 
@@ -199,7 +199,7 @@ function deleteModelo(id) {
 
                 $.ajax({
                     type: "DELETE",
-                    url: "http://192.168.10.10:3004/modelo/" + id,
+                    url: urlApi + "modelo/" + id,
                     dataType: "json",
 
                     //if received a response from the server

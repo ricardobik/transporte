@@ -38,8 +38,8 @@
                                 <div class="row">
                                     <div class="input-field col m12 s12">
                                         <i class="material-icons prefix">local_gas_station</i>
-                                        <input id="nomeCombustivel" type="text" class="validate" name="nomeCombustivel">
-                                        <label for="nomeCombustivel">Tipo</label>
+                                        <input id="tipoCombustivel" type="text" class="validate" name="tipoCombustivel">
+                                        <label for="tipoCombustivel">Tipo</label>
                                     </div>
                                 </div>
                             </div>
@@ -141,33 +141,6 @@
     <script>
         $(document).ready(function() {
 
-
-
-
-            //            $("#tipoCadastro").change(function() {
-            //
-            //                switch ($("#tipoCadastro").val()) {
-            //                    case "0":
-            //                        $("#novaMarca").removeClass("hide");
-            //                        $("#novoModelo").addClass("hide");
-            //                        $("#novoModelo2").addClass("hide");
-            //                        $("#novoTipo").addClass("hide");
-            //                        break;
-            //                    case "1":
-            //                        $("#novoModelo").removeClass("hide");
-            //                        $("#novoModelo2").removeClass("hide");
-            //                        $("#novaMarca").addClass("hide");
-            //                        $("#novoTipo").addClass("hide");
-            //                        break;
-            //                    case "2":
-            //                        $("#novoTipo").removeClass("hide");
-            //                        $("#novaMarca").addClass("hide");
-            //                        $("#novoModelo").addClass("hide");
-            //                        $("#novoModelo2").addClass("hide");
-            //                        break;
-            //                };
-            //            });
-
             //Load material select
             $('select').material_select();
 
@@ -187,7 +160,7 @@
             //get de form data and save
             $("#createCombustivel").click(function(e) {
                 var data = Object();
-                data.nome = $("#nomeCombustivel").val();
+                data.tipo = $("#tipoCombustivel").val();
                 createCombustivel(data);
             });
             $("#createMarca").click(function(e) {

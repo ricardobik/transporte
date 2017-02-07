@@ -62,7 +62,7 @@ function fillSetor(id) {
     
         $.ajax({
             type: "GET",
-            url: "http://192.168.10.10:3004/setor/" + id,
+            url: urlApi + "setor/" + id,
             dataType: "json",
 
             //if received a response from the server
@@ -100,7 +100,7 @@ function deleteSetor(id) {
 
                 $.ajax({
                     type: "DELETE",
-                    url: "http://192.168.10.10:3004/setor/" + id,
+                    url: urlApi + "setor/" + id,
                     dataType: "json",
 
                     //if received a response from the server
@@ -121,7 +121,6 @@ function deleteSetor(id) {
 
 };
 
-
 //Create function
 function saveSetor(data) {
 
@@ -130,7 +129,7 @@ function saveSetor(data) {
     if ($("#form").valid()) {
         $.ajax({
             type: "POST",
-            url: "http://192.168.10.10:3004/setor",
+            url: urlApi + "setor",
             data: data,
             dataType: "json",
 
@@ -171,7 +170,7 @@ function updateSetor(id, data) {
 
             $.ajax({
                 type: "PUT",
-                url: "http://192.168.10.10:3004/setor/" + id,
+                url: urlApi + "setor/" + id,
                 data: data,
                 dataType: "json",
 
@@ -197,6 +196,29 @@ function updateSetor(id, data) {
 
 };
 
-var table = "";
+function getSetor() {
+    //Load Json setor
+    $.ajax({
+        url: urlApi + "setor",
+        type: 'GET',
+        dataType: 'json',
+        success: function (json) {
+
+            $.each(json, function (key, value) {
+
+                $('#setor').append(
+                    $("<option></option>")
+                    .attr('value', value.id)
+                    .text(value.nome)
+                );
+
+                $('select').material_select();
+
+            });
+        }
+    });
+
+}
+
 
 

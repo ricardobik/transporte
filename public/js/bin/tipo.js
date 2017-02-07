@@ -3,7 +3,7 @@ function fillTipoTable() {
     //Populates Table with Json
     tableTipo = $('table#table-tipo').DataTable({
         ajax: {
-            url: "http://192.168.10.10:3004/tipo",
+            url: urlApi + "tipo",
             contentType: 'application/json; charset=UTF-8',
             dataType: 'json',
             dataSrc: ''
@@ -35,7 +35,7 @@ function fillTipo(id) {
 
     $.ajax({
         type: "GET",
-        url: "http://192.168.10.10:3004/tipo/" + id,
+        url: urlApi + "tipo/" + id,
         dataType: "json",
 
         //if received a response from the server
@@ -78,7 +78,7 @@ function updateTipo(id, dados) {
 
             $.ajax({
                 type: "PUT",
-                url: "http://192.168.10.10:3004/tipo/" + id,
+                url: urlApi + "tipo/" + id,
                 data: data,
                 dataType: "json",
 
@@ -122,7 +122,7 @@ function deleteTipo(id) {
 
                 $.ajax({
                     type: "DELETE",
-                    url: "http://192.168.10.10:3004/tipo/" + id,
+                    url: urlApi + "tipo/" + id,
                     dataType: "json",
 
                     //if received a response from the server
@@ -151,7 +151,7 @@ function createTipo(data) {
     if ($("#form").valid()) {
         $.ajax({
             type: "POST",
-            url: "http://192.168.10.10:3004/tipo",
+            url: urlApi + "tipo",
             data: data,
             dataType: "json",
 

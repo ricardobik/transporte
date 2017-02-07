@@ -31,19 +31,19 @@ $("form").validate({
     }
 });
 
-
+//Fill combustivel imput to update/delete
 function fillCombustivel(id) {
 
     $.ajax({
         type: "GET",
-        url: "http://192.168.10.10:3004/combustivel/" + id,
+        url: urlApi + "combustivel/" + id,
         dataType: "json",
 
         //if received a response from the server
         success: function (data) {
 
             $("#idCombustivel").val(data.id);
-            $("#nomeCombustivel").val(data.nome);
+            $("#nomeCombustivel").val(data.tipo);
 
             //Reload Material Form
             Materialize.updateTextFields();
@@ -72,7 +72,7 @@ function deleteCombustivel(id) {
 
                 $.ajax({
                     type: "DELETE",
-                    url: "http://192.168.10.10:3004/combustivel/" + id,
+                    url: urlApi + "combustivel/" + id,
                     dataType: "json",
 
                     //if received a response from the server
@@ -94,7 +94,6 @@ function deleteCombustivel(id) {
 
 };
 
-
 //Create function
 function createCombustivel(data) {
 
@@ -103,7 +102,7 @@ function createCombustivel(data) {
     if ($("#form").valid()) {
         $.ajax({
             type: "POST",
-            url: "http://192.168.10.10:3004/combustivel",
+            url: urlApi + "combustivel",
             data: data,
             dataType: "json",
 
@@ -126,12 +125,12 @@ function createCombustivel(data) {
 function updateCombustivel(id, dados) {
 
     var data = new Object();
-    data.nome = $("#nomeCombustivel").val();
+    data.tipo = $("#tipoCombustivel").val();
     data.id = id;
     
     //do AJAX request
-    $("#formC").validate();
-    if ($("#formC").valid()) {
+    $("form").validate();
+    if ($("form").valid()) {
 
         swal({
             title: "Confirmação",
@@ -146,7 +145,7 @@ function updateCombustivel(id, dados) {
 
             $.ajax({
                 type: "PUT",
-                url: "http://192.168.10.10:3004/combustivel/" + id,
+                url: urlApi + "combustivel/" + id,
                 data: data,
                 dataType: "json",
  
@@ -172,11 +171,12 @@ function updateCombustivel(id, dados) {
 
 };
 
+//fill table combustivel to search
 function fillCombustivelTable() {
     //Populates Table with Json
     tableCombustivel = $('table#table-combustivel').DataTable({
         ajax: {
-            url: "http://192.168.10.10:3004/combustivel",
+            url: urlApi + "combustivel",
             contentType: 'application/json; charset=UTF-8',
             dataType: 'json',
             dataSrc: ''
@@ -184,14 +184,11 @@ function fillCombustivelTable() {
         columns: [{
             data: "id"
                 }, {
-            data: "nome"
+            data: "tipo"
                 }],
         "columnDefs": [{
-            "width": "50%",
+            "width": "20%",
             "targets": 0
-                }, {
-            "width": "40%",
-            "targets": 1
                 }],
         select: true,
         fixedColumns: true,

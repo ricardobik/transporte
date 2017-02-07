@@ -1,28 +1,3 @@
-function getCombustivel() {
-    //Load Json marcas from FIPE API
-
-    $.ajax({
-        url: 'http://192.168.10.10:3004/combustivel',
-
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-
-            $.each(json, function (key, value) {
-
-                $('#combustivelid').append(
-                    $("<option></option>")
-                    .attr('value', value.id)
-                    .text(value.nome)
-                );
-                $('#combustivelid').material_select();
-
-            });
-
-        }
-    });
-};
-
 // Validade Fields materialize.css
 $.validator.setDefaults({
     errorClass: 'invalid',
@@ -104,7 +79,7 @@ function saveVeiculo(data) {
     if ($("form").valid()) {
         $.ajax({
             type: "POST",
-            url: "http://192.168.10.10:3004/veiculo",
+            url: urlApi + "veiculo",
             data: data,
             dataType: "json",
 
@@ -131,7 +106,7 @@ function fillVeiculoTable() {
 
     table = $('table#table-veiculo').DataTable({
         ajax: {
-            url: "http://192.168.10.10:3004/veiculo",
+            url: urlApi + "veiculo",
             contentType: 'application/json; charset=UTF-8',
             dataType: 'json',
             dataSrc: ''
@@ -171,32 +146,32 @@ function fillVeiculoTable() {
 }
 
 //Fill motorista Modal to Edit
-function FillMotorista(Id) {
+function FillVeiculo(Id) {
 
-    $.ajax({
-        type: "GET",
-        url: "http://192.168.10.10:3004/veiculo/" + Id,
-
-        dataType: "json",
-
-        //if received a response from the server
-        success: function (data) {
-
-            $("#id").val(data.id);
-            $("#nome").val(data.nome);
-            $("#cnh").val(data.cnh);
-            $("#cnhVencimento").val(data.cnhVencimento);
-            $("#telefone").val(data.telefone);
-            $("#setor").val(data.setor);
-
-            //Reload Material Form
-            Materialize.updateTextFields();
-
-            //Load material dropbox
-            $('#setor').material_select();
-
-        },
-
-    });
+//    $.ajax({
+//        type: "GET",
+//        url: urlApi + "veiculo/" + Id,
+//
+//        dataType: "json",
+//
+//        //if received a response from the server
+//        success: function (data) {
+//
+//            $("#id").val(data.id);
+//            $("#nome").val(data.nome);
+//            $("#cnh").val(data.cnh);
+//            $("#cnhVencimento").val(data.cnhVencimento);
+//            $("#telefone").val(data.telefone);
+//            $("#setor").val(data.setor);
+//
+//            //Reload Material Form
+//            Materialize.updateTextFields();
+//
+//            //Load material dropbox
+//            $('#setor').material_select();
+//
+//        },
+//
+//    });
 
 };

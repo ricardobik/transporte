@@ -49,11 +49,11 @@ $("#form").validate({
 });
 
 //Fill motorista Modal to Edit
-function FillMotorista(motoristaId) {
+function FillMotorista(Id) {
 
     $.ajax({
         type: "GET",
-        url: "http://192.168.10.10:3004/driver/" + motoristaId,
+        url: urlApi + "motorista/" + Id,
 
         dataType: "json",
 
@@ -97,7 +97,7 @@ function deleteMotorista(id) {
 
                 $.ajax({
                     type: "DELETE",
-                    url: "http://192.168.10.10:3004/driver/" + id,
+                    url: urlApi + "motorista/" + id,
                     dataType: "json",
 
                     //if received a response from the server
@@ -125,7 +125,7 @@ function saveMotorista(data) {
     if ($("#form").valid()) {
         $.ajax({
             type: "POST",
-            url: "http://192.168.10.10:3004/driver",
+            url: "http://192.168.10.10:3004/motorista",
             data: data,
             dataType: "json",
 
@@ -164,7 +164,7 @@ function updateMotorista(id, data) {
 
             $.ajax({
                 type: "PUT",
-                url: "http://192.168.10.10:3004/driver/" + id,
+                url: urlApi + "motorista/" + id,
                 data: data,
                 dataType: "json",
 
@@ -190,13 +190,12 @@ function updateMotorista(id, data) {
 
 };
 
-var table = "";
-
+//Fill table to search motorista
 function fillMotoristaTable() {
 
     table = $('table#table-motorista').DataTable({
         ajax: {
-            url: "http://192.168.10.10:3004/motorista",
+            url: urlApi + "motorista",
             contentType: 'application/json; charset=UTF-8',
             dataType: 'json',
             dataSrc: ''

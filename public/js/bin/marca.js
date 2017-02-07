@@ -30,7 +30,7 @@ $("form").validate({
 //Get Brands to fill select
 function getMarcas(input) {
     $.ajax({
-        url: 'http://192.168.10.10:3004/marca/',
+        url: urlApi + "marca/",
         type: 'GET',
         dataType: 'json',
         success: function (json) {
@@ -53,38 +53,6 @@ function verifySwitch() {
     };
 };
 
-//Create function
-function saveMarcaModelo() {
-    var data = new Object();
-    var url, successMsg = "";
-    if ($("#switchMarcaModelo").prop('checked')) {
-        data.nome = $("#marcaCreate").val();
-        url = "http://192.168.10.10:3004/marca";
-        successMsg = "Marca adicionada com sucesso";
-    } else {
-        data.marcaId = $("#marcaModal").val();
-        data.nome = $("#modeloModal").val();
-        url = "http://192.168.10.10:3004/modelo";
-        successMsg = "Modelo adicionado com sucesso";
-    };
-    //make AJAX request
-    $("#formMarcaModelo").validate();
-    if ($("#formMarcaModelo").valid()) {
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: data,
-            dataType: "json", //if received a response from the server
-            success: function (response) {
-                swal("Pronto!", successMsg, "success");
-            },
-        });
-        $('#modeloModal').modal('close');
-    }
-    //Reload Material Form
-    Materialize.updateTextFields();
-};
-
 function createMarca(data) {
 
     //make AJAX request
@@ -92,7 +60,7 @@ function createMarca(data) {
     if ($("#form").valid()) {
         $.ajax({
             type: "POST",
-            url: "http://192.168.10.10:3004/marca",
+            url: urlApi + "marca",
             data: data,
             dataType: "json",
 
@@ -118,7 +86,7 @@ function saveAll(type) {
     switch (type) {
         case "0":
             data.nome = $("#marca").val();
-            url = "http://192.168.10.10:3004/marca";
+            url = urlApi + "marca";
             successMsg = "Marca adicionada com sucesso";
             break;
         case "1":
@@ -156,7 +124,7 @@ function fillMarcaTable() {
     //Populates Table with Json
     tableMarca = $('table#table-marca').DataTable({
         ajax: {
-            url: "http://192.168.10.10:3004/marca",
+            url: urlApi + "marca",
             contentType: 'application/json; charset=UTF-8',
             dataType: 'json',
             dataSrc: ''

@@ -5,6 +5,8 @@ var homeUrl = getUrl.protocol + "//" + getUrl.host + "/index.html";
 var searchUrl = getUrl.protocol + "//" + getUrl.host + "/" + path[1] + "/" + path[2] + "/search.html";
 var createUrl = getUrl.protocol + "//" + getUrl.host + "/" + path[1] + "/" + path[2] + "/create.html";
 
+var urlApi = "http://192.168.10.10:3004/"
+
 function goHome() {
     location.href = homeUrl;
 }
@@ -26,32 +28,6 @@ function goSetorCreate() {
     //location.href = createUrl;
     location.href = getUrl.protocol + "//" + getUrl.host + "/" + path[1] + "modules/setor/create.html";
 }
-
-function getSetor() {
-    //Load Json setor
-    $.ajax({
-        url: 'http://192.168.10.10:3004/setor',
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-
-            $.each(json, function (key, value) {
-
-                $('#setorid').append(
-                    $("<option></option>")
-                    .attr('value', value.id)
-                    .text(value.nome)
-                );
-
-                $('select').material_select();
-
-            });
-        }
-    });
-
-};
-
-
 
 $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
