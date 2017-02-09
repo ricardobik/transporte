@@ -221,19 +221,26 @@ function deleteModelo(id) {
 
 function getModelos(input, marcaid, modeloid) {
 
-    console.log(input, marcaid, modeloid);
+
+    $("#modeloid").empty().html(' ');
+    $("#modeloid").append("<option value='' disabled selected>Escolha o modelo</option>");
+    $("#loader").css('display', '');
+
     $.ajax({
         url: urlApi + "marca/" + marcaid + "/modelo",
-
         type: 'GET',
         dataType: 'json',
         success: function (json) {
 
-            console.log(json);
+            $("#modeloid").val("");
+
             $.each(json, function (key, value) {
                 $('#' + input).append($("<option></option>").attr('value', value.id).text(value.nome));
                 $('#' + input).material_select();
             });
+            
+            $("#loader").css('display', 'none');
+
             $("#modeloid").val(modeloid);
             $("select").material_select();
         }
@@ -241,6 +248,8 @@ function getModelos(input, marcaid, modeloid) {
 };
 
 function getOnlyModelo(id) {
+    
+    $("#modeloid").empty().html(' ');
 
     $.ajax({
         url: urlApi + "modelo/" + id,

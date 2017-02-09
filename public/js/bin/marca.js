@@ -29,6 +29,8 @@ $("form").validate({
 
 //Get Brands to fill select
 function getMarcas(input, marcaid) {
+//    $("#marcaid").empty().html(' ');
+    
     $.ajax({
         url: urlApi + "marca/",
         type: 'GET',
@@ -37,12 +39,38 @@ function getMarcas(input, marcaid) {
             $.each(json, function (key, value) {
                 $('#' + input).append($("<option></option>").attr('value', value.id).text(value.nome));
             });
-            
-            //            console.log(json);
+
             $("#marcaid").val(marcaid);
             //Load material dropbox
             $('select').material_select();
 
+        }
+    });
+};
+
+function getOnlyMarca(id) {
+
+    $("#marcaid").empty().html(' ');
+    //        $("#marcaid").append("<option value='' disabled selected>Escolha o modelo</option>");
+    //    $("#loader").css('display', '');
+
+    $.ajax({
+        url: urlApi + "marca/" + id,
+
+        type: 'GET',
+        dataType: 'json',
+        success: function (json) {
+
+            $('#marcaid').append(
+                $("<option></option>")
+                .attr('value', json.id)
+                .text(json.nome)
+            );
+            $('#marcaid').material_select();
+
+        },
+        error: function (textStatus, errorThrown) {
+            console.log("errou");
         }
     });
 };
@@ -158,7 +186,7 @@ function fillMarcaTable() {
 }
 
 function fillMarca(id) {
-    
+
     $.ajax({
         type: "GET",
         url: "http://192.168.10.10:3004/marca/" + id,
@@ -179,32 +207,7 @@ function fillMarca(id) {
 
 };
 
-function getOnlyMarca(id) {
 
-    //    $("#modeloid").empty().html(' ');
-    //    $("#modeloid").append("<option value='' disabled selected>Escolha o modelo</option>");
-    //    $("#loader").css('display', '');
-  
-    $.ajax({
-        url: urlApi + "marca/" + id,
-
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-
-            $('#marcaid').append(
-                $("<option></option>")
-                .attr('value', json.id)
-                .text(json.nome)
-            );
-            $('#marcaid').material_select();
-
-        },
-        error: function (textStatus, errorThrown) {
-            console.log("errou");
-        }
-    });
-};
 
 function updateMarca(id, dados) {
 

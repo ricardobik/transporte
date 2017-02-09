@@ -160,6 +160,7 @@ function FillVeiculo(Id) {
             $("#tipoid").val(data.tipoid);
             $("#placa").val(data.placa);
 
+            console.log(data.marcaid, data.modeloid);
             getOnlyMarca(data.marcaid);
 
             getOnlyModelo(data.modeloid);
