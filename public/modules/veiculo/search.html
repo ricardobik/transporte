@@ -253,7 +253,6 @@
                 $("#divDelete").removeClass("hide");
                 $("#divEdit").addClass("hide");
 
-
                 FillVeiculo($update.id);
                 $("#form :input").prop("disabled", true);
 
@@ -267,10 +266,39 @@
                 $("#divEdit").removeClass("hide");
                 $("#form :input").prop("disabled", false);
                 
+                
+
+                getMarcas(marcaid.name, marcaid.value);
+
+                getModelos(modeloid.name, marcaid.value, modeloid.value);
+
                 //Reload Material Form
                 Materialize.updateTextFields();
 
+                //Load material dropbox
+                $('select').material_select();
+
             });
+
+            $('#modeloid').on('change focusin', function() {
+
+                //                getModelos(modeloid.name, marcaid.value, modeloid.value);
+
+                //Load material dropbox
+                $('select').material_select();
+
+            });
+
+            $('#marcaid').on('change', function() {
+                getMarcas(marcaid.name, marcaid.value);
+
+                getModelos(modeloid.name, marcaid.value, modeloid.value);
+
+                //Load material dropbox
+                $('select').material_select();
+
+            });
+
 
             //Update request
             //            $("#update").click(function(e) {
