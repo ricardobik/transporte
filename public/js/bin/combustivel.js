@@ -204,7 +204,7 @@ function fillCombustivelTable() {
 //insert into select to create veiculo
 function getCombustivel() {
     
-    //Load Json marcas from FIPE API
+    //Load Json marca
     $.ajax({
         url: urlApi + "combustivel",
 
@@ -226,6 +226,34 @@ function getCombustivel() {
         }
     });
 };
+
+function getCombustivelSelect(id) {
+    
+    //Load Json marcas from FIPE API
+    $.ajax({
+        url: urlApi + "combustivel",
+
+        type: 'GET',
+        dataType: 'json',
+        success: function (json) {
+
+            $.each(json, function (key, value) {
+
+                $('#combustivelid').append(
+                    $("<option></option>")
+                    .attr('value', value.id)
+                    .text(value.tipo)
+                );
+                
+                $('#combustivelid').val(id);
+                $('#combustivelid').material_select();
+
+            });
+
+        }
+    });
+};
+
 
 
 

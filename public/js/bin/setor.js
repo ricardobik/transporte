@@ -220,5 +220,55 @@ function getSetor() {
 
 }
 
+function getSetorSelect(id) {
+    
+    //Load Json marcas from FIPE API
+    $.ajax({
+        url: urlApi + "setor",
+
+        type: 'GET',
+        dataType: 'json',
+        success: function (json) {
+
+            $.each(json, function (key, value) {
+
+                $('#setorid').append(
+                    $("<option></option>")
+                    .attr('value', value.id)
+                    .text(value.nome)
+                );
+                
+                $('#setorid').val(id);
+                $('#setorid').material_select();
+
+            });
+
+        }
+    });
+};
+
+function getOnlySetor(id) {
+    
+    $.ajax({
+     url: urlApi + "setor/" + id,
+
+        type: 'GET',
+        dataType: 'json',
+        success: function (json) {
+
+            $('#setorid').append(
+                $("<option></option>")
+                .attr('value', json.id)
+                .text(json.nome)
+            );
+            $('#setorid').material_select();
+
+        },
+        error: function (textStatus, errorThrown) {
+            console.log("errou");
+        }
+    });
+};
+
 
 

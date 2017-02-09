@@ -34,10 +34,10 @@ $("#formVeiculo1").validate({
         placa: {
             required: "O campo placa deve ser preenchido"
         },
-        placa: {
+        marcaid: {
             required: "O campo placa deve ser preenchido"
         },
-        placa: {
+        modeloid: {
             required: "O campo placa deve ser preenchido"
         }
     }
@@ -62,10 +62,10 @@ $("form").validate({
         placa: {
             required: "O campo placa deve ser preenchido"
         },
-        placa: {
+        marcaid: {
             required: "O campo placa deve ser preenchido"
         },
-        placa: {
+        modeloid: {
             required: "O campo placa deve ser preenchido"
         }
     }
@@ -91,9 +91,8 @@ function createVeiculo(data) {
                 slideOut("#cardFirst", 1350, -800, more);
 
                 validator.resetForm();
-                //                this.formVeiculo2.reset();
-                Materialize.updateTextFields(); //updating labels from inputs
-            },
+                Materialize.updateTextFields();
+            }
 
         });
     }
@@ -160,19 +159,23 @@ function FillVeiculo(Id) {
             $("#id").val(data.id);
             $("#tipoid").val(data.tipoid);
             $("#placa").val(data.placa);
-            
-            getMarcaSelect(data.marcaid);
-            
-            //TODO getModelosSelect(data.modeloid);
-            
 
+            getOnlyMarca(data.marcaid);
 
-            $('#modeloid').append(
-                $("<option></option>")
-                .attr('value', data.modeloid)
-                .text(data.modeloid)
-            );
+            getOnlyModelo(data.modeloid);
 
+            getCombustivelSelect(data.combustivelid);
+            
+            getOnlySetor(data.setorid);
+
+            //            getMarcas(marcaid.name, data.marcaid);
+            //
+            //            getModelos(modeloid.name, data.marcaid, data.modeloid);
+            //
+
+            //            
+            //            getSetorSelect(data.setorid);
+            //                
 
             $("#anofabricacao").val(data.anofabricacao);
             $("#combustivelid").val(data.combustivelid);
@@ -187,8 +190,8 @@ function FillVeiculo(Id) {
             //Load material dropbox
             $('select').material_select();
 
-        },
+        }
 
     });
 
-};
+}

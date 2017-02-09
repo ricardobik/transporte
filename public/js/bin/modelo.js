@@ -5,7 +5,7 @@ function getModelosSelect(marca) {
     $("#loader").css('display', '');
 
     $.ajax({
-        url: urlApi +  "marca/" + marca + "/modelo",
+        url: urlApi + "marca/" + marca + "/modelo",
 
         type: 'GET',
         dataType: 'json',
@@ -36,9 +36,7 @@ function getModelosSelect(marca) {
     });
 };
 
-function getModelos(marca) {
-    console.log(marca);
-
+function getModelosTable(marca) {
 
     //Populates Table with Json
     tableModelo = $('table#table-modelo').DataTable({
@@ -219,4 +217,48 @@ function deleteModelo(id) {
             }
         });
 
+};
+
+function getModelos(input, marcaid, modeloid) {
+
+    console.log(input, marcaid, modeloid);
+    $.ajax({
+        url: urlApi + "marca/" + marcaid + "/modelo",
+
+        type: 'GET',
+        dataType: 'json',
+        success: function (json) {
+
+            console.log(json);
+            $.each(json, function (key, value) {
+                $('#' + input).append($("<option></option>").attr('value', value.id).text(value.nome));
+                $('#' + input).material_select();
+            });
+            $("#modeloid").val(modeloid);
+            $("select").material_select();
+        }
+    });
+};
+
+function getOnlyModelo(id) {
+
+    $.ajax({
+        url: urlApi + "modelo/" + id,
+
+        type: 'GET',
+        dataType: 'json',
+        success: function (json) {
+
+            $('#modeloid').append(
+                $("<option></option>")
+                .attr('value', json.id)
+                .text(json.nome)
+            );
+            $('#modeloid').material_select();
+
+        },
+        error: function (textStatus, errorThrown) {
+            console.log("errou");
+        }
+    });
 };

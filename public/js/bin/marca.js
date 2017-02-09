@@ -28,7 +28,7 @@ $("form").validate({
 });
 
 //Get Brands to fill select
-function getMarcas(input) {
+function getMarcas(input, marcaid) {
     $.ajax({
         url: urlApi + "marca/",
         type: 'GET',
@@ -36,8 +36,13 @@ function getMarcas(input) {
         success: function (json) {
             $.each(json, function (key, value) {
                 $('#' + input).append($("<option></option>").attr('value', value.id).text(value.nome));
-                $('#' + input).material_select();
             });
+            
+            //            console.log(json);
+            $("#marcaid").val(marcaid);
+            //Load material dropbox
+            $('select').material_select();
+
         }
     });
 };
@@ -153,8 +158,7 @@ function fillMarcaTable() {
 }
 
 function fillMarca(id) {
-    console.log(id);
-
+    
     $.ajax({
         type: "GET",
         url: "http://192.168.10.10:3004/marca/" + id,
@@ -175,14 +179,14 @@ function fillMarca(id) {
 
 };
 
-function getMarcaSelect(id) {
+function getOnlyMarca(id) {
 
     //    $("#modeloid").empty().html(' ');
     //    $("#modeloid").append("<option value='' disabled selected>Escolha o modelo</option>");
     //    $("#loader").css('display', '');
-    console.log("aiiiiii");
+  
     $.ajax({
-        url: "http://192.168.10.10:3004/marca/" + id,
+        url: urlApi + "marca/" + id,
 
         type: 'GET',
         dataType: 'json',
@@ -194,7 +198,7 @@ function getMarcaSelect(id) {
                 .text(json.nome)
             );
             $('#marcaid').material_select();
-            
+
         },
         error: function (textStatus, errorThrown) {
             console.log("errou");

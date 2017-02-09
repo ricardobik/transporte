@@ -9,6 +9,7 @@
     <link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="/sass/table.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen" />
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -91,7 +92,7 @@
                 <div class="row">
                     <div class="input-field col m5 s11">
                         <select id="marcaid" name="marcaid">
-<!--                            <option value=""  selected>Escolha a marca</option>-->
+                            <!--                            <option value=""  selected>Escolha a marca</option>-->
                         </select>
                         <label for="marcaid">Marca</label>
                     </div>
@@ -107,7 +108,7 @@
 
                     <div class="input-field col s12 m6">
                         <select id="modeloid" name="modeloid">
-<!--                            <option value="" disabled selected>Escolha o modelo</option>-->
+                            <!--                            <option value="" disabled selected>Escolha o modelo</option>-->
                         </select>
                         <label>Modelo</label>
                     </div>
@@ -124,7 +125,7 @@
                     </div>
                     <div class="input-field col m5 offset-m4" id="divCombustivel">
                         <select id="combustivelid" name="combustivelid" required="" aria-required="true">
-<!--                            <option value="" disabled selected>Selecione</option>-->
+                            <!--                            <option value="" disabled selected>Selecione</option>-->
                         </select>
                         <label for="Combustivel">Combustível</label>
                     </div>
@@ -147,9 +148,9 @@
                     </div>
                     <div class="input-field col m12">
                         <select id="setorid" name="setorid" required="" aria-required="true">
-<!--                            <option value="" disabled selected>Selecione</option>-->
+                            <!--                            <option value="" disabled selected>Selecione</option>-->
                         </select>
-                        <label for="setor">Setor do veículo</label>
+                        <label for="setorid">Setor do veículo</label>
                     </div>
 
                     <div class="input-field col m12">
@@ -167,9 +168,15 @@
 
             <div class="modal-footer">
                 <div class="card-action right-align">
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Voltar</a>
-                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="delete">Deletar</a>
-                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="update">Enviar</a>
+                    <div class="" id="divDelete">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="back">Voltar</a>
+                        <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="delete">Deletar</a>
+                        <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="edit">Editar</a>
+                    </div>
+                    <div class="hide" id="divEdit">
+                        <a href="#!" class="modal-action waves-effect waves-green btn-flat" id="update">Salvar</a>
+                        <a href="#!" class="modal-action waves-effect waves-green btn-flat modal-close" id="cancel">Cancelar</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -190,6 +197,8 @@
     <script type="text/javascript" src="/js/bin/tipo.js"></script>
     <script type="text/javascript" src="/js/bin/marca.js"></script>
     <script type="text/javascript" src="/js/bin/modelo.js"></script>
+    <script type="text/javascript" src="/js/bin/combustivel.js"></script>
+    <script type="text/javascript" src="/js/bin/setor.js"></script>
 
 
     <script>
@@ -241,7 +250,26 @@
 
             //Fill modal form
             $('#callModalEdit').on('click', function() {
+                $("#divDelete").removeClass("hide");
+                $("#divEdit").addClass("hide");
+
+
                 FillVeiculo($update.id);
+                $("#form :input").prop("disabled", true);
+
+                //Reload Material Form
+                Materialize.updateTextFields();
+
+            });
+
+            $('#edit').on('click', function() {
+                $("#divDelete").addClass("hide");
+                $("#divEdit").removeClass("hide");
+                $("#form :input").prop("disabled", false);
+                
+                //Reload Material Form
+                Materialize.updateTextFields();
+
             });
 
             //Update request
