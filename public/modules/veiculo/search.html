@@ -76,7 +76,11 @@
                 <span class="card-title">Editar Veiculo</span>
 
                 <div class="row">
-                    <div class="input-field col m4" id="divTipo">
+                    <div class="input-field col m1">
+                        <input id="id" name="id" type="text" class="validate">
+                        <label for="id">ID</label>
+                    </div>
+                    <div class="input-field col m3" id="divTipo">
                         <select id="tipoid" name="tipoid" required="" aria-required="true">
                             <option value="" disabled selected>Escolha o tipo</option>
                         </select>
@@ -91,9 +95,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col m5 s11">
-                        <select id="marcaid" name="marcaid">
-                            <!--                            <option value=""  selected>Escolha a marca</option>-->
-                        </select>
+                        <select id="marcaid" name="marcaid"></select>
                         <label for="marcaid">Marca</label>
                     </div>
 
@@ -107,9 +109,7 @@
                     </div>
 
                     <div class="input-field col s12 m6">
-                        <select id="modeloid" name="modeloid">
-                            <!--                            <option value="" disabled selected>Escolha o modelo</option>-->
-                        </select>
+                        <select id="modeloid" name="modeloid"></select>
                         <label>Modelo</label>
                     </div>
                 </div>
@@ -124,9 +124,7 @@
                         <label for="ano">Ano</label>
                     </div>
                     <div class="input-field col m5 offset-m4" id="divCombustivel">
-                        <select id="combustivelid" name="combustivelid" required="" aria-required="true">
-                            <!--                            <option value="" disabled selected>Selecione</option>-->
-                        </select>
+                        <select id="combustivelid" name="combustivelid" required="" aria-required="true"></select>
                         <label for="Combustivel">Combustível</label>
                     </div>
 
@@ -147,9 +145,7 @@
                         <label for="tipo">Estado atual do veículo</label>
                     </div>
                     <div class="input-field col m12">
-                        <select id="setorid" name="setorid" required="" aria-required="true">
-                            <!--                            <option value="" disabled selected>Selecione</option>-->
-                        </select>
+                        <select id="setorid" name="setorid" required="" aria-required="true"></select>
                         <label for="setorid">Setor do veículo</label>
                     </div>
 
@@ -158,13 +154,8 @@
                         <textarea id="info" name="info" class="materialize-textarea"></textarea>
                         <label for="informacoes">Informações adicionais</label>
                     </div>
-
                 </div>
-
             </div>
-
-
-
 
             <div class="modal-footer">
                 <div class="card-action right-align">
@@ -252,9 +243,10 @@
             $('#callModalEdit').on('click', function() {
                 $("#divDelete").removeClass("hide");
                 $("#divEdit").addClass("hide");
-
-                FillVeiculo($update.id);
                 $("#form :input").prop("disabled", true);
+                
+                ///Get veiculo info to update/delete
+                FillVeiculo($update.id);
 
                 //Reload Material Form
                 Materialize.updateTextFields();
@@ -265,12 +257,12 @@
                 $("#divDelete").addClass("hide");
                 $("#divEdit").removeClass("hide");
                 $("#form :input").prop("disabled", false);
-                
-                
+                $("#id").prop("disabled", true)
 
+                //Call functions to set select values
                 getMarcas(marcaid.name, marcaid.value);
-
                 getModelos(modeloid.name, marcaid.value, modeloid.value);
+                getSetorSelect(setorid.value);
 
                 //Reload Material Form
                 Materialize.updateTextFields();
@@ -280,14 +272,14 @@
 
             });
 
-            $('#modeloid').on('change focusin', function() {
-
-                //                getModelos(modeloid.name, marcaid.value, modeloid.value);
-
-                //Load material dropbox
-                $('select').material_select();
-
-            });
+//            $('#modeloid').on('change focusin', function() {
+//
+//                //                getModelos(modeloid.name, marcaid.value, modeloid.value);
+//
+//                //Load material dropbox
+//                $('select').material_select();
+//
+//            });
 
             $('#marcaid').on('change', function() {
                 getMarcas(marcaid.name, marcaid.value);
@@ -299,16 +291,15 @@
 
             });
 
-
             //Update request
-            //            $("#update").click(function(e) {
-            //                updateVeiculo($update.id, $("#form").serializeArray());
-            //            });
+            $("#update").click(function(e) {
+                updateVeiculo($update.id, $("#form").serializeArray());
+            });
 
             //Delete request
-            //            $('#delete').on('click', function() {
-            //                deleteVeiculo($update.id);
-            //            });
+            $('#delete').on('click', function() {
+                deleteVeiculo($update.id);
+            });
 
 
         });

@@ -1,7 +1,41 @@
+// Validade Fields materialize.css
+$.validator.setDefaults({
+    errorClass: 'invalid',
+    validClass: "valid",
+    errorPlacement: function (error, element) {
+        $(element)
+            .closest("form")
+            .find("label[for='" + element.attr("id") + "']")
+            .attr('data-error', error.text())
+            .attr('class', 'active');
+
+    },
+    submitHandler: function (form) {
+        console.log('form ok');
+    }
+});
+
+//Rules and Messages to Validate
+$("#formModelo").validate({
+    //ignore: [],
+    debug: true,
+    rules: {
+        nome: {
+            required: true,
+            rangelength: [11, 11]
+        }
+    },
+    messages: {
+        nome: {
+            required: "O campo nome deve ser preenchido"
+        }
+    }
+});
+
 function getModelosSelect(marca) {
 
-    $("#modeloid").empty().html(' ');
-    $("#modeloid").append("<option value='' disabled selected>Escolha o modelo</option>");
+    $("#modeloId").empty().html(' ');
+    $("#modeloId").append("<option value='' disabled selected>Escolha o modelo</option>");
     $("#loader").css('display', '');
 
     $.ajax({
@@ -12,20 +46,23 @@ function getModelosSelect(marca) {
         success: function (json) {
 
             if (json == '') {
-                $("#modeloid").empty();
-                $("#modeloid").html('');
-                $("#modeloid").append("<option value='' disabled selected>Não há modelo disponível</option>");
-                $('#modeloid').material_select();
+                $("#modeloId")
+                    .find("option")
+                    .remove()
+                    .end()
+                    .append("<option value='' disabled selected>Não há modelo disponível</option>")
+                    .material_select();
+
             };
 
             $.each(json, function (key, value) {
 
-                $('#modeloid').append(
+                $('#modeloId').append(
                     $("<option></option>")
                     .attr('value', value.id)
                     .text(value.nome)
                 );
-                $('#modeloid').material_select();
+                $('#modeloId').material_select();
 
             });
             $("#loader").css('display', 'none');
@@ -77,7 +114,9 @@ function getModelosTable(marca) {
 
 function fillModelo(data) {
 
-    getMarcas("marcaModal");
+    getOnlyMarca(data.marcaId, "input");
+
+    console.log(data);
 
     $.ajax({
         type: "GET",
@@ -87,12 +126,12 @@ function fillModelo(data) {
         //if received a response from the server
         success: function (data) {
 
-            $("#idModelo").val(data.id);
-            $("#nomeModelo").val(data.nome);
+            $("#modeloId").val(data.id);
+            $("#modeloNome").val(data.nome);
 
-            $('#marcaModal').find('option[value="' + data.marcaId + '"]').prop('selected', true);
-
-            $('#marcaModal').material_select();
+            //            $('#marcaModal').find('option[value="' + data.marcaId + '"]').prop('selected', true);
+            //
+            //            $('#marcaModal').material_select();
             //Reload Material Form
             Materialize.updateTextFields();
 
@@ -102,18 +141,18 @@ function fillModelo(data) {
 
 };
 
-function updateModelo(id, dados) {
+function updateModelo(dados) {
+
 
     var data = new Object();
-    data.id = id;
-    data.nome = $("#nomeModelo").val();
-    data.marcaId = $('#marcaModal').val();
+    data.id = dados.id;
+    data.nome = $("#modeloNome").val();
+    data.marcaId = dados.marcaId;
 
-    console.log(data);
-
+    
     //do AJAX request
-    $("#formMo").validate();
-    if ($("#formMo").valid()) {
+    $("#formModelo").validate();
+    if ($("#formModelo").valid()) {
 
         swal({
             title: "Confirmação",
@@ -128,7 +167,7 @@ function updateModelo(id, dados) {
 
             $.ajax({
                 type: "PUT",
-                url: urlApi + "modelo/" + id,
+                url: urlApi + "modelo/" + dados.id,
                 data: data,
                 dataType: "json",
 
@@ -157,8 +196,8 @@ function updateModelo(id, dados) {
 function createModelo(data) {
 
     //make AJAX request
-    $("#form").validate();
-    if ($("#form").valid()) {
+    $("#formModelo").validate();
+    if ($("#formModelo").valid()) {
         $.ajax({
             type: "POST",
             url: urlApi + "modelo",
@@ -219,11 +258,11 @@ function deleteModelo(id) {
 
 };
 
-function getModelos(input, marcaid, modeloid) {
+function getModelos(input, marcaId, modeloId) {
 
 
-    $("#modeloid").empty().html(' ');
-    $("#modeloid").append("<option value='' disabled selected>Escolha o modelo</option>");
+    $("#modeloId").empty().html(' ');
+    $("#modeloId").append("<option value='' disabled selected>Escolha o modelo</option>");
     $("#loader").css('display', '');
 
     $.ajax({
@@ -232,24 +271,25 @@ function getModelos(input, marcaid, modeloid) {
         dataType: 'json',
         success: function (json) {
 
-            $("#modeloid").val("");
+            $("#modeloId").val("");
 
             $.each(json, function (key, value) {
                 $('#' + input).append($("<option></option>").attr('value', value.id).text(value.nome));
                 $('#' + input).material_select();
             });
-            
+
             $("#loader").css('display', 'none');
 
-            $("#modeloid").val(modeloid);
+            //            $("#modeloId").val(modeloId);
+            $('#modeloId').find('option[value="' + modeloId + '"]').prop('selected', true);
             $("select").material_select();
         }
     });
 };
 
 function getOnlyModelo(id) {
-    
-    $("#modeloid").empty().html(' ');
+
+    $("#modeloId").empty().html(' ');
 
     $.ajax({
         url: urlApi + "modelo/" + id,
@@ -258,12 +298,12 @@ function getOnlyModelo(id) {
         dataType: 'json',
         success: function (json) {
 
-            $('#modeloid').append(
+            $('#modeloId').append(
                 $("<option></option>")
                 .attr('value', json.id)
                 .text(json.nome)
             );
-            $('#modeloid').material_select();
+            $('#modeloId').material_select();
 
         },
         error: function (textStatus, errorThrown) {

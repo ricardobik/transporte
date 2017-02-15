@@ -25,14 +25,6 @@
       "cnhVencimento": "2014-05-15"
     },
     {
-      "id": 31,
-      "nome": "Henrietta Carrillo",
-      "setor": 15,
-      "telefone": "+55 (874) 542-2121",
-      "cnh": 2235651755,
-      "cnhVencimento": "2014-04-13"
-    },
-    {
       "id": 6,
       "nome": "Frankie Holt",
       "setor": 13,
@@ -75,49 +67,34 @@
   ],
   "combustivel": [
     {
-      "id": 1,
-      "nome": "GASOLINA"
+      "tipo": "GASOLINA",
+      "id": 1
     },
     {
-      "id": 2,
-      "nome": "ETANOL"
+      "tipo": "ETANOL",
+      "id": 2
     },
     {
       "id": 3,
-      "nome": "DIESEL"
+      "tipo": "DIESEL"
     },
     {
-      "id": 4,
-      "nome": "BIODIESEL"
+      "tipo": "BIODIESEL",
+      "id": 4
     },
     {
-      "id": 5,
-      "nome": "GASOLINA AD"
+      "tipo": "GASOLINA AD",
+      "id": 5
     },
     {
       "id": 6,
-      "nome": "ETANOL AD"
-    },
-    {
-      "nomeCombustivel": "TITANIUM",
-      "nomeMarca": "",
-      "nomeModelo": "",
-      "nomeTipo": "",
-      "id": 7
-    },
-    {
-      "TITANIUM": "",
-      "id": 8
-    },
-    {
-      "nome": "TITANIUM",
-      "id": 9
+      "tipo": "ETANOL AD"
     }
   ],
   "setor": [
     {
       "id": 1,
-      "nome": "CORPULSE"
+      "nome": "SALVE"
     },
     {
       "id": 2,
@@ -286,8 +263,8 @@
       "nome": "YAMAHA"
     },
     {
-      "nome": "FAMOSA",
-      "id": 256
+      "id": 256,
+      "nome": "FAMOSA"
     }
   ],
   "modelo": [
@@ -2743,8 +2720,8 @@
     },
     {
       "id": 4,
-      "marcaId": 27,
-      "nome": "MARRUA"
+      "nome": "MARRUA",
+      "marcaId": "27"
     },
     {
       "id": 781,
@@ -5115,39 +5092,20 @@
       "id": 2488,
       "marcaId": 85,
       "nome": "80S"
-    },
-    {
-      "marcaId": "27",
-      "nome": "fgasdgaqsdf",
-      "id": 5029
     }
   ],
   "veiculo": [
     {
-      "id": 0,
-      "descricao": "",
-      "anofabricacao": "",
-      "placa": "",
-      "combustivelId": "",
-      "setorId": "",
-      "modeloId": "",
-      "tipoId": "",
-      "renavam": "",
-      "estadoveiculo": ""
-    },
-    {
-      "tipoid": "1",
+      "tipoid": "3",
       "placa": "drm-6699",
-      "marcaid": "5",
-      "modeloid": "113",
+      "marcaid": "1",
+      "modeloid": "1536",
       "anofabricacao": "1990",
       "combustivelid": "5",
       "renavam": "222111336666",
       "estadoveiculo": "3",
-      "setorid": "6",
-      "info": "informações sobre o veículo, oras.",
-      "modeloModal": "",
-      "marcaCreate": "",
+      "setorid": "12",
+      "info": "informações sobre o veículo, oras bolas",
       "id": 1
     },
     {
@@ -5159,55 +5117,47 @@
       "combustivelid": "1",
       "renavam": "222111336666",
       "estadoveiculo": "3",
-      "setorid": "1",
+      "setorid": "3",
       "info": "informações sobre o veículo, oras.",
-      "modeloModal": "",
-      "marcaCreate": "",
       "id": 2
     },
     {
       "tipoid": "1",
       "placa": "drm-6699",
-      "marcaid": "27",
-      "modeloid": "1521",
+      "marcaid": "3",
+      "modeloid": "2297",
       "anofabricacao": "1990",
       "combustivelid": "1",
       "renavam": "222111336666",
       "estadoveiculo": "3",
-      "setorid": "1",
+      "setorid": "4",
       "info": "informações sobre o veículo, oras.",
-      "modeloModal": "",
-      "marcaCreate": "",
       "id": 3
     },
     {
       "tipoid": "1",
       "placa": "drm-6699",
-      "marcaid": "27",
-      "modeloid": "1523",
+      "marcaid": "85",
+      "modeloid": "1653",
       "anofabricacao": "1990",
       "combustivelid": "1",
       "renavam": "222111336666",
       "estadoveiculo": "3",
-      "setorid": "1",
+      "setorid": "11",
       "info": "informações sobre o veículo, oras.",
-      "modeloModal": "",
-      "marcaCreate": "",
       "id": 4
     },
     {
       "tipoid": "1",
       "placa": "111555",
-      "marcaid": "7",
-      "modeloid": "302",
+      "marcaid": "254",
+      "modeloid": "2040",
       "anofabricacao": "1982",
       "combustivelid": "3",
       "renavam": "222111",
       "estadoveiculo": "5",
-      "setorid": "1",
+      "setorid": "15",
       "info": "fidamãe",
-      "modeloModal": "",
-      "marcaCreate": "",
       "id": 5
     },
     {
@@ -5219,11 +5169,24 @@
       "combustivelid": "1",
       "renavam": "222111",
       "estadoveiculo": "5",
-      "setorid": "1",
+      "setorid": "19",
       "info": "fidamãe",
+      "id": 6
+    },
+    {
+      "tipoid": "0",
+      "placa": "drr-6633",
+      "marcaid": "27",
+      "modeloid": "746",
+      "anofabricacao": "2015",
+      "combustivelid": "1",
+      "renavam": "2200000033",
+      "estadoveiculo": "3",
+      "setorid": "7",
+      "info": "nada não",
       "modeloModal": "",
       "marcaCreate": "",
-      "id": 6
+      "id": 7
     }
   ],
   "tipo": [

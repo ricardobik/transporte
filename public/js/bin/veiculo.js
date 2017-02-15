@@ -99,7 +99,7 @@ function createVeiculo(data) {
     //Reload Material Form
     Materialize.updateTextFields();
 
-};
+}
 
 function fillVeiculoTable() {
 
@@ -160,23 +160,13 @@ function FillVeiculo(Id) {
             $("#tipoid").val(data.tipoid);
             $("#placa").val(data.placa);
 
-            console.log(data.marcaid, data.modeloid);
             getOnlyMarca(data.marcaid);
 
             getOnlyModelo(data.modeloid);
 
             getCombustivelSelect(data.combustivelid);
-            
+
             getOnlySetor(data.setorid);
-
-            //            getMarcas(marcaid.name, data.marcaid);
-            //
-            //            getModelos(modeloid.name, data.marcaid, data.modeloid);
-            //
-
-            //            
-            //            getSetorSelect(data.setorid);
-            //                
 
             $("#anofabricacao").val(data.anofabricacao);
             $("#combustivelid").val(data.combustivelid);
@@ -193,6 +183,90 @@ function FillVeiculo(Id) {
 
         }
 
+    });
+
+}
+
+//Update function
+function updateVeiculo(id, data) {
+
+
+    //do AJAX request
+    $("#form").validate();
+    if ($("#form").valid()) {
+
+        swal({
+            title: "Confirmação",
+            text: "Deseja salvar as informações?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Salvar",
+            closeOnConfirm: false,
+            html: false
+        }, function () {
+
+            $.ajax({
+                type: "PUT",
+                url: urlApi + "veiculo/" + id,
+                data: data,
+                dataType: "json",
+
+                //if received a response from the server
+                success: function (response) {
+                    swal("Pronto!",
+                        "As alterações foram salvas com sucesso.",
+                        "success");
+
+                    //Reload dataTable
+                    $('#table-veiculo').DataTable().ajax.reload();
+                    $('#modal-edit').modal('close');
+
+                }
+
+            });
+
+        });
+
+    }
+    //Reload Material Form
+    Materialize.updateTextFields();
+
+}
+
+//Delete function
+function deleteVeiculo(id) {
+    swal({
+        title: "Tem certeza?",
+        text: "Esta ação excluirá o veiculo!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: 'btn-danger',
+        confirmButtonText: 'Excluir',
+        cancelButtonText: "Cancelar",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    }, function (isConfirm) {
+        if (isConfirm) {
+
+            $.ajax({
+                type: "DELETE",
+                url: urlApi + "veiculo/" + id,
+                dataType: "json",
+
+                //if received a response from the server
+                success: function (response) {
+                    //Reload dataTable
+                    $('#table-veiculo').DataTable().ajax.reload();
+                    $('#modal-edit').modal('close');
+                }
+
+            });
+
+            swal("Excluído!", "O veículo foi excluído!", "success");
+        } else {
+            swal("Cancelado", "Nada foi modificado", "error");
+        }
     });
 
 }

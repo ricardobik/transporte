@@ -51,7 +51,7 @@ $.validator.setDefaults({
 
 //Rules and Messages to Validate
 $("#form").validate({
-    
+
     rules: {
 
     }
@@ -59,27 +59,27 @@ $("#form").validate({
 });
 
 function fillSetor(id) {
-    
-        $.ajax({
-            type: "GET",
-            url: urlApi + "setor/" + id,
-            dataType: "json",
 
-            //if received a response from the server
-            success: function (data) {
+    $.ajax({
+        type: "GET",
+        url: urlApi + "setor/" + id,
+        dataType: "json",
 
-                console.log(data);
+        //if received a response from the server
+        success: function (data) {
 
-                $("#id").val(data.id);
-                $("#nome").val(data.nome);
+            console.log(data);
 
-                //Reload Material Form
-                Materialize.updateTextFields();
+            $("#id").val(data.id);
+            $("#nome").val(data.nome);
 
-            },
+            //Reload Material Form
+            Materialize.updateTextFields();
 
-        });
-   
+        },
+
+    });
+
 };
 
 //Delete function
@@ -220,15 +220,19 @@ function getSetor() {
 
 }
 
+//Get setores and add to select
 function getSetorSelect(id) {
-    
-    //Load Json marcas from FIPE API
+
     $.ajax({
         url: urlApi + "setor",
-
         type: 'GET',
         dataType: 'json',
         success: function (json) {
+
+            $('#setorid')
+                .find('option')
+                .remove()
+                .end();
 
             $.each(json, function (key, value) {
 
@@ -237,8 +241,8 @@ function getSetorSelect(id) {
                     .attr('value', value.id)
                     .text(value.nome)
                 );
-                
-                $('#setorid').val(id);
+
+                $('#setorid').find('option[value="' + id + '"]').prop('selected', true);
                 $('#setorid').material_select();
 
             });
@@ -248,19 +252,24 @@ function getSetorSelect(id) {
 };
 
 function getOnlySetor(id) {
-    
-    $.ajax({
-     url: urlApi + "setor/" + id,
 
+    //Clear the options before set new id
+    $('#setorid').empty();
+
+    $.ajax({
+        url: urlApi + "setor/" + id,
         type: 'GET',
         dataType: 'json',
         success: function (json) {
+
+
 
             $('#setorid').append(
                 $("<option></option>")
                 .attr('value', json.id)
                 .text(json.nome)
             );
+
             $('#setorid').material_select();
 
         },
@@ -269,6 +278,3 @@ function getOnlySetor(id) {
         }
     });
 };
-
-
-

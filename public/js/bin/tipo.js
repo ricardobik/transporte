@@ -1,3 +1,32 @@
+// Validade Fields materialize.css
+$.validator.setDefaults({
+    errorClass: 'invalid',
+    validClass: "valid",
+    errorPlacement: function (error, element) {
+        $(element).closest("form").find("label[for='" + element.attr("id") + "']").attr('data-error', error.text()).attr('class', 'active');
+    },
+    submitHandler: function (form) {
+        console.log('form ok');
+    }
+});
+//Rules and Messages to Validate
+$("#formTipo").validate({
+//    ignore: [],
+    debug: true,
+    rules: {
+        tipoNome: {
+            required: true
+        }
+    },
+    messages: {
+        tipoNome: {
+            required: "Digite a marca a ser adicionada"
+        }
+    }
+});
+
+
+
 //Fill table tipo
 function fillTipoTable() {
     //Populates Table with Json
@@ -41,8 +70,8 @@ function fillTipo(id) {
         //if received a response from the server
         success: function (data) {
 
-            $("#idTipo").val(data.id);
-            $("#nomeTipo").val(data.nome);
+            $("#tipoId").val(data.id);
+            $("#tipoNome").val(data.nome);
 
             //Reload Material Form
             Materialize.updateTextFields();
@@ -57,13 +86,11 @@ function updateTipo(id, dados) {
 
     var data = new Object();
     data.id = id;
-    data.nome = $("#nomeTipo").val();
-    
-    console.log(data);
-        
+    data.nome = $("#tipoNome").val();
+       
     //do AJAX request
-    $("#formMa").validate();
-    if ($("#formMa").valid()) {
+    $("#formTipo").validate();
+    if ($("#formTipo").valid()) {
 
         swal({
             title: "Confirmação",
@@ -147,8 +174,8 @@ function deleteTipo(id) {
 function createTipo(data) {
 
     //make AJAX request
-    $("#form").validate();
-    if ($("#form").valid()) {
+    $("form").validate();
+    if ($("form").valid()) {
         $.ajax({
             type: "POST",
             url: urlApi + "tipo",
@@ -183,12 +210,12 @@ function getTipo() {
 
             $.each(json, function (key, value) {
 
-                $('#tipoid').append(
+                $('#tipoId').append(
                     $("<option></option>")
                     .attr('value', value.id)
                     .text(value.nome)
                 );
-                $('#tipoid').material_select();
+                $('#tipoId').material_select();
 
             });
 

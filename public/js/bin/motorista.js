@@ -146,7 +146,7 @@ function saveMotorista(data) {
 
 //Update function
 function updateMotorista(id, data) {
-
+    
     //do AJAX request
     $("#form").validate();
     if ($("#form").valid()) {

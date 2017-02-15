@@ -12,48 +12,51 @@ $.validator.setDefaults({
     }
 });
 //Rules and Messages to Validate
-$("form").validate({
-    //    ignore: [],
+$("#formMarca").validate({
+//    ignore: [],
     debug: true,
     rules: {
-        marcaCreate: {
+        marcaNome: {
             required: true
         }
     },
     messages: {
-        marcaCreate: {
+        marcaNome: {
             required: "Digite a marca a ser adicionada"
         }
     }
 });
 
 //Get Brands to fill select
-function getMarcas(input, marcaid) {
-//    $("#marcaid").empty().html(' ');
-    
+function getMarcas(input, marcaId) {
+
     $.ajax({
         url: urlApi + "marca/",
         type: 'GET',
         dataType: 'json',
         success: function (json) {
+
+            $('#marcaId')
+                .find('option')
+                .remove()
+                .end();
+
             $.each(json, function (key, value) {
                 $('#' + input).append($("<option></option>").attr('value', value.id).text(value.nome));
             });
 
-            $("#marcaid").val(marcaid);
+            $('#marcaId').find('option[value="' + marcaId + '"]').prop('selected', true);
+
             //Load material dropbox
             $('select').material_select();
 
         }
     });
-};
+}
 
-function getOnlyMarca(id) {
+function getOnlyMarca(id, type) {
 
-    $("#marcaid").empty().html(' ');
-    //        $("#marcaid").append("<option value='' disabled selected>Escolha o modelo</option>");
-    //    $("#loader").css('display', '');
-
+    
     $.ajax({
         url: urlApi + "marca/" + id,
 
@@ -61,19 +64,25 @@ function getOnlyMarca(id) {
         dataType: 'json',
         success: function (json) {
 
-            $('#marcaid').append(
-                $("<option></option>")
-                .attr('value', json.id)
-                .text(json.nome)
-            );
-            $('#marcaid').material_select();
+            if (type !== "input") {
+                $('#marcaId').append(
+                    $("<option></option>")
+                    .attr('value', json.id)
+                    .text(json.nome)
+                );
+
+            } else {
+                $('#marcaModeloId'
+                 ).val(json.nome);
+            }
+            $('#marcaId').material_select();
 
         },
         error: function (textStatus, errorThrown) {
             console.log("errou");
         }
     });
-};
+}
 
 //Switch marcaModelo verify
 function verifySwitch() {
@@ -83,14 +92,14 @@ function verifySwitch() {
     } else {
         $("#divMarcaModelo").show();
         $("#divMarca").hide();
-    };
-};
+    }
+}
 
 function createMarca(data) {
 
     //make AJAX request
-    $("#form").validate();
-    if ($("#form").valid()) {
+    $("#formMarca").validate();
+    if ($("#formMarca").valid()) {
         $.ajax({
             type: "POST",
             url: urlApi + "marca",
@@ -102,8 +111,7 @@ function createMarca(data) {
                 swal("Pronto!",
                     "Marca de veículo gravada com sucesso.",
                     "success");
-
-            },
+            }
 
         });
     }
@@ -125,18 +133,19 @@ function saveAll(type) {
         case "1":
             data.marcaId = $("#marcaSelect").val();
             data.nome = $("#modelo").val();
-            url = "http://192.168.10.10:3004/modelo";
+            url = urlApi + "modelo";
             successMsg = "Modelo adicionado com sucesso";
             break;
         case "2":
             data.nome = $("#tipo").val();
-            url = "http://192.168.10.10:3004/tipo";
+            url = urlApi + "tipo";
             successMsg = "Tipo de veículo adicionado com sucesso";
             break;
-    };
+    }
+    
     //make AJAX request
-    $("#form").validate();
-    if ($("form").valid()) {
+    $("#formMarca").validate();
+    if ($("formMarca").valid()) {
         $.ajax({
             type: "POST",
             url: url,
@@ -144,16 +153,18 @@ function saveAll(type) {
             dataType: "json", //if received a response from the server
             success: function (response) {
                 swal("Pronto!", successMsg, "success");
-            },
+            }
         });
     }
     //Empty all fields
-    $(':input', '#form').not(':button, :submit, :reset').val('').removeAttr('checked').removeAttr('selected');
+    $(':input', '#formMarca').not(':button, :submit, :reset').val('').removeAttr('checked').removeAttr('selected');
     //Reload Material Form
     Materialize.updateTextFields();
-};
+}
+
 //Fill table marca
 function fillMarcaTable() {
+    
     //Populates Table with Json
     tableMarca = $('table#table-marca').DataTable({
         ajax: {
@@ -168,11 +179,8 @@ function fillMarcaTable() {
             data: "nome"
                 }],
         "columnDefs": [{
-            "width": "10%",
+            "width": "20%",
             "targets": 0
-                }, {
-            "width": "40%",
-            "targets": 1
                 }],
         select: true,
         fixedColumns: true,
@@ -189,35 +197,33 @@ function fillMarca(id) {
 
     $.ajax({
         type: "GET",
-        url: "http://192.168.10.10:3004/marca/" + id,
+        url: urlApi + "marca/" + id,
         dataType: "json",
 
         //if received a response from the server
         success: function (data) {
 
-            $("#idMarca").val(data.id);
-            $("#nomeMarca").val(data.nome);
+            $("#marcaId").val(data.id);
+            $("#marcaNome").val(data.nome);
 
             //Reload Material Form
             Materialize.updateTextFields();
 
-        },
+        }
 
     });
 
-};
+}
 
-
-
-function updateMarca(id, dados) {
+function updateMarca(id) {
 
     var data = new Object();
     data.id = id;
-    data.nome = $("#nomeMarca").val();
+    data.nome = $("#marcaNome").val();
 
     //do AJAX request
-    $("#formMa").validate();
-    if ($("#formMa").valid()) {
+    $("#formMarca").validate();
+    if ($("#formMarca").valid()) {
 
         swal({
             title: "Confirmação",
@@ -232,7 +238,7 @@ function updateMarca(id, dados) {
 
             $.ajax({
                 type: "PUT",
-                url: "http://192.168.10.10:3004/marca/" + id,
+                url: urlApi + "marca/" + id,
                 data: data,
                 dataType: "json",
 
@@ -242,11 +248,12 @@ function updateMarca(id, dados) {
                         "As alterações foram salvas com sucesso.",
                         "success");
 
+                    console.log("passou");
                     //Reload dataTable
                     $('#table-marca').DataTable().ajax.reload();
                     $('#modal-marca').modal('close');
 
-                },
+                }
 
             });
 
@@ -256,7 +263,7 @@ function updateMarca(id, dados) {
     //Reload Material Form
     Materialize.updateTextFields();
 
-};
+}
 
 //Delete function
 function deleteMarca(id) {
@@ -276,7 +283,7 @@ function deleteMarca(id) {
 
                 $.ajax({
                     type: "DELETE",
-                    url: "http://192.168.10.10:3004/marca/" + id,
+                    url: urlApi + "marca/" + id,
                     dataType: "json",
 
                     //if received a response from the server
@@ -296,4 +303,4 @@ function deleteMarca(id) {
             }
         });
 
-};
+}

@@ -34,6 +34,8 @@ $("form").validate({
 //Fill combustivel imput to update/delete
 function fillCombustivel(id) {
 
+    console.log(id);
+    
     $.ajax({
         type: "GET",
         url: urlApi + "combustivel/" + id,
@@ -42,8 +44,8 @@ function fillCombustivel(id) {
         //if received a response from the server
         success: function (data) {
 
-            $("#idCombustivel").val(data.id);
-            $("#nomeCombustivel").val(data.tipo);
+            $("#combustivelId").val(data.id);
+            $("#combustivelTipo").val(data.tipo);
 
             //Reload Material Form
             Materialize.updateTextFields();
@@ -98,8 +100,8 @@ function deleteCombustivel(id) {
 function createCombustivel(data) {
 
     //make AJAX request
-    $("#form").validate();
-    if ($("#form").valid()) {
+    $("#formCombustivel").validate();
+    if ($("#formCombustivel").valid()) {
         $.ajax({
             type: "POST",
             url: urlApi + "combustivel",
@@ -125,12 +127,12 @@ function createCombustivel(data) {
 function updateCombustivel(id, dados) {
 
     var data = new Object();
-    data.tipo = $("#tipoCombustivel").val();
+    data.tipo = $("#combustivelTipo").val();
     data.id = id;
     
     //do AJAX request
-    $("form").validate();
-    if ($("form").valid()) {
+    $("#formCombustivel").validate();
+    if ($("#formCombustivel").valid()) {
 
         swal({
             title: "Confirmação",
@@ -214,12 +216,12 @@ function getCombustivel() {
 
             $.each(json, function (key, value) {
 
-                $('#combustivelid').append(
+                $('#combustivelId').append(
                     $("<option></option>")
                     .attr('value', value.id)
                     .text(value.tipo)
                 );
-                $('#combustivelid').material_select();
+                $('#combustivelId').material_select();
 
             });
 
@@ -239,14 +241,14 @@ function getCombustivelSelect(id) {
 
             $.each(json, function (key, value) {
 
-                $('#combustivelid').append(
+                $('#combustivelId').append(
                     $("<option></option>")
                     .attr('value', value.id)
                     .text(value.tipo)
                 );
                 
-                $('#combustivelid').val(id);
-                $('#combustivelid').material_select();
+                $('#combustivelId').val(id);
+                $('#combustivelId').material_select();
 
             });
 

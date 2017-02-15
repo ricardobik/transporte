@@ -50,7 +50,7 @@
                             </table>
                         </div>
                         <div class="card-action right-align">
-                            <a class="waves-effect waves-light btn disabled" name="CallModalCombustivel" id="CallModalCombustivel" href="#modal-combustivel">Editar</a>
+                            <a class="waves-effect waves-light btn disabled" name="CallModalCombustivel" id="CallModalCombustivel" href="#modal-combustivel">Detalhes</a>
                         </div>
                     </div>
 
@@ -74,7 +74,7 @@
                             </table>
                         </div>
                         <div class="card-action right-align">
-                            <a class="waves-effect waves-light btn disabled" name="CallModalMarca" id="CallModalMarca" href="#modal-marca">Editar</a>
+                            <a class="waves-effect waves-light btn disabled" name="CallModalMarca" id="CallModalMarca" href="#modal-marca">Detalhes</a>
                         </div>
                     </div>
 
@@ -103,7 +103,7 @@
                             </table>
                         </div>
                         <div class="card-action right-align">
-                            <a class="waves-effect waves-light btn disabled" name="CallModalModelo" id="CallModalModelo" href="#modal-modelo">Editar</a>
+                            <a class="waves-effect waves-light btn disabled" name="CallModalModelo" id="CallModalModelo" href="#modal-modelo">Detalhes</a>
                         </div>
                     </div>
 
@@ -127,12 +127,11 @@
                             </table>
                         </div>
                         <div class="card-action right-align">
-                            <a class="waves-effect waves-light btn disabled" name="CallModalTipo" id="CallModalTipo" href="#modal-tipo">Editar</a>
+                            <a class="waves-effect waves-light btn disabled" name="CallModalTipo" id="CallModalTipo" href="#modal-tipo">Detalhes</a>
                         </div>
                     </div>
 
                 </div>
-
             </div>
             <!--action button-->
             <div class="fixed-action-btn horizontal">
@@ -148,37 +147,42 @@
     </div>
 
     <!-- Modal Structure Combustivel-->
-    <form method="POST" name="formC" action="" id="formC">
+    <form method="POST" name="formCombustivel" action="" id="formCombustivel">
         <div id="modal-combustivel" class="modal modal-fixed-footer modal-edit">
             <div class="modal-content">
                 <span class="card-title">Editar Combustível</span>
 
-
                 <div class="row">
                     <div class="input-field col s12 m1">
-                        <input disabled name="idCombustivel" id="idCombustivel" type="text">
-                        <label for="idCombustivel">id</label>
+                        <input disabled name="combustivelId" id="combustivelId" type="text">
+                        <label for="combustivelId">id</label>
                     </div>
 
                     <div class="input-field col m11 s12">
-                        <input id="tipoCombustivel" name="tipoCombustivel" type="text" class="validate" required="">
-                        <label for="tipoCombustivel">Nome</label>
+                        <input id="combustivelTipo" name="combustivelTipo" type="text" class="validate" required="">
+                        <label for="combustivelTipo">Nome</label>
                     </div>
                 </div>
 
             </div>
             <div class="modal-footer">
                 <div class="card-action right-align">
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Voltar</a>
-                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="deleteCombustivel">Deletar</a>
-                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="updateCombustivel">Enviar</a>
+                    <div class="" id="divDeleteCombustivel">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="back">Voltar</a>
+                        <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="deleteCombustivel">Deletar</a>
+                        <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="editCombustivel">Editar</a>
+                    </div>
+                    <div class="hide" id="divEditCombustivel">
+                        <a href="#!" class="modal-action waves-effect waves-green btn-flat" id="updateCombustivel">Salvar</a>
+                        <a href="#!" class="modal-action waves-effect waves-green btn-flat modal-close" id="cancel">Cancelar</a>
+                    </div>
                 </div>
             </div>
         </div>
     </form>
 
     <!-- Modal Structure Marca-->
-    <form method="POST" name="formMa" action="" id="formMa">
+    <form method="POST" name="formMarca" action="" id="formMarca">
         <div id="modal-marca" class="modal modal-fixed-footer modal-edit">
             <div class="modal-content">
                 <span class="card-title">Editar Marca</span>
@@ -186,63 +190,70 @@
 
                 <div class="row">
                     <div class="input-field col s12 m1">
-                        <input disabled name="idMarca" id="idMarca" type="text">
-                        <label for="idMarca">id</label>
+                        <input disabled name="marcaId" id="marcaId" type="text">
+                        <label for="marcaId">id</label>
                     </div>
 
                     <div class="input-field col m11 s12">
-                        <input id="nomeMarca" name="nomeMarca" type="text" class="validate" required="">
-                        <label for="nomeMarca">Nome</label>
+                        <input id="marcaNome" name="marcaNome" type="text" class="validate" required="">
+                        <label for="marcaNome">Nome</label>
                     </div>
                 </div>
 
             </div>
             <div class="modal-footer">
-                <div class="card-action right-align">
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Voltar</a>
+                <div class="" id="divDeleteMarca">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="back">Voltar</a>
                     <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="deleteMarca">Deletar</a>
-                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="updateMarca">Enviar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="editMarca">Editar</a>
+                </div>
+                <div class="hide" id="divEditMarca">
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat" id="updateMarca">Salvar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat modal-close" id="cancel">Cancelar</a>
                 </div>
             </div>
         </div>
     </form>
 
     <!-- Modal Structure Modelo-->
-    <form method="POST" name="formMo" action="" id="formMo">
+    <form method="POST" name="formModelo" action="" id="formModelo">
         <div id="modal-modelo" class="modal modal-fixed-footer modal-edit">
             <div class="modal-content">
                 <span class="card-title">Editar Modelo</span>
                 <div class="row">
 
+
                     <div class="input-field col m12">
-                        <select id="marcaModal" name="marcaModal">
-                            <option value="" disabled selected>Escolha a marca</option>
-                        </select>
-                        <label for="marcaModal">Marca</label>
+                        <input id="marcaModeloId" name="marcaModeloId" type="text" class="validate" required="">
+                        <label for="marcaModeloId">Marca</label>
                     </div>
 
                     <div class="input-field col s12 m1">
-                        <input disabled name="idModelo" id="idModelo" type="text">
-                        <label for="idModelo">id</label>
+                        <input disabled name="modeloId" id="modeloId" type="text">
+                        <label for="modeloId">id</label>
                     </div>
                     <div class="input-field col m11 s12">
-                        <input id="nomeModelo" name="nomeModelo" type="text" class="validate" required="">
-                        <label for="nomeModelo">Nome</label>
+                        <input id="modeloNome" name="modeloNome" type="text" class="validate" required="">
+                        <label for="modeloNome">Nome</label>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <div class="card-action right-align">
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Voltar</a>
+                <div class="" id="divDeleteModelo">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="back">Voltar</a>
                     <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="deleteModelo">Deletar</a>
-                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="updateModelo">Enviar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="editModelo">Editar</a>
+                </div>
+                <div class="hide" id="divEditModelo">
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat" id="updateModelo">Salvar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat modal-close" id="cancel">Cancelar</a>
                 </div>
             </div>
         </div>
     </form>
 
     <!-- Modal Structure Tipo-->
-    <form method="POST" name="form-tipo" action="" id="form-tipo">
+    <form method="POST" name="formTipo" action="" id="formTipo">
         <div id="modal-tipo" class="modal modal-fixed-footer modal-edit">
             <div class="modal-content">
                 <span class="card-title">Editar Tipo de Veículo</span>
@@ -250,22 +261,26 @@
 
                 <div class="row">
                     <div class="input-field col s12 m1">
-                        <input disabled name="idTipo" id="idTipo" type="text">
-                        <label for="idTipo">id</label>
+                        <input disabled name="tipoId" id="tipoId" type="text">
+                        <label for="tipoId">id</label>
                     </div>
 
                     <div class="input-field col m11 s12">
-                        <input id="nomeTipo" name="nomeTipo" type="text" class="validate" required="">
-                        <label for="nomeTipo">Nome</label>
+                        <input id="tipoNome" name="tipoNome" type="text" class="validate" required="">
+                        <label for="tipoNome">Nome</label>
                     </div>
                 </div>
 
             </div>
             <div class="modal-footer">
-                <div class="card-action right-align">
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Voltar</a>
+                <div class="" id="divDeleteModelo">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="back">Voltar</a>
                     <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="deleteTipo">Deletar</a>
-                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="updateTipo">Enviar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="editTipo">Editar</a>
+                </div>
+                <div class="hide" id="divEditModelo">
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat" id="updateTipo">Salvar</a>
+                    <a href="#!" class="modal-action waves-effect waves-green btn-flat modal-close" id="cancel">Cancelar</a>
                 </div>
             </div>
         </div>
@@ -301,16 +316,16 @@
             $('.modal').modal({
                 dismissible: false
             });
-            
+
             //Load material select
             $('select').material_select();
-            
+
             //Enable Model after select Brand type
             $("#marcaSelect").change(function() {
-                getModelos($("#marcaSelect").val());
+                getModelosTable($("#marcaSelect").val());
                 $("#table-modelo").removeClass("hide");
             });
-            
+
             // #search-input is a <input type="text"> element
             $('#search-input-combustivel').on('keyup', function() {
                 tableCombustivel.search(this.value).draw();
@@ -324,13 +339,13 @@
             $('#search-input-tipo').on('keyup', function() {
                 tableTipo.search(this.value).draw();
             });
-            
+
             //Load Navbar and dropdown menu
             $('#nav-bar').load("/modules/navbar.html", function() {
                 $(".button-collapse").sideNav();
                 $('.dropdown-button').dropdown();
             });
-            
+
             //Enable edit button and set id of Table Combustivel to Edit
             $('#table-combustivel tbody').on('click', 'tr', function() {
                 if ($(this).hasClass('selected')) {
@@ -343,6 +358,7 @@
                     $update = $(this).parents('table').DataTable().row(this).data();
                 }
             });
+
             //Enable edit button and set id of Table Combustivel to Edit
             $('#table-marca tbody').on('click', 'tr', function() {
                 if ($(this).hasClass('selected')) {
@@ -355,6 +371,7 @@
                     $update = $(this).parents('table').DataTable().row(this).data();
                 }
             });
+
             //Enable edit button and set id of Table Combustivel to Edit
             $('#table-modelo tbody').on('click', 'tr', function() {
                 if ($(this).hasClass('selected')) {
@@ -367,6 +384,7 @@
                     $update = $(this).parents('table').DataTable().row(this).data();
                 }
             });
+
             //Enable edit button and set id of Table Combustivel to Edit
             $('#table-tipo tbody').on('click', 'tr', function() {
                 if ($(this).hasClass('selected')) {
@@ -379,19 +397,78 @@
                     $update = $(this).parents('table').DataTable().row(this).data();
                 }
             });
-            
+
             //Get id from json and populate the modal field
             $('#CallModalCombustivel').on('click', function() {
+                $("#divDeleteCombustivel").removeClass("hide");
+                $("#divEditCombustivel").addClass("hide");
+                $("form :input").prop("disabled", true);
+
                 fillCombustivel($update.id);
             });
+            $('#editCombustivel').on('click', function() {
+                $("#divDeleteCombustivel").addClass("hide");
+                $("#divEditCombustivel").removeClass("hide");
+                $("form :input").prop("disabled", false);
+                $("#combustivelId").prop("disabled", true)
+
+                //Reload Material Form
+                Materialize.updateTextFields();
+            });
+
+            //Get id from json and populate the modal field
             $('#CallModalMarca').on('click', function() {
+                $("#divDeleteMarca").removeClass("hide");
+                $("#divEditMarca").addClass("hide");
+                $("form :input").prop("disabled", true);
+
                 fillMarca($update.id);
             });
+            $('#editMarca').on('click', function() {
+                $("#divDeleteMarca").addClass("hide");
+                $("#divEditMarca").removeClass("hide");
+                $("form :input").prop("disabled", false);
+                $("#marcaId").prop("disabled", true)
+
+                //Reload Material Form
+                Materialize.updateTextFields();
+            });
+
+            //Get id from json and populate the modal field
             $('#CallModalModelo').on('click', function() {
+                $("#divDeleteModelo").removeClass("hide");
+                $("#divEditModelo").addClass("hide");
+                $("form :input").prop("disabled", true);
+
                 fillModelo($update);
             });
+            $('#editModelo').on('click', function() {
+                $("#divDeleteModelo").addClass("hide");
+                $("#divEditModelo").removeClass("hide");
+                $("form :input").prop("disabled", false);
+                $("#modeloId").prop("disabled", true)
+                $("#marcaModeloId").prop("disabled", true)
+
+                //Reload Material Form
+                Materialize.updateTextFields();
+            });
+
+            //Get id from json and populate the modal field
             $('#CallModalTipo').on('click', function() {
+                $("#divDeleteTipo").removeClass("hide");
+                $("#divEditTipo").addClass("hide");
+                $("form :input").prop("disabled", true);
                 fillTipo($update.id);
+            });
+            
+            $('#editTipo').on('click', function() {
+                $("#divDeleteTipo").addClass("hide");
+                $("#divEditTipo").removeClass("hide");
+                $("form :input").prop("disabled", false);
+                $("#tipoId").prop("disabled", true)
+
+                //Reload Material Form
+                Materialize.updateTextFields();
             });
 
             //Update request
@@ -402,7 +479,7 @@
                 updateMarca($update.id);
             });
             $("#updateModelo").click(function(e) {
-                updateModelo($update.id);
+                updateModelo($update);
             });
             $("#updateTipo").click(function(e) {
                 updateTipo($update.id);
