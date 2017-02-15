@@ -31,10 +31,10 @@
                         <span class="card-title">Cadastrar novo veículo</span>
                         <div class="row">
                             <div class="input-field col m4" id="divTipo">
-                                <select id="tipoid" name="tipoid" required="" aria-required="true">
+                                <select id="tipoId" name="tipoId" required="" aria-required="true">
                                     <option value="" disabled selected>Escolha o tipo</option>
                                 </select>
-                                <label for="tipo">Tipo</label>
+                                <label for="tipoId">Tipo</label>
                             </div>
 
                             <div class="input-field col m4 offset-m4">
@@ -45,10 +45,10 @@
                         </div>
                         <div class="row">
                             <div class="input-field col m5 s11">
-                                <select id="marcaid" name="marcaid" disabled>
+                                <select id="marcaId" name="marcaId" disabled>
                                     <option value="" disabled selected>Escolha a marca</option>
                                 </select>
-                                <label for="marcaid">Marca</label>
+                                <label for="marcaId">Marca</label>
                             </div>
 
                             <!--Load when choosing Modelo-->
@@ -61,7 +61,7 @@
                             </div>
 
                             <div class="input-field col s12 m6">
-                                <select id="modeloid" name="modeloid" disabled>
+                                <select id="modeloId" name="modeloId" disabled>
                                 <option value="" disabled selected>Escolha o modelo</option>
                             </select>
                                 <label>Modelo</label>
@@ -87,13 +87,13 @@
 
                             <div class="input-field col m3">
                                 <input id="anofabricacao" name="anofabricacao" type="text" class="validate">
-                                <label for="ano">Ano</label>
+                                <label for="anofabricacao">Ano</label>
                             </div>
                             <div class="input-field col m5 offset-m4" id="divCombustivel">
-                                <select id="combustivelid" name="combustivelid" required="" aria-required="true">
+                                <select id="combustivelId" name="combustivelId" required="" aria-required="true">
                                 <option value="" disabled selected>Selecione</option>
                             </select>
-                                <label for="Combustivel">Combustível</label>
+                                <label for="CombustivelId">Combustível</label>
                             </div>
 
                             <div class="input-field col m4">
@@ -113,10 +113,10 @@
                                 <label for="tipo">Estado atual do veículo</label>
                             </div>
                             <div class="input-field col m12">
-                                <select id="setorid" name="setorid" required="" aria-required="true">
+                                <select id="setorId" name="setorId" required="" aria-required="true">
                                 <option value="" disabled selected>Selecione</option>
                             </select>
-                                <label for="setor">Setor do veículo</label>
+                                <label for="setorId">Setor do veículo</label>
                             </div>
 
                             <div class="input-field col m12">
@@ -213,7 +213,7 @@
     <script>
         $(document).ready(function() {
 
-            getMarcas(marcaid.name);
+            getMarcas(marcaId.name);
             getCombustivel();
             getSetor();
             getTipo();
@@ -222,8 +222,8 @@
             $("#next").addClass("disabled");
 
             //Enable next button only if model has changed
-            $("#modeloid").change(function() {
-                if ($("#modeloid").val() !== "" || $("#modeloid").val() !== null) {
+            $("#modeloId").change(function() {
+                if ($("#modeloId").val() !== "" || $("#modeloId").val() !== null) {
                     $("#next").removeClass("disabled");
                 } else {
                     $("#next").addClass("disabled");
@@ -283,15 +283,15 @@
             $('select').material_select();
 
             //Enable Brand after select vehicle type
-            $("#tipoid").change(function() {
-                $("#marcaid").removeAttr("disabled");
-                $("#marcaid").material_select();
+            $("#tipoId").change(function() {
+                $("#marcaId").removeAttr("disabled");
+                $("#marcaId").material_select();
             });
 
             //Enable Model after select Brand type
-            $("#marcaid").change(function() {
-                $("#modeloid").removeAttr("disabled");
-                getModelosSelect($("#marcaid").val());
+            $("#marcaId").change(function() {
+                $("#modeloId").removeAttr("disabled");
+                getModelosSelect($("#marcaId").val());
             });
 
         });

@@ -206,7 +206,7 @@ function getSetor() {
 
             $.each(json, function (key, value) {
 
-                $('#setorid').append(
+                $('#setorId').append(
                     $("<option></option>")
                     .attr('value', value.id)
                     .text(value.nome)
@@ -254,7 +254,7 @@ function getSetorSelect(id) {
 function getOnlySetor(id) {
 
     //Clear the options before set new id
-    $('#setorid').empty();
+    $('#setorId').empty();
 
     $.ajax({
         url: urlApi + "setor/" + id,
@@ -264,13 +264,13 @@ function getOnlySetor(id) {
 
 
 
-            $('#setorid').append(
+            $('#setorId').append(
                 $("<option></option>")
                 .attr('value', json.id)
                 .text(json.nome)
             );
 
-            $('#setorid').material_select();
+            $('#setorId').material_select();
 
         },
         error: function (textStatus, errorThrown) {

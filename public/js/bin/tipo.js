@@ -200,7 +200,7 @@ function createTipo(data) {
 //insert into select to create veiculo
 function getTipo() {
     
-    //Load Json marcas from FIPE API
+    //Load 
     $.ajax({
         url: urlApi + "tipo",
 

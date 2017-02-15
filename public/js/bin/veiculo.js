@@ -157,7 +157,7 @@ function FillVeiculo(Id) {
         success: function (data) {
 
             $("#id").val(data.id);
-            $("#tipoid").val(data.tipoid);
+            $("#tipoId").val(data.tipoid);
             $("#placa").val(data.placa);
 
             getOnlyMarca(data.marcaid);
@@ -169,10 +169,10 @@ function FillVeiculo(Id) {
             getOnlySetor(data.setorid);
 
             $("#anofabricacao").val(data.anofabricacao);
-            $("#combustivelid").val(data.combustivelid);
+            $("#combustivelId").val(data.combustivelid);
             $("#renavam").val(data.renavam);
             $("#estadoveiculo").val(data.estadoveiculo);
-            $("#setorid").val(data.setorid);
+            $("#setorId").val(data.setorid);
             $("#info").val(data.info);
 
             //Reload Material Form
