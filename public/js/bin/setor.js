@@ -1,10 +1,44 @@
+// Validade Fields materialize.css
+$.validator.setDefaults({
+    errorClass: 'invalid',
+    validClass: "valid",
+    errorPlacement: function (error, element) {
+        $(element)
+            .closest("form")
+            .find("label[for='" + element.attr("id") + "']")
+            .attr('data-error', error.text())
+            .attr('class', 'active');
+
+    },
+    submitHandler: function (form) {
+        console.log('form ok');
+    }
+});
+
+//Rules and Messages to Validate
+$("#form").validate({
+    rules: {
+        nome: {
+            required: true,
+            minlength: 3
+        }
+    },
+    messages: {
+        nome: {
+            required: "Preencha com o nome do novo setor",
+            minlength: jQuery.validator.format("O nome do setor deve conter ao menos {0} caracteres")
+
+        }
+    }
+});
+
 //Fill table setor
 function fillSetorTable() {
 
     //Populates Table with Json
     table = $('table#table-setor').DataTable({
         ajax: {
-            url: "http://192.168.10.10:3004/setor",
+            url: urlApi + "setor",
             contentType: 'application/json; charset=UTF-8',
             dataType: 'json',
             dataSrc: ''
@@ -32,33 +66,9 @@ function fillSetorTable() {
     });
 }
 
-// Validade Fields materialize.css
-$.validator.setDefaults({
-    errorClass: 'invalid',
-    validClass: "valid",
-    errorPlacement: function (error, element) {
-        $(element)
-            .closest("form")
-            .find("label[for='" + element.attr("id") + "']")
-            .attr('data-error', error.text())
-            .attr('class', 'active');
-
-    },
-    submitHandler: function (form) {
-        console.log('form ok');
-    }
-});
-
-//Rules and Messages to Validate
-$("#form").validate({
-
-    rules: {
-
-    }
-
-});
-
-function fillSetor(id) {
+//Fill input to update
+function getSetor(id, inputType) {
+    $('#setor').empty();
 
     $.ajax({
         type: "GET",
@@ -68,11 +78,22 @@ function fillSetor(id) {
         //if received a response from the server
         success: function (data) {
 
-            console.log(data);
+            if (inputType == "select") {
+                $("#setor").append(
+                    $("<option></option>")
+                    .attr('value', data.id)
+                    .text(data.nome)
+                    .prop('selected', true)
 
-            $("#id").val(data.id);
-            $("#nome").val(data.nome);
+                );
+                $("#setor").material_select();
+                //                $('#setor').find('option[value="' + id + '"]').prop('selected', true);
 
+            } else {
+
+                $("#setorId").val(data.id);
+                $("#setorNome").val(data.nome);
+            }
             //Reload Material Form
             Materialize.updateTextFields();
 
@@ -122,7 +143,7 @@ function deleteSetor(id) {
 };
 
 //Create function
-function saveSetor(data) {
+function createSetor(data) {
 
     //make AJAX request
     $("#form").validate();
@@ -136,12 +157,16 @@ function saveSetor(data) {
             //if received a response from the server
             success: function (response) {
                 swal("Pronto!",
-                    "Motorista gravado com sucesso.",
+                    "Setor gravado com sucesso.",
                     "success");
 
             },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Erro!");
+            }
 
         });
+
     }
     //Reload Material Form
     Materialize.updateTextFields();
@@ -151,7 +176,7 @@ function saveSetor(data) {
 };
 
 //Update function
-function updateSetor(id, data) {
+function updateSetor(data) {
 
     //do AJAX request
     $("#form").validate();
@@ -170,7 +195,7 @@ function updateSetor(id, data) {
 
             $.ajax({
                 type: "PUT",
-                url: urlApi + "setor/" + id,
+                url: urlApi + "setor/" + data.id,
                 data: data,
                 dataType: "json",
 
@@ -196,7 +221,9 @@ function updateSetor(id, data) {
 
 };
 
-function getSetor() {
+//Get Setores to fill a select
+function getSetores(id) {
+
     //Load Json setor
     $.ajax({
         url: urlApi + "setor",
@@ -206,13 +233,19 @@ function getSetor() {
 
             $.each(json, function (key, value) {
 
-                $('#setorId').append(
+                $('#setor').append(
                     $("<option></option>")
                     .attr('value', value.id)
                     .text(value.nome)
                 );
 
-                $('select').material_select();
+                if (id !== "null") {
+                    $('#setor').find('option[value="' + id + '"]').prop('selected', true);
+                }
+                $('#setor').material_select();
+
+                //Reload Material Form
+                Materialize.updateTextFields();
 
             });
         }
@@ -251,30 +284,28 @@ function getSetorSelect(id) {
     });
 };
 
-function getOnlySetor(id) {
-
-    //Clear the options before set new id
-    $('#setorId').empty();
-
-    $.ajax({
-        url: urlApi + "setor/" + id,
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-
-
-
-            $('#setorId').append(
-                $("<option></option>")
-                .attr('value', json.id)
-                .text(json.nome)
-            );
-
-            $('#setorId').material_select();
-
-        },
-        error: function (textStatus, errorThrown) {
-            console.log("errou");
-        }
-    });
-};
+//function getOnlySetor(id) {
+//
+//    //Clear the options before set new id
+//    $('#setorId').empty();
+//
+//    $.ajax({
+//        url: urlApi + "setor/" + id,
+//        type: 'GET',
+//        dataType: 'json',
+//        success: function (json) {
+//
+//            $('#setorId').append(
+//                $("<option></option>")
+//                .attr('value', json.id)
+//                .text(json.nome)
+//            );
+//
+//            $('#setorId').material_select();
+//
+//        },
+//        error: function (textStatus, errorThrown) {
+//            console.log("errou");
+//        }
+//    });
+//};

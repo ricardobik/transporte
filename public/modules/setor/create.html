@@ -29,11 +29,12 @@
                         <div class="card-content">
                             <span class="card-title">Cadastrar Setor</span>
                             <div class="row">
-                                <div class="input-field col m12 s12">
-                                    <input id="nome" type="text" class="validate" name="nome">
-                                    <label for="nome">Novo Setor</label>
+                                <div class="input-field col m12">
+                                    <input id="nome" placeholder="" name="nome" type="text" class="validate" required="" aria-required="true">
+                                    <label class="active" for="nome">Novo Setor</label>
                                 </div>
                             </div>
+
                         </div>
                         <div class="card-action right-align">
                             <a class="waves-effect waves-light btn" id="submit" name="submit"><i class="material-icons right">send</i>Enviar</a>
@@ -67,23 +68,16 @@
     <script>
         $(document).ready(function() {
 
-
             //Load Navbar and dropdown menu
             $('#nav-bar').load("/modules/navbar.html", function() {
                 $(".button-collapse").sideNav();
                 $('.dropdown-button').dropdown();
             });
 
-            //Stop the submit request
-            $("#form").submit(function(e) {
-                e.preventDefault();
-            });
-
-
             //get de form data and save
             $("#submit").click(function(e) {
                 var data = $("#form").serializeArray();
-                saveSetor(data);
+                createSetor(data);
             });
 
         });

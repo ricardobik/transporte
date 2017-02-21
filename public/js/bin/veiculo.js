@@ -91,6 +91,15 @@ function createVeiculo(data) {
                 slideOut("#cardFirst", 1350, -800, more);
 
                 validator.resetForm();
+                resetForm($('#formVeiculo1'));
+
+                $("#marca").attr("disabled", true);
+                $("#modelo").attr("disabled", true);
+                $('select').prop('selectedIndex', 0);
+
+                //Load material dropbox
+                $('select').material_select();
+
                 Materialize.updateTextFields();
             }
 
@@ -101,7 +110,7 @@ function createVeiculo(data) {
 
 }
 
-function fillVeiculoTable() {
+function getVeiculoTable() {
 
     table = $('table#table-veiculo').DataTable({
         ajax: {
@@ -145,7 +154,7 @@ function fillVeiculoTable() {
 }
 
 //Fill motorista Modal to Edit
-function FillVeiculo(Id) {
+function getVeiculo(Id) {
 
     $.ajax({
         type: "GET",
@@ -157,22 +166,19 @@ function FillVeiculo(Id) {
         success: function (data) {
 
             $("#id").val(data.id);
-            $("#tipoId").val(data.tipoid);
+            $("#tipo").val(data.tipoid);
             $("#placa").val(data.placa);
 
-            getOnlyMarca(data.marcaid);
+            getModelo(data.marcaid, data.modeloid, "select");
 
-            getOnlyModelo(data.modeloid);
+            getCombustiveis(data.combustivelid);
 
-            getCombustivelSelect(data.combustivelid);
-
-            getOnlySetor(data.setorid);
+            getSetor(data.setorid, "select");
 
             $("#anofabricacao").val(data.anofabricacao);
-            $("#combustivelId").val(data.combustivelid);
+            $("#combustivel").val(data.combustivelid);
             $("#renavam").val(data.renavam);
             $("#estadoveiculo").val(data.estadoveiculo);
-            $("#setorId").val(data.setorid);
             $("#info").val(data.info);
 
             //Reload Material Form

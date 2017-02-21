@@ -1,4 +1,18 @@
+/*Use to data-error*/
+.input-field label:after {
+  -webkit-transform: translateY(-190%);
+  transform: translateY(-190%);
+  font-size: 0.8rem;
+  transition: .2s ease-out;
+}
+.input-field label.active:after {
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  transition: .2s ease-out;
+}
 
+
+/*------------------------------------*/
  .modal-edit {
      width: 40% !important;
      height: 40% !important;

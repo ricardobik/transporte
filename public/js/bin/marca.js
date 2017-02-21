@@ -13,15 +13,15 @@ $.validator.setDefaults({
 });
 //Rules and Messages to Validate
 $("#formMarca").validate({
-//    ignore: [],
+    //    ignore: [],
     debug: true,
     rules: {
-        marcaNome: {
+        nomeMarca: {
             required: true
         }
     },
     messages: {
-        marcaNome: {
+        nomeMarca: {
             required: "Digite a marca a ser adicionada"
         }
     }
@@ -36,7 +36,7 @@ function getMarcas(input, marcaId) {
         dataType: 'json',
         success: function (json) {
 
-            $('#marcaId')
+            $('#marca')
                 .find('option')
                 .remove()
                 .end();
@@ -45,37 +45,10 @@ function getMarcas(input, marcaId) {
                 $('#' + input).append($("<option></option>").attr('value', value.id).text(value.nome));
             });
 
-            $('#marcaId').find('option[value="' + marcaId + '"]').prop('selected', true);
+            $('#marca').find('option[value="' + marcaId + '"]').prop('selected', true);
 
             //Load material dropbox
             $('select').material_select();
-
-        }
-    });
-}
-
-function getOnlyMarca(id, type) {
-
-    
-    $.ajax({
-        url: urlApi + "marca/" + id,
-
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-
-            if (type !== "input") {
-                $('#marcaId').append(
-                    $("<option></option>")
-                    .attr('value', json.id)
-                    .text(json.nome)
-                );
-
-            } else {
-                $('#marcaModeloId'
-                 ).val(json.nome);
-            }
-            $('#marcaId').material_select();
 
         },
         error: function (textStatus, errorThrown) {
@@ -84,16 +57,36 @@ function getOnlyMarca(id, type) {
     });
 }
 
-//Switch marcaModelo verify
-function verifySwitch() {
-    if ($("#switchMarcaModelo").prop('checked')) {
-        $("#divMarcaModelo").hide();
-        $("#divMarca").show();
-    } else {
-        $("#divMarcaModelo").show();
-        $("#divMarca").hide();
-    }
-}
+//function getOnlyMarca(id, type) {
+//
+//    $.ajax({
+//        url: urlApi + "marca/" + id,
+//
+//        type: 'GET',
+//        dataType: 'json',
+//        success: function (json) {
+//
+//            if (type !== "input") {
+//                $('#marcaId').append(
+//                    $("<option></option>")
+//                    .attr('value', json.id)
+//                    .text(json.nome)
+//                );
+//
+//            } else {
+//                $('#marcaModeloId'
+//                 ).val(json.nome);
+//            }
+//            $('#marcaId').material_select();
+//
+//        },
+//        error: function (textStatus, errorThrown) {
+//            console.log("errou");
+//        }
+//    });
+//}
+
+
 
 function createMarca(data) {
 
@@ -142,7 +135,7 @@ function saveAll(type) {
             successMsg = "Tipo de veículo adicionado com sucesso";
             break;
     }
-    
+
     //make AJAX request
     $("#formMarca").validate();
     if ($("formMarca").valid()) {
@@ -163,8 +156,8 @@ function saveAll(type) {
 }
 
 //Fill table marca
-function fillMarcaTable() {
-    
+function getMarcaTable() {
+
     //Populates Table with Json
     tableMarca = $('table#table-marca').DataTable({
         ajax: {
@@ -193,7 +186,7 @@ function fillMarcaTable() {
     });
 }
 
-function fillMarca(id) {
+function getMarca(id, inputType) {
 
     $.ajax({
         type: "GET",
@@ -203,9 +196,21 @@ function fillMarca(id) {
         //if received a response from the server
         success: function (data) {
 
-            $("#marcaId").val(data.id);
-            $("#marcaNome").val(data.nome);
+            if (inputType == "select") {
+                $("#marca").empty().html(' ');
+                $('#marca').append($("<option></option>")
+                    .attr('value', data.id)
+                    .text(data.nome)
+                );
+                $('#marca').material_select();
+                
+            } else {
 
+                $("#marcaId").val(data.id);
+                $("#marcaNome").val(data.nome);
+            }
+
+            
             //Reload Material Form
             Materialize.updateTextFields();
 

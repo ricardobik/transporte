@@ -73,7 +73,7 @@
 
                     <div class="card-action right-align">
                         <!-- Modal Trigger -->
-                        <a class="waves-effect waves-light btn disabled" name="callModalEdit" id="callModalEdit" href="#modal-edit">Editar</a>
+                        <a class="waves-effect waves-light btn disabled" name="callModalEdit" id="callModalEdit" href="#modal-edit">Detalhes</a>
                     </div>
                 </div>
                 <!--action button-->
@@ -99,7 +99,7 @@
 
                 <div class="row">
                     <div class="input-field col s1">
-                        <input disabled name="id" id="id" type="text">
+                        <input disabled name="motoristaId" id="motoristaId" type="text">
                         <label for="disabled">ID</label>
                     </div>
 
@@ -132,9 +132,15 @@
             </div>
             <div class="modal-footer">
                 <div class="card-action right-align">
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Voltar</a>
-                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="delete">Deletar</a>
-                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="update">Enviar</a>
+                    <div class="" id="divDelete">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="back">Voltar</a>
+                        <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="delete">Deletar</a>
+                        <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="edit">Editar</a>
+                    </div>
+                    <div class="hide" id="divEdit">
+                        <a href="#!" class="modal-action waves-effect waves-green btn-flat" id="update">Salvar</a>
+                        <a href="#!" class="modal-action waves-effect waves-green btn-flat modal-close" id="cancel">Cancelar</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -162,9 +168,6 @@
 
             //Fill Table with Json
             fillMotoristaTable();
-
-            //Fill setor select 
-            getSetor();
 
             $('.modal').modal({
                 dismissible: false
@@ -205,8 +208,26 @@
 
             //Fill modal form
             $('#callModalEdit').on('click', function() {
+                $("#divDelete").removeClass("hide");
+                $("#divEdit").addClass("hide");
+                $("form :input").prop("disabled", true);
                 FillMotorista($update.id);
+
             });
+
+            $('#edit').on('click', function() {
+                $("#divDelete").addClass("hide");
+                $("#divEdit").removeClass("hide");
+                $("form :input").prop("disabled", false);
+                $("#motoristaId").prop("disabled", true)
+
+                //Reload Material Form
+                Materialize.updateTextFields();
+
+                //Load material select
+                $('select').material_select();
+            });
+
 
             //Update request
             $("#update").click(function(e) {

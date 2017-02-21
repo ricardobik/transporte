@@ -30,8 +30,10 @@
                         <li class="tab col s2"><a href="#divTipo">TIPO</a></li>
                     </ul>
 
-                    <form method="POST" name="form" action="" id="form" novalidate="novalidate">
-                        <div id="divCombustivel">
+
+                    <div id="divCombustivel">
+                        <!--                        <form method="POST" name="formCombustivel" id="formCombustivel" novalidate="novalidate">-->
+                        <form method="POST" name="formCombustivel" id="formCombustivel" novalidate="novalidate">
 
                             <div class="card-content">
                                 <span class="card-title">Cadastrar combustível</span>
@@ -46,10 +48,11 @@
                             <div class="card-action right-align">
                                 <a class="waves-effect waves-light btn" id="createCombustivel" name="createCombustivel"><i class="material-icons right">send</i>Salvar</a>
                             </div>
-                        </div>
+                        </form>
+                    </div>
 
-                        <div id="divMarca">
-
+                    <div id="divMarca">
+                        <form method="POST" name="formMarca" id="formMarca" novalidate="novalidate">
                             <div class="card-content">
                                 <span class="card-title">Cadastrar Marca</span>
                                 <div class="row">
@@ -63,10 +66,12 @@
                             <div class="card-action right-align">
                                 <a class="waves-effect waves-light btn" id="createMarca" name="createMarca"><i class="material-icons right">send</i>Salvar</a>
                             </div>
-                        </div>
+                        </form>
+                    </div>
 
-                        <div id="divModelo">
+                    <div id="divModelo">
 
+                        <form method="POST" name="formModelo" id="formModelo" novalidate="novalidate">
                             <div class="card-content">
                                 <span class="card-title">Cadastrar Modelo</span>
                                 <div class="row">
@@ -88,11 +93,11 @@
                             <div class="card-action right-align">
                                 <a class="waves-effect waves-light btn" id="createModelo" name="createModelo"><i class="material-icons right">send</i>Salvar</a>
                             </div>
-                        </div>
+                        </form>
+                    </div>
 
-
-                        <div id="divTipo">
-
+                    <div id="divTipo">
+                        <form method="POST" name="formTipo" id="formTipo" novalidate="novalidate">
                             <div class="card-content">
                                 <span class="card-title">Cadastrar Tipo</span>
                                 <div class="row">
@@ -106,9 +111,10 @@
                             <div class="card-action right-align">
                                 <a class="waves-effect waves-light btn" id="createTipo" name="createTipo"><i class="material-icons right">send</i>Salvar</a>
                             </div>
-                        </div>
+                        </form>
+                    </div>
 
-                    </form>
+
 
                     <!--action button-->
                     <div class="fixed-action-btn horizontal">

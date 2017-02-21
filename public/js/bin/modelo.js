@@ -17,62 +17,21 @@ $.validator.setDefaults({
 
 //Rules and Messages to Validate
 $("#formModelo").validate({
-    //ignore: [],
+    ignore: [],
     debug: true,
     rules: {
-        nome: {
-            required: true,
-            rangelength: [11, 11]
+        nomeModelo: {
+            required: true
         }
     },
     messages: {
-        nome: {
+        nomeModelo: {
             required: "O campo nome deve ser preenchido"
         }
     }
 });
 
-function getModelosSelect(marca) {
-
-    $("#modeloId").empty().html(' ');
-    $("#modeloId").append("<option value='' disabled selected>Escolha o modelo</option>");
-    $("#loader").css('display', '');
-
-    $.ajax({
-        url: urlApi + "marca/" + marca + "/modelo",
-
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-
-            if (json == '') {
-                $("#modeloId")
-                    .find("option")
-                    .remove()
-                    .end()
-                    .append("<option value='' disabled selected>Não há modelo disponível</option>")
-                    .material_select();
-
-            };
-
-            $.each(json, function (key, value) {
-
-                $('#modeloId').append(
-                    $("<option></option>")
-                    .attr('value', value.id)
-                    .text(value.nome)
-                );
-                $('#modeloId').material_select();
-
-            });
-            $("#loader").css('display', 'none');
-        },
-        error: function (textStatus, errorThrown) {
-            console.log("errou");
-        }
-    });
-};
-
+//Fill table with all modelos
 function getModelosTable(marca) {
 
     //Populates Table with Json
@@ -110,49 +69,106 @@ function getModelosTable(marca) {
     });
     tableModelo.draw(false);
 
-};
+}
 
-function fillModelo(data) {
+//TODO VER QUEM CHAMA O FILLMODELO - PROVAVELMENTE O SEARCH
+//function getModelo(data) {
+function getModelo(marca, modelo, inputType) {
 
-    getOnlyMarca(data.marcaId, "input");
-
-    console.log(data);
+    getMarca(marca, inputType);
 
     $.ajax({
         type: "GET",
-        url: urlApi + "modelo/" + data.id,
+        url: urlApi + "modelo/" + modelo,
         dataType: "json",
 
         //if received a response from the server
         success: function (data) {
 
-            $("#modeloId").val(data.id);
-            $("#modeloNome").val(data.nome);
+            if (inputType === "select") {
+                $("#modelo").empty().html(' ');
 
-            //            $('#marcaModal').find('option[value="' + data.marcaId + '"]').prop('selected', true);
-            //
-            //            $('#marcaModal').material_select();
+                $('#modelo').append(
+                    $("<option></option>")
+                    .attr('value', data.id)
+                    .text(data.nome)
+                    .prop('selected', true)
+                );
+                $('#modelo').material_select();
+            } else {
+
+                $("#modeloId").val(data.id);
+                $("#modeloNome").val(data.nome);
+            }
+
             //Reload Material Form
             Materialize.updateTextFields();
 
         },
 
+        error: function (textStatus, errorThrown) {
+            console.log("errou");
+        }
+
     });
 
-};
+}
+
+function getModelos(marcaId, modeloId, input) {
+
+    $("#modelo").empty().html(' ');
+    $("#modelo").append("<option value='' disabled selected>Escolha o modelo</option>");
+    $("#loader").css('display', '');
+
+    $.ajax({
+        url: urlApi + "marca/" + marcaId + "/modelo",
+
+        type: 'GET',
+        dataType: 'json',
+        success: function (json) {
+
+            if (json === '') {
+                $("#modelo")
+                    .find("option")
+                    .remove()
+                    .end()
+                    .append("<option value='' disabled selected>Não há modelo disponível</option>")
+                    .material_select();
+            };
+
+            $.each(json, function (key, value) {
+
+                $('#modelo').append(
+                    $("<option></option>")
+                    .attr('value', value.id)
+                    .text(value.nome)
+                );
+                $('#modelo').material_select();
+
+            });
+            $("#loader").css('display', 'none');
+            if (modeloId !== undefined) {
+                $('#modelo').find('option[value="' + modeloId + '"]').prop('selected', true);
+            };
+
+        },
+        error: function (textStatus, errorThrown) {
+            console.log("errou");
+        }
+    });
+}
 
 function updateModelo(dados) {
-
 
     var data = new Object();
     data.id = dados.id;
     data.nome = $("#modeloNome").val();
     data.marcaId = dados.marcaId;
 
-    
+
     //do AJAX request
-    $("#formModelo").validate();
-    if ($("#formModelo").valid()) {
+    $("form").validate();
+    if ($("form").valid()) {
 
         swal({
             title: "Confirmação",
@@ -182,6 +198,9 @@ function updateModelo(dados) {
                     $('#modal-modelo').modal('close');
 
                 },
+                error: function (textStatus, errorThrown) {
+                    console.log("errou");
+                }
 
             });
 
@@ -191,13 +210,13 @@ function updateModelo(dados) {
     //Reload Material Form
     Materialize.updateTextFields();
 
-};
+}
 
 function createModelo(data) {
 
     //make AJAX request
-    $("#formModelo").validate();
-    if ($("#formModelo").valid()) {
+    $("form").validate();
+    if ($("form").valid()) {
         $.ajax({
             type: "POST",
             url: urlApi + "modelo",
@@ -212,12 +231,16 @@ function createModelo(data) {
 
             },
 
+            error: function (textStatus, errorThrown) {
+                console.log("errou");
+            }
+
         });
     }
     //Reload Material Form
     Materialize.updateTextFields();
 
-};
+}
 
 function deleteModelo(id) {
     swal({
@@ -256,58 +279,4 @@ function deleteModelo(id) {
             }
         });
 
-};
-
-function getModelos(input, marcaId, modeloId) {
-
-
-    $("#modeloId").empty().html(' ');
-    $("#modeloId").append("<option value='' disabled selected>Escolha o modelo</option>");
-    $("#loader").css('display', '');
-
-    $.ajax({
-        url: urlApi + "marca/" + marcaid + "/modelo",
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-
-            $("#modeloId").val("");
-
-            $.each(json, function (key, value) {
-                $('#' + input).append($("<option></option>").attr('value', value.id).text(value.nome));
-                $('#' + input).material_select();
-            });
-
-            $("#loader").css('display', 'none');
-
-            //            $("#modeloId").val(modeloId);
-            $('#modeloId').find('option[value="' + modeloId + '"]').prop('selected', true);
-            $("select").material_select();
-        }
-    });
-};
-
-function getOnlyModelo(id) {
-
-    $("#modeloId").empty().html(' ');
-
-    $.ajax({
-        url: urlApi + "modelo/" + id,
-
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-
-            $('#modeloId').append(
-                $("<option></option>")
-                .attr('value', json.id)
-                .text(json.nome)
-            );
-            $('#modeloId').material_select();
-
-        },
-        error: function (textStatus, errorThrown) {
-            console.log("errou");
-        }
-    });
-};
+}

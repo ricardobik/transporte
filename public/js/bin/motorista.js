@@ -60,19 +60,19 @@ function FillMotorista(Id) {
         //if received a response from the server
         success: function (data) {
 
-            $("#id").val(data.id);
+            $("#motoristaId").val(data.id);
             $("#nome").val(data.nome);
             $("#cnh").val(data.cnh);
             $("#cnhVencimento").val(data.cnhVencimento);
             $("#telefone").val(data.telefone);
-            $("#setor").val(data.setor);
-
+            
+            
+            getSetores(data.setor);
+            
             //Reload Material Form
             Materialize.updateTextFields();
 
-            //Load material dropbox
-            $('#setor').material_select();
-
+            
         },
 
     });
@@ -210,7 +210,7 @@ function fillMotoristaTable() {
             data: "telefone"
                 }],
         "columnDefs": [{
-            "width": "5%",
+            "width": "10%",
             "targets": 0
                 }, {
             "width": "40%",

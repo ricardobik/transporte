@@ -307,9 +307,9 @@
             var $update;
 
             //Fill Tables with Json
-            fillCombustivelTable();
-            fillMarcaTable();
-            fillTipoTable();
+            getCombustivelTable();
+            getMarcaTable();
+            getTipoTable();
             getMarcas(marcaSelect.name);
 
             //Call modal form
@@ -404,7 +404,7 @@
                 $("#divEditCombustivel").addClass("hide");
                 $("form :input").prop("disabled", true);
 
-                fillCombustivel($update.id);
+                getCombustivel($update.id);
             });
             $('#editCombustivel').on('click', function() {
                 $("#divDeleteCombustivel").addClass("hide");
@@ -422,7 +422,7 @@
                 $("#divEditMarca").addClass("hide");
                 $("form :input").prop("disabled", true);
 
-                fillMarca($update.id);
+                getMarca($update.id);
             });
             $('#editMarca').on('click', function() {
                 $("#divDeleteMarca").addClass("hide");
@@ -440,7 +440,7 @@
                 $("#divEditModelo").addClass("hide");
                 $("form :input").prop("disabled", true);
 
-                fillModelo($update);
+                getModelo($update);
             });
             $('#editModelo').on('click', function() {
                 $("#divDeleteModelo").addClass("hide");
@@ -458,7 +458,7 @@
                 $("#divDeleteTipo").removeClass("hide");
                 $("#divEditTipo").addClass("hide");
                 $("form :input").prop("disabled", true);
-                fillTipo($update.id);
+                getTipo($update.id);
             });
             
             $('#editTipo').on('click', function() {

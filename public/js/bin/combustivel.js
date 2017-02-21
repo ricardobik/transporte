@@ -16,26 +16,26 @@ $.validator.setDefaults({
 });
 
 //Rules and Messages to Validate
-$("form").validate({
-    ignore: [],
+$("#formCombustivel").validate({
+//    ignore: [],
     debug: true,
     rules: {
-        nomeCombustivel: {
-            required: true
+        tipoCombustivel: {
+            required: true,
+            minlength: 3
         }
     },
     messages: {
-        nomeCombustivel: {
-            required: "O campo nome não deve estar vazio"
+        tipoCombustivel: {
+            required: "Preencha corretamente o campo",
+            minlength: jQuery.validator.format("O nome do setor deve conter ao menos {0} caracteres")
         }
     }
 });
 
 //Fill combustivel imput to update/delete
-function fillCombustivel(id) {
-
-    console.log(id);
-    
+function fillCombustivel(id, inputType) {
+ 
     $.ajax({
         type: "GET",
         url: urlApi + "combustivel/" + id,
@@ -174,7 +174,7 @@ function updateCombustivel(id, dados) {
 };
 
 //fill table combustivel to search
-function fillCombustivelTable() {
+function getCombustivelTable() {
     //Populates Table with Json
     tableCombustivel = $('table#table-combustivel').DataTable({
         ajax: {
@@ -204,7 +204,7 @@ function fillCombustivelTable() {
 }
 
 //insert into select to create veiculo
-function getCombustivel() {
+function getCombustiveis() {
     
     //Load Json marca
     $.ajax({
@@ -216,12 +216,12 @@ function getCombustivel() {
 
             $.each(json, function (key, value) {
 
-                $('#combustivelId').append(
+                $('#combustivel').append(
                     $("<option></option>")
                     .attr('value', value.id)
                     .text(value.tipo)
                 );
-                $('#combustivelId').material_select();
+                $('#combustivel').material_select();
 
             });
 
@@ -229,32 +229,32 @@ function getCombustivel() {
     });
 };
 
-function getCombustivelSelect(id) {
-    
-    //Load Json marcas from FIPE API
-    $.ajax({
-        url: urlApi + "combustivel",
-
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-
-            $.each(json, function (key, value) {
-
-                $('#combustivelId').append(
-                    $("<option></option>")
-                    .attr('value', value.id)
-                    .text(value.tipo)
-                );
-                
-                $('#combustivelId').val(id);
-                $('#combustivelId').material_select();
-
-            });
-
-        }
-    });
-};
+//function getCombustivelSelect(id) {
+//    
+//    //Load Json 
+//    $.ajax({
+//        url: urlApi + "combustivel",
+//
+//        type: 'GET',
+//        dataType: 'json',
+//        success: function (json) {
+//
+//            $.each(json, function (key, value) {
+//
+//                $('#combustivelId').append(
+//                    $("<option></option>")
+//                    .attr('value', value.id)
+//                    .text(value.tipo)
+//                );
+//                
+//                $('#combustivelId').val(id);
+//                $('#combustivelId').material_select();
+//
+//            });
+//
+//        }
+//    });
+//};
 
 
 

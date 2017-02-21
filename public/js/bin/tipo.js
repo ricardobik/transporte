@@ -9,26 +9,25 @@ $.validator.setDefaults({
         console.log('form ok');
     }
 });
+
 //Rules and Messages to Validate
 $("#formTipo").validate({
 //    ignore: [],
     debug: true,
     rules: {
-        tipoNome: {
+        nomeTipo: {
             required: true
         }
     },
     messages: {
-        tipoNome: {
+        nomeTipo: {
             required: "Digite a marca a ser adicionada"
         }
     }
 });
 
-
-
 //Fill table tipo
-function fillTipoTable() {
+function getTipoTable() {
     //Populates Table with Json
     tableTipo = $('table#table-tipo').DataTable({
         ajax: {
@@ -174,8 +173,8 @@ function deleteTipo(id) {
 function createTipo(data) {
 
     //make AJAX request
-    $("form").validate();
-    if ($("form").valid()) {
+    $("#formTipo").validate();
+    if ($("#formTipo").valid()) {
         $.ajax({
             type: "POST",
             url: urlApi + "tipo",
@@ -198,7 +197,7 @@ function createTipo(data) {
 };
 
 //insert into select to create veiculo
-function getTipo() {
+function getTipos() {
     
     //Load 
     $.ajax({
@@ -210,12 +209,12 @@ function getTipo() {
 
             $.each(json, function (key, value) {
 
-                $('#tipoId').append(
+                $('#tipo').append(
                     $("<option></option>")
                     .attr('value', value.id)
                     .text(value.nome)
                 );
-                $('#tipoId').material_select();
+                $('#tipo').material_select();
 
             });
 

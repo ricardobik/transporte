@@ -31,10 +31,10 @@
                         <span class="card-title">Cadastrar novo veículo</span>
                         <div class="row">
                             <div class="input-field col m4" id="divTipo">
-                                <select id="tipoId" name="tipoId" required="" aria-required="true">
+                                <select id="tipo" name="tipo" required="" aria-required="true">
                                     <option value="" disabled selected>Escolha o tipo</option>
                                 </select>
-                                <label for="tipoId">Tipo</label>
+                                <label for="tipo">Tipo</label>
                             </div>
 
                             <div class="input-field col m4 offset-m4">
@@ -45,26 +45,26 @@
                         </div>
                         <div class="row">
                             <div class="input-field col m5 s11">
-                                <select id="marcaId" name="marcaId" disabled>
+                                <select id="marca" name="marca" disabled>
                                     <option value="" disabled selected>Escolha a marca</option>
                                 </select>
-                                <label for="marcaId">Marca</label>
+                                <label for="marca">Marca</label>
                             </div>
 
                             <!--Load when choosing Modelo-->
                             <div class="showbox col s1 m1">
                                 <div class="loader" id="loader" style="display:none;">
                                     <svg class="circular" viewBox="25 25 50 50">
-                                    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
-                                </svg>
+                                        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+                                    </svg>
                                 </div>
                             </div>
 
                             <div class="input-field col s12 m6">
-                                <select id="modeloId" name="modeloId" disabled>
-                                <option value="" disabled selected>Escolha o modelo</option>
-                            </select>
-                                <label>Modelo</label>
+                                <select id="modelo" name="modelo" disabled>
+                                    <option value="" disabled selected>Escolha o modelo</option>
+                                </select>
+                                <label for="modelo">Modelo</label>
                             </div>
                         </div>
                         <a class="" name="callModalEdit" id="callModalEdit" href="#modal">Não encontrou marca ou modelo específico? Cadastre aqui</a>
@@ -90,10 +90,10 @@
                                 <label for="anofabricacao">Ano</label>
                             </div>
                             <div class="input-field col m5 offset-m4" id="divCombustivel">
-                                <select id="combustivelId" name="combustivelId" required="" aria-required="true">
-                                <option value="" disabled selected>Selecione</option>
-                            </select>
-                                <label for="CombustivelId">Combustível</label>
+                                <select id="combustivel" name="combustivelId" required="" aria-required="true">
+                                    <option value="" disabled selected>Selecione</option>
+                                </select>
+                                <label for="Combustivel">Combustível</label>
                             </div>
 
                             <div class="input-field col m4">
@@ -103,26 +103,26 @@
 
                             <div class="input-field col m5 offset-m3">
                                 <select id="estadoveiculo" name="estadoveiculo" required="" aria-required="true">
-                                <option value="" disabled selected>Selecione</option>
-                                <option value="5">Ótimo</option>
-                                <option value="4">Bom</option>
-                                <option value="3">Regular</option>
-                                <option value="2">Ruim</option>
-                                <option value="1">Péssimo</option>
-                            </select>
+                                    <option value="" disabled selected>Selecione</option>
+                                    <option value="5">Ótimo</option>
+                                    <option value="4">Bom</option>
+                                    <option value="3">Regular</option>
+                                    <option value="2">Ruim</option>
+                                    <option value="1">Péssimo</option>
+                                </select>
                                 <label for="tipo">Estado atual do veículo</label>
                             </div>
                             <div class="input-field col m12">
-                                <select id="setorId" name="setorId" required="" aria-required="true">
-                                <option value="" disabled selected>Selecione</option>
-                            </select>
-                                <label for="setorId">Setor do veículo</label>
+                                <select id="setor" name="setor" required="" aria-required="true">
+                                    <option value="" disabled selected>Selecione</option>
+                                </select>
+                                <label for="setor">Setor do veículo</label>
                             </div>
 
                             <div class="input-field col m12">
                                 <i class="material-icons prefix">mode_edit</i>
                                 <textarea id="info" name="info" class="materialize-textarea"></textarea>
-                                <label for="informacoes">Informações adicionais</label>
+                                <label for="info">Informações adicionais</label>
                             </div>
 
                         </div>
@@ -149,50 +149,6 @@
         </div>
     </div>
 
-    <!-- Modal Structure -->
-    <form method="POST" name="formMarcaModelo" action="" id="formMarcaModelo">
-        <div id="modal" class="modal modal-vehicle">
-            <div class="modal-content">
-                <span class="card-title">Cadastrar marca e modelo</span>
-                <div class="row">
-                    <p>Deseja cadastrar só a marca?</p>
-                    <div class="switch">
-                        <label>
-                            Não
-                            <input type="checkbox" name="switchMarcaModelo" id="switchMarcaModelo">
-                            <span class="lever"></span>
-                            Sim    
-                        </label>
-                    </div>
-                </div>
-                <div class="row" id="divMarcaModelo">
-                    <div class="input-field col m12">
-                        <select id="marcaModal" name="marcaModal">
-                               <option value="" disabled selected>Escolha a marca</option>
-                        </select>
-                        <label for="marcaModal">Marca</label>
-                    </div>
-                    <div class="input-field col m12">
-                        <input id="modeloModal" name="modeloModal" type="text" class="validate" required="" aria-required="true" style="text-transform:uppercase;">
-                        <label for="modeloModal">Digite o modelo</label>
-                    </div>
-                </div>
-                <div class="row" id="divMarca">
-                    <div class="input-field col m12">
-                        <input id="marcaCreate" name="marcaCreate" type="text" class="validate" required="" aria-required="true" style="text-transform:uppercase;">
-                        <label for="marcaCreate">Digite a marca</label>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="card-action right-align">
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Voltar</a>
-
-                    <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="createMarcaModelo">Cadastrar</a>
-                </div>
-            </div>
-        </div>
-    </form>
 
 
     <!--Import jQuery before materialize.js-->
@@ -213,22 +169,18 @@
     <script>
         $(document).ready(function() {
 
-            getMarcas(marcaId.name);
-            getCombustivel();
-            getSetor();
-            getTipo();
+            getMarcas($("#marca").attr("name"));
+            getTipos();
 
-            $("#divMarca").hide();
             $("#next").addClass("disabled");
 
             //Enable next button only if model has changed
-            $("#modeloId").change(function() {
-                if ($("#modeloId").val() !== "" || $("#modeloId").val() !== null) {
+            $("#modelo").change(function() {
+                if ($("#modelo").val() !== "" || $("#modelo").val() !== null) {
                     $("#next").removeClass("disabled");
                 } else {
                     $("#next").addClass("disabled");
                 }
-
             });
 
             //Validate first vehicles data
@@ -237,32 +189,13 @@
                 $("#formVeiculo1").validate();
                 if ($("#formVeiculo1").valid()) {
                     slideIn("#more", 1350, -800, cardFirst);
-//                    $("#infoSpan").text("Informações do veículo " + $("#marcaid").val());
+                    //$("#infoSpan").text("Informações do veículo " + $("#marcaid").val());
+                    getCombustiveis();
+                    getSetores();
                 };
             });
 
-            //Create new vehicle
-            $("#createVeiculo").click(function() {
-                var data = $('form').serializeArray();
-                createVeiculo(data);
-            });
-
-            //create new Model/Brand
-            $("#createMarcaModelo").click(function() {
-                saveMarcaModelo();
-            });
-
-            //Call Modal to create new Model/Brand
-            $("#callModalEdit").click(function() {
-                getMarcas(marcaModal.name);
-                verifySwitch();
-            });
-
-            //animate on panels change
-            $("#switchMarcaModelo").click(function() {
-                verifySwitch();
-            });
-
+          
             //modal config
             $('.modal').modal({
                 dismissible: false
@@ -274,25 +207,43 @@
                 $('.dropdown-button').dropdown();
             });
 
-            //Stop the submit request
-            $("#form").submit(function(e) {
-                e.preventDefault();
-            });
-
             //Load material select
             $('select').material_select();
 
-            //Enable Brand after select vehicle type
-            $("#tipoId").change(function() {
-                $("#marcaId").removeAttr("disabled");
-                $("#marcaId").material_select();
+            //Enable select Marca after select vehicle type
+            $("#tipo").change(function() {
+                $("#marca").attr("disabled", false);
+                $("#marca").material_select();
             });
 
-            //Enable Model after select Brand type
-            $("#marcaId").change(function() {
-                $("#modeloId").removeAttr("disabled");
-                getModelosSelect($("#marcaId").val());
+            //Load modelos after change Marca
+            $("#marca").change(function() {
+
+                $("#modelo").attr("disabled", false);
+                getModelos($("#marca").val());
+
+                //Load material select
+                $('select').material_select();
             });
+
+            //Create new vehicle
+            $("#createVeiculo").click(function() {
+                var data = new Object();
+                data.tipoid = $("#tipo").val();
+                data.placa = $("#placa").val();
+                data.marcaid = $("#marca").val();
+                data.modeloid = $("#modelo").val();
+                data.anofabricacao = $("#anofabricacao").val();
+                data.combustivelid = $("#combustivel").val();
+                data.renavam = $("#renavam").val();
+                data.estadoveiculo = $("#estadoveiculo").val();
+                data.setorid = $("#setor").val();
+                data.info = $("#info").val();
+                
+                createVeiculo(data);
+                
+            });
+
 
         });
 

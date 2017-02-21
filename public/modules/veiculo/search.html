@@ -51,7 +51,7 @@
 
                     <div class="card-action right-align">
                         <!-- Modal Trigger -->
-                        <a class="waves-effect waves-light btn disabled" name="callModalEdit" id="callModalEdit" href="#modal-edit">Editar</a>
+                        <a class="waves-effect waves-light btn disabled" name="callModalEdit" id="callModalEdit" href="#modal-edit">Detalhes</a>
                     </div>
                 </div>
                 <!--action button-->
@@ -81,10 +81,10 @@
                         <label for="id">ID</label>
                     </div>
                     <div class="input-field col m3" id="divTipo">
-                        <select id="tipoId" name="tipoId" required="" aria-required="true">
+                        <select id="tipo" name="tipo" required="" aria-required="true">
                             <option value="" disabled selected>Escolha o tipo</option>
                         </select>
-                        <label for="tipoId">Tipo</label>
+                        <label for="tipo">Tipo</label>
                     </div>
 
                     <div class="input-field col m4 offset-m4">
@@ -95,8 +95,8 @@
                 </div>
                 <div class="row">
                     <div class="input-field col m5 s11">
-                        <select id="marcaId" name="marcaId"></select>
-                        <label for="marcaId">Marca</label>
+                        <select id="marca" name="marca"></select>
+                        <label for="marca">Marca</label>
                     </div>
 
                     <!--Load when choosing Modelo-->
@@ -109,7 +109,7 @@
                     </div>
 
                     <div class="input-field col s12 m6">
-                        <select id="modeloId" name="modeloId"></select>
+                        <select id="modelo" name="modelo"></select>
                         <label>Modelo</label>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                         <label for="ano">Ano</label>
                     </div>
                     <div class="input-field col m5 offset-m4" id="divCombustivel">
-                        <select id="combustivelId" name="combustivelId" required="" aria-required="true"></select>
+                        <select id="combustivel" name="combustivel" required="" aria-required="true"></select>
                         <label for="Combustivel">Combustível</label>
                     </div>
 
@@ -145,8 +145,8 @@
                         <label for="tipo">Estado atual do veículo</label>
                     </div>
                     <div class="input-field col m12">
-                        <select id="setorId" name="setorid" required="" aria-required="true"></select>
-                        <label for="setorId">Setor do veículo</label>
+                        <select id="setor" name="setor" required="" aria-required="true"></select>
+                        <label for="setor">Setor do veículo</label>
                     </div>
 
                     <div class="input-field col m12">
@@ -183,6 +183,7 @@
     <!--Import DataTables-->
     <script type="text/javascript" src="/js/bin/jquery.dataTables.min.js"></script>
 
+    <!--Import sistems jQuery -->
     <script type="text/javascript" src="/js/bin/general.js"></script>
     <script type="text/javascript" src="/js/bin/veiculo.js"></script>
     <script type="text/javascript" src="/js/bin/tipo.js"></script>
@@ -197,10 +198,11 @@
 
             var $update;
 
-            getTipo();
+            //Get vehicle types
+            getTipos();
 
             //Fill Table with Json
-            fillVeiculoTable();
+            getVeiculoTable();
 
             $('.modal').modal({
                 dismissible: false
@@ -244,9 +246,9 @@
                 $("#divDelete").removeClass("hide");
                 $("#divEdit").addClass("hide");
                 $("#form :input").prop("disabled", true);
-                
+
                 ///Get veiculo info to update/delete
-                FillVeiculo($update.id);
+                getVeiculo($update.id);
 
                 //Reload Material Form
                 Materialize.updateTextFields();
@@ -260,9 +262,9 @@
                 $("#id").prop("disabled", true)
 
                 //Call functions to set select values
-                getMarcas(marcaid.name, marcaid.value);
-                getModelos(modeloid.name, marcaid.value, modeloid.value);
-                getSetorSelect(setorid.value);
+                getMarcas($("#marca").attr("name"), $("#marca").val());
+                getModelos($("#modelo").attr("name"), $("#marca").val(), $("#modelo").val());
+                getSetores($("setor").val());
 
                 //Reload Material Form
                 Materialize.updateTextFields();
@@ -272,19 +274,9 @@
 
             });
 
-//            $('#modeloid').on('change focusin', function() {
-//
-//                //                getModelos(modeloid.name, marcaid.value, modeloid.value);
-//
-//                //Load material dropbox
-//                $('select').material_select();
-//
-//            });
-
-            $('#marcaid').on('change', function() {
-                getMarcas(marcaid.name, marcaid.value);
-
-                getModelos(modeloid.name, marcaid.value, modeloid.value);
+            $('#marca').on('change', function() {
+                //Call functions to set select values
+                getModelos($("#modelo").attr("name"), $("#marca").val(), $("#modelo").val());
 
                 //Load material dropbox
                 $('select').material_select();
@@ -293,7 +285,19 @@
 
             //Update request
             $("#update").click(function(e) {
-                updateVeiculo($update.id, $("#form").serializeArray());
+                var data = new Object();
+                data.tipoid = $("#tipo").val();
+                data.placa = $("#placa").val();
+                data.marcaid = $("#marca").val();
+                data.modeloid = $("#modelo").val();
+                data.anofabricacao = $("#anofabricacao").val();
+                data.combustivelid = $("#combustivel").val();
+                data.renavam = $("#renavam").val();
+                data.estadoveiculo = $("#estadoveiculo").val();
+                data.setorid = $("#setor").val();
+                data.info = $("#info").val();
+                
+                updateVeiculo($update.id, data);
             });
 
             //Delete request

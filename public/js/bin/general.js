@@ -7,6 +7,12 @@ var createUrl = getUrl.protocol + "//" + getUrl.host + "/" + path[1] + "/" + pat
 
 var urlApi = "http://192.168.10.10:3004/"
 
+function resetForm($form) {
+    $form.find('input:text, input:password, input:file, select, textarea').val('');
+    $form.find('input:radio, input:checkbox')
+         .removeAttr('checked').removeAttr('selected');
+}
+
 function goHome() {
     location.href = homeUrl;
 }
