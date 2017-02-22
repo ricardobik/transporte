@@ -34,7 +34,7 @@ $("#formCombustivel").validate({
 });
 
 //Fill combustivel imput to update/delete
-function fillCombustivel(id, inputType) {
+function getCombustivel(id, inputType) {
  
     $.ajax({
         type: "GET",

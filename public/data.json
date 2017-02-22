@@ -1,12 +1,20 @@
 {
   "motorista": [
     {
+      "id": 30,
       "nome": "Heath Herrera",
-      "cnh": "88062278971",
-      "cnhVencimento": "2014-09-09",
+      "setor": 4,
       "telefone": "+55 (862) 571-3125",
-      "setor": "9",
-      "id": 30
+      "cnh": 8806227897,
+      "cnhVencimento": "2014-09-09"
+    },
+    {
+      "id": 44,
+      "nome": "Chelsea Fields",
+      "setor": 9,
+      "telefone": "+55 (892) 541-2198",
+      "cnh": 55544650550,
+      "cnhVencimento": "2015-08-24"
     },
     {
       "id": 26,
@@ -17,12 +25,20 @@
       "cnhVencimento": "2014-05-15"
     },
     {
+      "id": 31,
+      "nome": "Henrietta Carrillo",
+      "setor": 15,
+      "telefone": "+55 (874) 542-2121",
+      "cnh": 2235651755,
+      "cnhVencimento": "2014-04-13"
+    },
+    {
+      "id": 6,
       "nome": "Frankie Holt",
-      "cnh": "25431185760",
-      "cnhVencimento": "2014-01-29",
+      "setor": 13,
       "telefone": "+55 (856) 508-3053",
-      "setor": "15",
-      "id": 6
+      "cnh": 25431185760,
+      "cnhVencimento": "2014-01-29"
     },
     {
       "id": 98,
@@ -49,12 +65,12 @@
       "cnhVencimento": "2015-11-26"
     },
     {
-      "nome": "Meadows Mcdonald Habibs",
-      "cnh": "36778147476",
-      "cnhVencimento": "2015-04-29",
+      "id": 58,
+      "nome": "Meadows Mcdonald",
+      "setor": 5,
       "telefone": "+55 (917) 553-2665",
-      "setor": "11",
-      "id": 58
+      "cnh": 36778147476,
+      "cnhVencimento": "2015-04-29"
     }
   ],
   "combustivel": [
@@ -63,58 +79,34 @@
       "id": 1
     },
     {
-      "tipo": "ETANOL",
-      "id": 2
+      "id": 2,
+      "tipo": "ETANOL"
     },
     {
       "id": 3,
       "tipo": "DIESEL"
     },
     {
-      "tipo": "BIODIESEL",
-      "id": 4
+      "id": 4,
+      "tipo": "BIODIESEL"
     },
     {
-      "tipo": "GASOLINA AD",
-      "id": 5
+      "id": 5,
+      "tipo": "GASOLINA AD"
     },
     {
       "id": 6,
       "tipo": "ETANOL AD"
-    },
-    {
-      "tipo": "",
-      "id": 7
-    },
-    {
-      "tipo": "",
-      "id": 8
-    },
-    {
-      "tipo": "",
-      "id": 9
-    },
-    {
-      "tipo": "",
-      "id": 10
-    },
-    {
-      "tipo": "",
-      "id": 11
-    },
-    {
-      "tipo": "",
-      "id": 12
-    },
-    {
-      "tipo": "",
-      "id": 13
     }
   ],
   "setor": [
     {
+      "id": 1,
+      "nome": "CORPULSE"
+    },
+    {
       "id": 2,
-      "nome": "SAVVY 2000"
+      "nome": "SAVVY"
     },
     {
       "id": 3,
@@ -183,10 +175,6 @@
     {
       "id": 19,
       "nome": "NIKUDA"
-    },
-    {
-      "nome": "ABACABB",
-      "id": 20
     }
   ],
   "marca": [
@@ -281,10 +269,6 @@
     {
       "id": 135,
       "nome": "YAMAHA"
-    },
-    {
-      "id": 256,
-      "nome": "FAMOSA"
     }
   ],
   "modelo": [
@@ -2740,8 +2724,8 @@
     },
     {
       "id": 4,
-      "nome": "MARRUA",
-      "marcaId": "27"
+      "marcaId": 27,
+      "nome": "MARRUA"
     },
     {
       "id": 781,
@@ -5115,315 +5099,28 @@
     },
     {
       "marcaId": "27",
-      "nome": "TRATORZÃO",
+      "nome": "fgasdgaqsdf",
       "id": 5029
-    },
-    {
-      "marcaId": "27",
-      "nome": "",
-      "id": 5030
     }
   ],
   "veiculo": [
     {
-      "tipoid": "0",
-      "placa": "drm-6690",
-      "marcaid": "5",
-      "modeloid": "113",
-      "anofabricacao": "1994",
-      "combustivelid": "3",
-      "renavam": "222111336664",
-      "estadoveiculo": "1",
-      "setorid": "3",
-      "info": "informações sobre o veículo, oras bolas 2017",
-      "id": 1
-    },
-    {
-      "tipoid": "1",
-      "placa": "drm-6699",
-      "marcaid": "27",
-      "modeloid": "746",
-      "anofabricacao": "1990",
-      "combustivelid": "1",
-      "renavam": "222111336666",
-      "estadoveiculo": "3",
-      "setorid": "3",
-      "info": "informações sobre o veículo, oras.",
-      "id": 2
-    },
-    {
-      "tipoid": "1",
-      "placa": "drm-6699",
-      "marcaid": "3",
-      "modeloid": "2297",
-      "anofabricacao": "1990",
-      "combustivelid": "1",
-      "renavam": "222111336666",
-      "estadoveiculo": "4",
-      "setorid": "4",
-      "info": "informações sobre o veículo, oras.",
-      "id": 3
-    },
-    {
-      "tipoid": "1",
-      "placa": "drm-6699",
-      "marcaid": "27",
-      "modeloid": "746",
-      "anofabricacao": "1990",
-      "combustivelid": "1",
-      "renavam": "222111336666",
-      "estadoveiculo": "3",
-      "setorid": "3",
-      "info": "informações sobre o veículo, oras.",
-      "id": 4
-    },
-    {
-      "tipoid": "1",
-      "placa": "111555",
-      "marcaid": "254",
-      "modeloid": "2040",
-      "anofabricacao": "1982",
-      "combustivelid": "3",
-      "renavam": "222111",
-      "estadoveiculo": "5",
-      "setorid": "15",
-      "info": "fidamãe",
-      "id": 5
-    },
-    {
-      "tipoid": "1",
-      "placa": "111555",
-      "marcaid": "27",
-      "modeloid": "1521",
-      "anofabricacao": "1982",
-      "combustivelid": "1",
-      "renavam": "222111",
-      "estadoveiculo": "5",
-      "setorid": "19",
-      "info": "fidamãe",
-      "id": 6
-    },
-    {
-      "tipoid": "0",
-      "placa": "drr-6633",
-      "marcaid": "27",
-      "modeloid": "746",
-      "anofabricacao": "2015",
-      "combustivelid": "1",
-      "renavam": "2200000033",
-      "estadoveiculo": "3",
-      "setorid": "7",
-      "info": "nada não",
-      "modeloModal": "",
-      "marcaCreate": "",
-      "id": 7
-    },
-    {
-      "tipo": "0",
-      "placa": "DRH-6688",
-      "marca": "7",
-      "modelo": "303",
-      "anofabricacao": "2017",
-      "combustivelId": "1",
-      "renavam": "00011122233",
-      "estadoveiculo": "4",
-      "setor": "7",
-      "info": "informação",
-      "id": 8
-    },
-    {
-      "tipo": "1",
-      "placa": "DIM-0000",
-      "marca": "1",
-      "modelo": "1641",
-      "anofabricacao": "2010",
-      "combustivelId": "2",
-      "renavam": "0001113355",
-      "estadoveiculo": "4",
-      "setor": "9",
-      "info": "INFORMAÇão",
-      "id": 9
-    },
-    {
-      "tipo": "0",
-      "placa": "DIM-0000",
-      "marca": "1",
-      "modelo": "2024",
-      "anofabricacao": "2010",
-      "combustivelId": "1",
-      "renavam": "0001113355",
-      "estadoveiculo": "4",
-      "setor": "2",
-      "info": "INFORMAÇão",
-      "id": 10
-    },
-    {
-      "tipo": "0",
-      "placa": "DIM-0000",
-      "marca": "1",
-      "modelo": "1537",
-      "anofabricacao": "2010",
-      "combustivelId": "1",
-      "renavam": "0001113355",
-      "estadoveiculo": "4",
-      "setor": "2",
-      "info": "INFORMAÇÃO",
-      "id": 11
-    },
-    {
-      "tipo": "0",
-      "placa": "hhh-2020",
-      "marca": "1",
-      "modelo": "1546",
-      "anofabricacao": "2010",
-      "combustivelId": "1",
-      "renavam": "0001113355",
-      "estadoveiculo": "4",
-      "setor": "2",
-      "info": "INFORMAÇÃO",
-      "id": 12
-    },
-    {
-      "tipo": "0",
-      "placa": "aaa-3030",
-      "marca": "16",
-      "modelo": "17",
-      "anofabricacao": "2010",
-      "combustivelId": "6",
-      "renavam": "55533300086",
-      "estadoveiculo": "2",
-      "setor": "15",
-      "info": "===",
-      "id": 13
-    },
-    {
-      "tipo": "1",
-      "placa": "ooo-9999",
-      "marca": "22",
-      "modelo": "592",
-      "anofabricacao": "2010",
-      "combustivelId": "1",
-      "renavam": "0001113355",
-      "estadoveiculo": "4",
-      "setor": "2",
-      "info": "INFORMAÇÃO",
-      "id": 14
-    },
-    {
-      "tipo": "1",
-      "placa": "ppp-6666",
-      "marca": "1",
-      "modelo": "1538",
-      "anofabricacao": "2010",
-      "combustivelId": "1",
-      "renavam": "0001113355",
-      "estadoveiculo": "4",
-      "setor": "2",
-      "info": "INFORMAÇÃO",
-      "id": 15
-    },
-    {
-      "tipo": "2",
-      "placa": "000-6666",
-      "marca": "1",
-      "modelo": "1538",
-      "anofabricacao": "2012",
-      "combustivelId": "2",
-      "renavam": "00000000000",
-      "estadoveiculo": "4",
-      "setor": "12",
-      "info": "info",
-      "id": 16
-    },
-    {
-      "tipo": "0",
-      "placa": "000-6666",
-      "marca": "27",
-      "modelo": "1521",
-      "anofabricacao": "2010",
-      "combustivelId": "1",
-      "renavam": "0001113355",
-      "estadoveiculo": "4",
-      "setor": "2",
-      "info": "INFORMAÇÃO",
-      "id": 17
-    },
-    {
-      "tipo": "0",
-      "placa": "mmm-6633",
-      "marca": "1",
-      "modelo": "1642",
-      "anofabricacao": "2008",
-      "combustivelId": "1",
-      "renavam": "00033366699",
-      "estadoveiculo": "4",
-      "setor": "20",
-      "info": "adfasd",
-      "id": 18
-    },
-    {
-      "tipo": "0",
-      "placa": "222-4488",
-      "marca": "5",
-      "modelo": "114",
-      "anofabricacao": "2005",
-      "combustivelId": "2",
-      "renavam": "66699988855",
-      "estadoveiculo": "4",
-      "setor": "12",
-      "info": "esgafdg",
-      "id": 19
-    },
-    {
-      "tipoid": "2",
-      "placa": "nnn-7788",
-      "marcaid": "5",
-      "modeloid": "118",
-      "anofabricacao": "2016",
-      "combustivelid": "1",
-      "renavam": "1982236655",
-      "estadoveiculo": "3",
-      "setorid": "11",
-      "info": "adicionais",
-      "id": 20
+      "id": 0,
+      "descricao": "",
+      "anofabricacao": "",
+      "placa": "",
+      "combustivelId": "",
+      "setorId": "",
+      "modeloId": "",
+      "tipoId": "",
+      "renavam": "",
+      "estadoveiculo": ""
     }
   ],
   "tipo": [
     {
       "id": 0,
       "nome": "CARRO"
-    },
-    {
-      "id": 1,
-      "nome": "MOTO"
-    },
-    {
-      "nome": "MICKEY",
-      "id": 2
-    },
-    {
-      "nome": "MICKEY MOUSE",
-      "id": 3
-    },
-    {
-      "nome": "",
-      "id": 4
-    },
-    {
-      "nome": "",
-      "id": 5
-    },
-    {
-      "nome": "",
-      "id": 6
-    },
-    {
-      "nome": "",
-      "id": 7
-    },
-    {
-      "nome": "",
-      "id": 8
     }
   ]
 }
