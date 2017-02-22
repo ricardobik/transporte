@@ -1,19 +1,3 @@
-// Validade Fields materialize.css
-$.validator.setDefaults({
-    errorClass: 'invalid',
-    validClass: "valid",
-    errorPlacement: function (error, element) {
-        $(element)
-            .closest("form")
-            .find("label[for='" + element.attr("id") + "']")
-            .attr('data-error', error.text())
-            .attr('class', 'active');
-
-    },
-    submitHandler: function (form) {
-        console.log('form ok');
-    }
-});
 
 //Rules and Messages to Validate
 $("#formVeiculo1").validate({
@@ -44,7 +28,7 @@ $("#formVeiculo1").validate({
 });
 
 //Rules and Messages to Validate
-$("form").validate({
+$("#veiculo_form").validate({
     ignore: [],
     debug: true,
     rules: {

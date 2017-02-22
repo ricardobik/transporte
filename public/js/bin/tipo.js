@@ -11,7 +11,7 @@ $.validator.setDefaults({
 });
 
 //Rules and Messages to Validate
-$("#formTipo").validate({
+$("#tipo_form").validate({
 //    ignore: [],
     debug: true,
     rules: {
@@ -31,7 +31,7 @@ function getTipoTable() {
     //Populates Table with Json
     tableTipo = $('table#table-tipo').DataTable({
         ajax: {
-            url: urlApi + "tipo",
+            url: urlApi + "tipo_veiculo",
             contentType: 'application/json; charset=UTF-8',
             dataType: 'json',
             dataSrc: ''
@@ -63,7 +63,7 @@ function fillTipo(id) {
 
     $.ajax({
         type: "GET",
-        url: urlApi + "tipo/" + id,
+        url: urlApi + "tipo_veiculo/" + id,
         dataType: "json",
 
         //if received a response from the server
@@ -88,8 +88,8 @@ function updateTipo(id, dados) {
     data.nome = $("#tipoNome").val();
        
     //do AJAX request
-    $("#formTipo").validate();
-    if ($("#formTipo").valid()) {
+    $("#tipo_form").validate();
+    if ($("#tipo_form").valid()) {
 
         swal({
             title: "Confirmação",
@@ -104,7 +104,7 @@ function updateTipo(id, dados) {
 
             $.ajax({
                 type: "PUT",
-                url: urlApi + "tipo/" + id,
+                url: urlApi + "tipo_veiculo/" + id,
                 data: data,
                 dataType: "json",
 
@@ -148,7 +148,7 @@ function deleteTipo(id) {
 
                 $.ajax({
                     type: "DELETE",
-                    url: urlApi + "tipo/" + id,
+                    url: urlApi + "tipo_veiculo/" + id,
                     dataType: "json",
 
                     //if received a response from the server
@@ -173,11 +173,11 @@ function deleteTipo(id) {
 function createTipo(data) {
 
     //make AJAX request
-    $("#formTipo").validate();
-    if ($("#formTipo").valid()) {
+    $("#tipo_form").validate();
+    if ($("#tipo_form").valid()) {
         $.ajax({
             type: "POST",
-            url: urlApi + "tipo",
+            url: urlApi + "tipo_veiculo",
             data: data,
             dataType: "json",
 
@@ -201,7 +201,7 @@ function getTipos() {
     
     //Load 
     $.ajax({
-        url: urlApi + "tipo",
+        url: urlApi + "tipo_veiculo",
 
         type: 'GET',
         dataType: 'json',

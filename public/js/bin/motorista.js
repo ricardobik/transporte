@@ -1,22 +1,5 @@
-// Validade Fields materialize.css
-$.validator.setDefaults({
-    errorClass: 'invalid',
-    validClass: "valid",
-    errorPlacement: function (error, element) {
-        $(element)
-            .closest("form")
-            .find("label[for='" + element.attr("id") + "']")
-            .attr('data-error', error.text())
-            .attr('class', 'active');
-
-    },
-    submitHandler: function (form) {
-        console.log('form ok');
-    }
-});
-
 //Rules and Messages to Validate
-$("#form").validate({
+$("#motorista_form").validate({
     //ignore: [],
     debug: true,
     rules: {
@@ -24,11 +7,11 @@ $("#form").validate({
             required: true,
             rangelength: [11, 11]
         },
-        cnhVencimento: {
+        cnh_vencimento: {
 
         },
         setor: {
-            //required: true
+            required: true
         }
     },
     messages: {
@@ -38,18 +21,21 @@ $("#form").validate({
         cnh: {
             required: "O número da CNH do motorista deve ser prenchido",
             rangelength: "O número da CNH deve conter onze digitos",
-            number: "Por favor preencha com um número válido"
+            number: "O campo CNH só pode conter números"
 
         },
-        cnhVencimento: {
+        cnh_vencimento: {
             required: "A data de vencimento da CNH deve ser preenchida"
+        },
+        setor: {
+            required: "Selecione um setor"
         }
 
     }
 });
 
 //Fill motorista Modal to Edit
-function FillMotorista(Id) {
+function getMotorista(Id) {
 
     $.ajax({
         type: "GET",
@@ -63,17 +49,19 @@ function FillMotorista(Id) {
             $("#motoristaId").val(data.id);
             $("#nome").val(data.nome);
             $("#cnh").val(data.cnh);
-            $("#cnhVencimento").val(data.cnhVencimento);
+            $("#cnh_vencimento").val(data.cnh_vencimento);
             $("#telefone").val(data.telefone);
-            
-            
+
             getSetores(data.setor);
-            
+
             //Reload Material Form
             Materialize.updateTextFields();
 
-            
+
         },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Erro!");
+        }
 
     });
 
@@ -106,6 +94,9 @@ function deleteMotorista(id) {
                         $('#table-motorista').DataTable().ajax.reload();
                         $('#modal-edit').modal('close');
                     },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("Erro!");
+                    }
 
                 });
 
@@ -118,14 +109,14 @@ function deleteMotorista(id) {
 };
 
 //Create function
-function saveMotorista(data) {
+function createMotorista(data) {
 
     //make AJAX request
-    $("#form").validate();
-    if ($("#form").valid()) {
+    $("#motorista_form").validate();
+    if ($("#motorista_form").valid()) {
         $.ajax({
             type: "POST",
-            url: "http://192.168.10.10:3004/motorista",
+            url: urlApi + "motorista",
             data: data,
             dataType: "json",
 
@@ -135,7 +126,13 @@ function saveMotorista(data) {
                     "Motorista gravado com sucesso.",
                     "success");
 
+                resetForm($("#motorista_form"));
+                $('select').prop('selectedIndex', 0);
+                $("select").material_select;
             },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Erro!");
+            }
 
         });
     }
@@ -146,10 +143,10 @@ function saveMotorista(data) {
 
 //Update function
 function updateMotorista(id, data) {
-    
+
     //do AJAX request
-    $("#form").validate();
-    if ($("#form").valid()) {
+    $("#motorista_form").validate();
+    if ($("#motorista_form").valid()) {
 
         swal({
             title: "Confirmação",
@@ -179,7 +176,9 @@ function updateMotorista(id, data) {
                     $('#modal-edit').modal('close');
 
                 },
-
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Erro!");
+                }
             });
 
         });
@@ -191,7 +190,7 @@ function updateMotorista(id, data) {
 };
 
 //Fill table to search motorista
-function fillMotoristaTable() {
+function getMotoristaTable() {
 
     table = $('table#table-motorista').DataTable({
         ajax: {

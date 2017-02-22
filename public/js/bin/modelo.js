@@ -16,7 +16,7 @@ $.validator.setDefaults({
 });
 
 //Rules and Messages to Validate
-$("#formModelo").validate({
+$("#modelo_form").validate({
     ignore: [],
     debug: true,
     rules: {
@@ -95,6 +95,7 @@ function getModelo(marca, modelo, inputType) {
                     .prop('selected', true)
                 );
                 $('#modelo').material_select();
+                
             } else {
 
                 $("#modeloId").val(data.id);
@@ -167,8 +168,8 @@ function updateModelo(dados) {
 
 
     //do AJAX request
-    $("form").validate();
-    if ($("form").valid()) {
+    $("#modelo_form").validate();
+    if ($("#modelo_form").valid()) {
 
         swal({
             title: "Confirmação",
@@ -215,8 +216,8 @@ function updateModelo(dados) {
 function createModelo(data) {
 
     //make AJAX request
-    $("form").validate();
-    if ($("form").valid()) {
+    $("#modelo_form").validate();
+    if ($("#modelo_form").valid()) {
         $.ajax({
             type: "POST",
             url: urlApi + "modelo",
@@ -268,6 +269,10 @@ function deleteModelo(id) {
                         $('#table-modelo').DataTable().ajax.reload();
                         $('#modal-modelo').modal('close');
                     },
+
+                    error: function (textStatus, errorThrown) {
+                        console.log("errou");
+                    }
 
                 });
 

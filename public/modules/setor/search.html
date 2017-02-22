@@ -45,7 +45,7 @@
                     </div>
                     <div class="card-action right-align">
                         <!-- Modal Trigger -->
-                        <a class="waves-effect waves-light btn disabled" name="callModalEdit" id="callModalEdit" href="#modal-edit">Editar</a>
+                        <a class="waves-effect waves-light btn disabled" name="callModalEdit" id="callModalEdit" href="#modal-edit">Detalhes</a>
                     </div>
                 </div>
                 <!--action button-->
@@ -63,7 +63,7 @@
     </div>
 
     <!-- Modal Structure -->
-    <form method="POST" name="form" action="" id="form">
+    <form method="POST" name="setor_form" action="" id="setor_form">
         <div id="modal-edit" class="modal modal-fixed-footer modal-edit">
             <div class="modal-content">
                 <span class="card-title">Editar Setor</span>
@@ -117,7 +117,7 @@
             var $update;
 
             //Fill Table with Json
-            fillSetorTable();
+            getSetorTable();
 
             //Call modal form
             $('.modal').modal({

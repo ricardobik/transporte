@@ -16,7 +16,7 @@ $.validator.setDefaults({
 });
 
 //Rules and Messages to Validate
-$("#formCombustivel").validate({
+$("#combustivel_form").validate({
 //    ignore: [],
     debug: true,
     rules: {
@@ -56,124 +56,7 @@ function getCombustivel(id, inputType) {
 
 };
 
-//Delete function
-function deleteCombustivel(id) {
-    swal({
-            title: "Tem certeza?",
-            text: "Esta ação excluirá o combustivel!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonClass: 'btn-danger',
-            confirmButtonText: 'Excluir',
-            cancelButtonText: "Cancelar",
-            closeOnConfirm: false,
-            closeOnCancel: false
-        },
-        function (isConfirm) {
-            if (isConfirm) {
-
-                $.ajax({
-                    type: "DELETE",
-                    url: urlApi + "combustivel/" + id,
-                    dataType: "json",
-
-                    //if received a response from the server
-                    success: function (response) {
-                        //Reload dataTable
-                        $('#table-combustivel').DataTable().ajax.reload();
-                        $('#modal-combustivel').modal('close');
-                    },
-
-                });
-
-                swal("Excluído!", "O combustível foi excluído!", "success");
-
-            } else {
-                swal("Cancelado", "Nada foi modificado", "error");
-                $('#modal-combustivel').modal('close');
-            }
-        });
-
-};
-
-//Create function
-function createCombustivel(data) {
-
-    //make AJAX request
-    $("#formCombustivel").validate();
-    if ($("#formCombustivel").valid()) {
-        $.ajax({
-            type: "POST",
-            url: urlApi + "combustivel",
-            data: data,
-            dataType: "json",
-
-            //if received a response from the server
-            success: function (response) {
-                swal("Pronto!",
-                    "Combustivel gravado com sucesso.",
-                    "success");
-
-            },
-
-        });
-    }
-    //Reload Material Form
-    Materialize.updateTextFields();
-
-};
-
-//Update function
-function updateCombustivel(id, dados) {
-
-    var data = new Object();
-    data.tipo = $("#combustivelTipo").val();
-    data.id = id;
-    
-    //do AJAX request
-    $("#formCombustivel").validate();
-    if ($("#formCombustivel").valid()) {
-
-        swal({
-            title: "Confirmação",
-            text: "Deseja salvar as informações?",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Salvar",
-            closeOnConfirm: false,
-            html: false
-        }, function () {
-
-            $.ajax({
-                type: "PUT",
-                url: urlApi + "combustivel/" + id,
-                data: data,
-                dataType: "json",
- 
-                //if received a response from the server
-                success: function (response) {
-                    swal("Pronto!",
-                        "As alterações foram salvas com sucesso.",
-                        "success");
-
-                    //Reload dataTable
-                    $('#table-combustivel').DataTable().ajax.reload();
-                    $('#modal-combustivel').modal('close');
-
-                },
-
-            });
-
-        });
-
-    }
-    //Reload Material Form
-    Materialize.updateTextFields();
-
-};
-
-//fill table combustivel to search
+//fill table combustivel to search table
 function getCombustivelTable() {
     //Populates Table with Json
     tableCombustivel = $('table#table-combustivel').DataTable({
@@ -229,32 +112,126 @@ function getCombustiveis() {
     });
 };
 
-//function getCombustivelSelect(id) {
-//    
-//    //Load Json 
-//    $.ajax({
-//        url: urlApi + "combustivel",
-//
-//        type: 'GET',
-//        dataType: 'json',
-//        success: function (json) {
-//
-//            $.each(json, function (key, value) {
-//
-//                $('#combustivelId').append(
-//                    $("<option></option>")
-//                    .attr('value', value.id)
-//                    .text(value.tipo)
-//                );
-//                
-//                $('#combustivelId').val(id);
-//                $('#combustivelId').material_select();
-//
-//            });
-//
-//        }
-//    });
-//};
+//Create function
+function createCombustivel(data) {
+
+    //make AJAX request
+    $("#combustivel_form").validate();
+    if ($("#combustivel_form").valid()) {
+        $.ajax({
+            type: "POST",
+            url: urlApi + "combustivel",
+            data: data,
+            dataType: "json",
+
+            //if received a response from the server
+            success: function (response) {
+                swal("Pronto!",
+                    "Combustivel gravado com sucesso.",
+                    "success");
+
+            },
+
+        });
+    }
+    //Reload Material Form
+    Materialize.updateTextFields();
+
+};
+
+//Update function
+function updateCombustivel(id, dados) {
+
+    var data = new Object();
+    data.tipo = $("#combustivelTipo").val();
+    data.id = id;
+    
+    //do AJAX request
+    $("#combustivel_form").validate();
+    if ($("#combustivel_form").valid()) {
+
+        swal({
+            title: "Confirmação",
+            text: "Deseja salvar as informações?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Salvar",
+            closeOnConfirm: false,
+            html: false
+        }, function () {
+
+            $.ajax({
+                type: "PUT",
+                url: urlApi + "combustivel/" + id,
+                data: data,
+                dataType: "json",
+ 
+                //if received a response from the server
+                success: function (response) {
+                    swal("Pronto!",
+                        "As alterações foram salvas com sucesso.",
+                        "success");
+
+                    //Reload dataTable
+                    $('#table-combustivel').DataTable().ajax.reload();
+                    $('#modal-combustivel').modal('close');
+
+                },
+
+            });
+
+        });
+
+    }
+    //Reload Material Form
+    Materialize.updateTextFields();
+
+};
+
+//Delete function
+function deleteCombustivel(id) {
+    swal({
+            title: "Tem certeza?",
+            text: "Esta ação excluirá o combustivel!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: 'btn-danger',
+            confirmButtonText: 'Excluir',
+            cancelButtonText: "Cancelar",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+
+                $.ajax({
+                    type: "DELETE",
+                    url: urlApi + "combustivel/" + id,
+                    dataType: "json",
+
+                    //if received a response from the server
+                    success: function (response) {
+                        //Reload dataTable
+                        $('#table-combustivel').DataTable().ajax.reload();
+                        $('#modal-combustivel').modal('close');
+                    },
+
+                });
+
+                swal("Excluído!", "O combustível foi excluído!", "success");
+
+            } else {
+                swal("Cancelado", "Nada foi modificado", "error");
+                $('#modal-combustivel').modal('close');
+            }
+        });
+
+};
+
+
+
+
 
 
 

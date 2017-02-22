@@ -10,29 +10,18 @@
     <!--Import SweetAlert with google style-->
     <link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
+    
+    <link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
-<style>
-    input[type=number]::-webkit-outer-spin-button,
-    input[type=number]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    
-    input[type=number] {
-        -moz-appearance: textfield;
-    }
-
-</style>
-
 <body>
     <!-- Import Navbar -->
     <div id="nav-bar"></div>
 
-    <form method="POST" name="motorista-form" action="" id="form" novalidate="novalidate">
+    <form method="POST" name="motorista_form" action="" id="motorista_form" novalidate="novalidate">
         <div class="container">
             <div class="row">
                 <div class="col s12 m8 offset-m2">
@@ -50,13 +39,13 @@
 
                             <div class="row">
                                 <div class="input-field col m6">
-                                    <input id="cnh" name="cnh" type="number" min="0" step="1" class="validate" required="" aria-required="true">
+                                    <input id="cnh" name="cnh" type="text" min="0" step="1" class="validate" required="" aria-required="true">
                                     <label for="cnh">Nº CNH</label>
                                 </div>
 
                                 <div class="input-field col m6">
-                                    <input id="cnhVencimento" name="cnhVencimento" type="text" class="validate" required="" aria-required="true">
-                                    <label for="cnhVencimento">Data de Vencimento da CNH</label>
+                                    <input id="cnh_vencimento" name="cnhVencimento" type="text" class="validate" required="" aria-required="true">
+                                    <label for="cnh_vencimento">Data de Vencimento da CNH</label>
                                 </div>
 
                             </div>
@@ -126,9 +115,8 @@
 
             //get de form data and save
             $("#submit").click(function(e) {
-                var data = $("#form").serializeArray();
-                saveMotorista(data);
-                $("#nome").focus();
+                var data = $("#motorista_form").serializeArray();
+                createMotorista(data);
             });
 
         });

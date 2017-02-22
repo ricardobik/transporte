@@ -9,6 +9,8 @@
     <!--Import SweetAlert with google style-->
     <link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
+    
+    <link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,7 +21,7 @@
     <!-- Import Navbar -->
     <div id="nav-bar"></div>
 
-    <form method="POST" name="form" action="" id="form" novalidate="novalidate">
+    <form method="POST" name="setor_form" action="" id="setor_form" novalidate="novalidate">
         <div class="container">
             <div class="row">
                 <div class="col s12 m8 offset-m2">
@@ -76,7 +78,8 @@
 
             //get de form data and save
             $("#submit").click(function(e) {
-                var data = $("#form").serializeArray();
+                var data = new Object();
+                data.nome = $("#nome").val();
                 createSetor(data);
             });
 

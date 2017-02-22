@@ -6,15 +6,7 @@
       "setor": 4,
       "telefone": "+55 (862) 571-3125",
       "cnh": 8806227897,
-      "cnhVencimento": "2014-09-09"
-    },
-    {
-      "id": 44,
-      "nome": "Chelsea Fields",
-      "setor": 9,
-      "telefone": "+55 (892) 541-2198",
-      "cnh": 55544650550,
-      "cnhVencimento": "2015-08-24"
+      "cnh_vencimento": "2014-09-09"
     },
     {
       "id": 26,
@@ -22,23 +14,23 @@
       "setor": 2,
       "telefone": "+55 (913) 573-3376",
       "cnh": 55643721242,
-      "cnhVencimento": "2014-05-15"
+      "cnh_vencimento": "2014-05-15"
     },
     {
-      "id": 31,
       "nome": "Henrietta Carrillo",
-      "setor": 15,
+      "cnh": "22356517551",
+      "cnh_vencimento": "2014-04-13",
       "telefone": "+55 (874) 542-2121",
-      "cnh": 2235651755,
-      "cnhVencimento": "2014-04-13"
+      "setor": "19",
+      "id": 31
     },
     {
-      "id": 6,
       "nome": "Frankie Holt",
-      "setor": 13,
+      "cnh": "25431185760",
+      "cnh_vencimento": "2015-10-20",
       "telefone": "+55 (856) 508-3053",
-      "cnh": 25431185760,
-      "cnhVencimento": "2014-01-29"
+      "setor": "13",
+      "id": 6
     },
     {
       "id": 98,
@@ -46,7 +38,7 @@
       "setor": 15,
       "telefone": "+55 (954) 562-2677",
       "cnh": 49542269803,
-      "cnhVencimento": "2016-03-10"
+      "cnh_vencimento": "2016-03-10"
     },
     {
       "id": 60,
@@ -54,7 +46,7 @@
       "setor": 5,
       "telefone": "+55 (974) 560-3198",
       "cnh": 55273892687,
-      "cnhVencimento": "2016-04-28"
+      "cnh_vencimento": "2016-04-28"
     },
     {
       "id": 90,
@@ -62,7 +54,7 @@
       "setor": 14,
       "telefone": "+55 (806) 414-3118",
       "cnh": 36248098434,
-      "cnhVencimento": "2015-11-26"
+      "cnh_vencimento": "2015-11-26"
     },
     {
       "id": 58,
@@ -70,7 +62,15 @@
       "setor": 5,
       "telefone": "+55 (917) 553-2665",
       "cnh": 36778147476,
-      "cnhVencimento": "2015-04-29"
+      "cnh_vencimento": "2015-04-29"
+    },
+    {
+      "nome": "ricardo rodrigo teixeira",
+      "cnh": "22255444451",
+      "cnh_vencimento": "2015-02-10",
+      "telefone": "19995339466",
+      "setor": "2",
+      "id": 107
     }
   ],
   "combustivel": [
@@ -118,7 +118,7 @@
     },
     {
       "id": 5,
-      "nome": "OMATOM"
+      "nome": "OMATOMES"
     },
     {
       "id": 6,
@@ -169,12 +169,24 @@
       "nome": "UNIWORLD"
     },
     {
-      "id": 18,
-      "nome": "KOZGENE"
-    },
-    {
       "id": 19,
       "nome": "NIKUDA"
+    },
+    {
+      "id": 20,
+      "nome": "LOKO ABREU"
+    },
+    {
+      "nome": "MARVMITE",
+      "id": 21
+    },
+    {
+      "nome": "PINGADO 2016",
+      "id": 25
+    },
+    {
+      "nome": "PINGADO 2017",
+      "id": 26
     }
   ],
   "marca": [
@@ -5105,19 +5117,20 @@
   ],
   "veiculo": [
     {
-      "id": 0,
-      "descricao": "",
-      "anofabricacao": "",
-      "placa": "",
-      "combustivelId": "",
-      "setorId": "",
-      "modeloId": "",
-      "tipoId": "",
-      "renavam": "",
-      "estadoveiculo": ""
+      "tipoid": "0",
+      "placa": "ddd-8394",
+      "marcaid": "3",
+      "modeloid": "",
+      "anofabricacao": "1972",
+      "combustivelid": "1",
+      "renavam": "00055599978",
+      "estadoveiculo": "5",
+      "setorid": "4",
+      "info": "informações relevantes sobre o veículo",
+      "id": 1
     }
   ],
-  "tipo": [
+  "tipo_veiculo": [
     {
       "id": 0,
       "nome": "CARRO"

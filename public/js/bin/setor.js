@@ -1,22 +1,5 @@
-// Validade Fields materialize.css
-$.validator.setDefaults({
-    errorClass: 'invalid',
-    validClass: "valid",
-    errorPlacement: function (error, element) {
-        $(element)
-            .closest("form")
-            .find("label[for='" + element.attr("id") + "']")
-            .attr('data-error', error.text())
-            .attr('class', 'active');
-
-    },
-    submitHandler: function (form) {
-        console.log('form ok');
-    }
-});
-
 //Rules and Messages to Validate
-$("#form").validate({
+$("#setor_form").validate({
     rules: {
         nome: {
             required: true,
@@ -33,7 +16,7 @@ $("#form").validate({
 });
 
 //Fill table setor
-function fillSetorTable() {
+function getSetorTable() {
 
     //Populates Table with Json
     table = $('table#table-setor').DataTable({
@@ -49,11 +32,8 @@ function fillSetorTable() {
             data: "nome"
                 }],
         "columnDefs": [{
-            "width": "50%",
+            "width": "20%",
             "targets": 0
-                }, {
-            "width": "40%",
-            "targets": 1
                 }],
         select: true,
         fixedColumns: true,
@@ -68,7 +48,7 @@ function fillSetorTable() {
 
 //Fill input to update
 function getSetor(id, inputType) {
-    $('#setor').empty();
+    //    $('#setor-form').empty();
 
     $.ajax({
         type: "GET",
@@ -87,7 +67,6 @@ function getSetor(id, inputType) {
 
                 );
                 $("#setor").material_select();
-                //                $('#setor').find('option[value="' + id + '"]').prop('selected', true);
 
             } else {
 
@@ -146,8 +125,8 @@ function deleteSetor(id) {
 function createSetor(data) {
 
     //make AJAX request
-    $("#form").validate();
-    if ($("#form").valid()) {
+    $("#setor_form").validate();
+    if ($("#setor_form").valid()) {
         $.ajax({
             type: "POST",
             url: urlApi + "setor",
@@ -160,6 +139,8 @@ function createSetor(data) {
                     "Setor gravado com sucesso.",
                     "success");
 
+                resetForm($("#setor_form"));
+               
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("Erro!");
@@ -171,16 +152,14 @@ function createSetor(data) {
     //Reload Material Form
     Materialize.updateTextFields();
 
-
-    // });
 };
 
 //Update function
 function updateSetor(data) {
 
     //do AJAX request
-    $("#form").validate();
-    if ($("#form").valid()) {
+    $("#setor_form").validate();
+    if ($("#setor_form").valid()) {
 
         swal({
             title: "Confirmação",
@@ -283,29 +262,3 @@ function getSetorSelect(id) {
         }
     });
 };
-
-//function getOnlySetor(id) {
-//
-//    //Clear the options before set new id
-//    $('#setorId').empty();
-//
-//    $.ajax({
-//        url: urlApi + "setor/" + id,
-//        type: 'GET',
-//        dataType: 'json',
-//        success: function (json) {
-//
-//            $('#setorId').append(
-//                $("<option></option>")
-//                .attr('value', json.id)
-//                .text(json.nome)
-//            );
-//
-//            $('#setorId').material_select();
-//
-//        },
-//        error: function (textStatus, errorThrown) {
-//            console.log("errou");
-//        }
-//    });
-//};

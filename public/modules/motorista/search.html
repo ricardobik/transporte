@@ -9,6 +9,7 @@
     <link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="/sass/table.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,29 +17,7 @@
 
 <body>
 
-    <style>
-        .card-title {
-            line-height: 48px;
-            font-size: 24px;
-            font-weight: 300;
-        }
-        
-        .hidden {
-            display: none;
-            -webkit-transition: display .5s ease;
-            -moz-transition: display .5s ease;
-            -o-transition: display .5s ease;
-        }
-        
-        .active {
-            transition: display .5s ease;
-            -webkit-transition: display .5s ease;
-            -moz-transition: display .5s ease;
-            -o-transition: display .5s ease;
-        }
-
-    </style>
-
+    
     <!-- Import Navbar -->
     <div id="nav-bar"></div>
 
@@ -92,7 +71,7 @@
     </div>
 
     <!-- Modal Structure -->
-    <form method="POST" name="form" action="" id="form">
+    <form method="POST" name="motorista_form" action="" id="motorista_form">
         <div id="modal-edit" class="modal modal-fixed-footer">
             <div class="modal-content">
                 <span class="card-title">Editar Motorista</span>
@@ -115,7 +94,7 @@
                     </div>
 
                     <div class="input-field col m6">
-                        <input placeholder="" id="cnhVencimento" name="cnhVencimento" type="text" class="validate" required="">
+                        <input placeholder="" id="cnh_vencimento" name="cnh_vencimento" type="text" class="validate" required="">
                         <label for="data de vencimento">Data de Vencimento</label>
                     </div>
                 </div>
@@ -167,7 +146,7 @@
             var $update;
 
             //Fill Table with Json
-            fillMotoristaTable();
+            getMotoristaTable();
 
             $('.modal').modal({
                 dismissible: false
@@ -187,11 +166,6 @@
             //Load material dropbox
             $('select').material_select();
 
-            //Stop the submit request
-            $("#form").submit(function(e) {
-                e.preventDefault();
-            });
-
             //Enable edit button and set id
             $('.search-page tbody').on('click', 'tr', function() {
                 if ($(this).hasClass('selected')) {
@@ -202,7 +176,6 @@
                     $(this).addClass('selected');
                     $('#callModalEdit').removeClass('disabled');
                     $update = table.row(this).data();
-
                 }
             });
 
@@ -211,7 +184,7 @@
                 $("#divDelete").removeClass("hide");
                 $("#divEdit").addClass("hide");
                 $("form :input").prop("disabled", true);
-                FillMotorista($update.id);
+                getMotorista($update.id);
 
             });
 
@@ -231,7 +204,7 @@
 
             //Update request
             $("#update").click(function(e) {
-                updateMotorista($update.id, $("#form").serializeArray());
+                updateMotorista($update.id, $("#motorista_form").serializeArray());
             });
 
             //Delete request

@@ -12,7 +12,7 @@ $.validator.setDefaults({
     }
 });
 //Rules and Messages to Validate
-$("#formMarca").validate({
+$("#marca_form").validate({
     //    ignore: [],
     debug: true,
     rules: {
@@ -91,8 +91,8 @@ function getMarcas(input, marcaId) {
 function createMarca(data) {
 
     //make AJAX request
-    $("#formMarca").validate();
-    if ($("#formMarca").valid()) {
+    $("#marca_form").validate();
+    if ($("#marca_form").valid()) {
         $.ajax({
             type: "POST",
             url: urlApi + "marca",
@@ -137,8 +137,8 @@ function saveAll(type) {
     }
 
     //make AJAX request
-    $("#formMarca").validate();
-    if ($("formMarca").valid()) {
+    $("#marca_form").validate();
+    if ($("marca_form").valid()) {
         $.ajax({
             type: "POST",
             url: url,
@@ -150,7 +150,7 @@ function saveAll(type) {
         });
     }
     //Empty all fields
-    $(':input', '#formMarca').not(':button, :submit, :reset').val('').removeAttr('checked').removeAttr('selected');
+    $(':input', '#marca_form').not(':button, :submit, :reset').val('').removeAttr('checked').removeAttr('selected');
     //Reload Material Form
     Materialize.updateTextFields();
 }
@@ -227,8 +227,8 @@ function updateMarca(id) {
     data.nome = $("#marcaNome").val();
 
     //do AJAX request
-    $("#formMarca").validate();
-    if ($("#formMarca").valid()) {
+    $("#marca_form").validate();
+    if ($("#marca_form").valid()) {
 
         swal({
             title: "Confirmação",

@@ -7,10 +7,32 @@ var createUrl = getUrl.protocol + "//" + getUrl.host + "/" + path[1] + "/" + pat
 
 var urlApi = "http://192.168.10.10:3004/"
 
+// Validade default Fields materialize.css
+$.validator.setDefaults({
+    errorClass: 'invalid',
+    validClass: "valid",
+    errorPlacement: function (error, element) {
+        $(element)
+            .closest("form")
+            .find("label[for='" + element.attr("id") + "']")
+            .attr('data-error', error.text())
+            .attr('class', 'active');
+
+    },
+    submitHandler: function (form) {
+        console.log('form ok');
+    }
+});
+
 function resetForm($form) {
     $form.find('input:text, input:password, input:file, select, textarea').val('');
     $form.find('input:radio, input:checkbox')
-         .removeAttr('checked').removeAttr('selected');
+        .removeAttr('checked').removeAttr('selected');
+
+    $("input:text:first:visible").focus();
+
+    //Reload Material Form
+    Materialize.updateTextFields();
 }
 
 function goHome() {
@@ -68,15 +90,15 @@ swal.setDefaults({
 
 //To update materializecss select every time it is changed
 $('select').on('contentChanged', function () {
-   $(this).material_select();
+    $(this).material_select();
 });
 
 
 //My transition function is here
-slideIn = function (selector, durationARG, startPosition,first) {
+slideIn = function (selector, durationARG, startPosition, first) {
 
     $(first).css("opacity", 0).addClass("hide");
-    
+
     $(first).velocity({
         translateX: "-500px"
     }, {
@@ -90,16 +112,16 @@ slideIn = function (selector, durationARG, startPosition,first) {
     if (durationARG == undefined) {
         durationARG = "800px";
     };
-    
+
     //If start position isn't specified, revert to default
     if (startPosition == undefined) {
         startPosition = "-500px";
     };
-    
+
 
     var time = 0;
-    
-    
+
+
     $(selector).velocity({
         translateX: "500px"
     }, {
@@ -118,10 +140,10 @@ slideIn = function (selector, durationARG, startPosition,first) {
 };
 
 //My transition function is here
-slideOut = function (selector, durationARG, startPosition,first) {
+slideOut = function (selector, durationARG, startPosition, first) {
 
     $(first).css("opacity", 0).addClass("hide");
-    
+
     $(first).velocity({
         translateX: "-500px"
     }, {
@@ -135,14 +157,14 @@ slideOut = function (selector, durationARG, startPosition,first) {
     if (durationARG == undefined) {
         durationARG = "800px";
     }
-    
+
     //If start position isn't specified, revert to default
     if (startPosition == undefined) {
         startPosition = "-500px";
     }
 
     var time = 0;
-        
+
     $(selector).velocity({
         translateX: "-500px"
     }, {
@@ -159,4 +181,3 @@ slideOut = function (selector, durationARG, startPosition,first) {
     });
     time += 120;
 };
-
