@@ -1,28 +1,17 @@
-var $update = "";
-
-// Validade Fields materialize.css
-$.validator.setDefaults({
-    errorClass: 'invalid',
-    validClass: "valid",
-    errorPlacement: function (error, element) {
-        $(element).closest("form").find("label[for='" + element.attr("id") + "']").attr('data-error', error.text()).attr('class', 'active');
-    },
-    submitHandler: function (form) {
-        console.log('form ok');
-    }
-});
 //Rules and Messages to Validate
 $("#marca_form").validate({
-    //    ignore: [],
+    ignore: [],
     debug: true,
     rules: {
-        nomeMarca: {
-            required: true
+        marcaNome: {
+            required: true,
+            minlength: 3
         }
     },
     messages: {
-        nomeMarca: {
-            required: "Digite a marca a ser adicionada"
+        marcaNome: {
+            required: "Digite a marca a ser adicionada",
+            minlength: jQuery.validator.format("O nome do setor deve conter ao menos {0} caracteres")
         }
     }
 });
@@ -30,22 +19,26 @@ $("#marca_form").validate({
 //Get Brands to fill select
 function getMarcas(input, marcaId) {
 
+    input = "#" + input;
+
     $.ajax({
         url: urlApi + "marca/",
         type: 'GET',
         dataType: 'json',
         success: function (json) {
 
-            $('#marca')
+            $(input)
                 .find('option')
                 .remove()
                 .end();
 
             $.each(json, function (key, value) {
-                $('#' + input).append($("<option></option>").attr('value', value.id).text(value.nome));
+                $(input).append($("<option></option>").attr('value', value.id).text(value.nome));
             });
 
-            $('#marca').find('option[value="' + marcaId + '"]').prop('selected', true);
+            if (marcaId !== undefined) {
+                $(input).find('option[value="' + marcaId + '"]').prop('selected', true);
+            }
 
             //Load material dropbox
             $('select').material_select();
@@ -56,37 +49,6 @@ function getMarcas(input, marcaId) {
         }
     });
 }
-
-//function getOnlyMarca(id, type) {
-//
-//    $.ajax({
-//        url: urlApi + "marca/" + id,
-//
-//        type: 'GET',
-//        dataType: 'json',
-//        success: function (json) {
-//
-//            if (type !== "input") {
-//                $('#marcaId').append(
-//                    $("<option></option>")
-//                    .attr('value', json.id)
-//                    .text(json.nome)
-//                );
-//
-//            } else {
-//                $('#marcaModeloId'
-//                 ).val(json.nome);
-//            }
-//            $('#marcaId').material_select();
-//
-//        },
-//        error: function (textStatus, errorThrown) {
-//            console.log("errou");
-//        }
-//    });
-//}
-
-
 
 function createMarca(data) {
 
@@ -104,6 +66,11 @@ function createMarca(data) {
                 swal("Pronto!",
                     "Marca de veículo gravada com sucesso.",
                     "success");
+
+                resetForm($("#marca_form"));
+            },
+            error: function (textStatus, errorThrown) {
+                console.log("errou");
             }
 
         });
@@ -111,48 +78,6 @@ function createMarca(data) {
     //Reload Material Form
     Materialize.updateTextFields();
 
-}
-
-//Create Function for Type, Brand and Model
-function saveAll(type) {
-    var data = new Object();
-    var url, successMsg = "";
-    switch (type) {
-        case "0":
-            data.nome = $("#marca").val();
-            url = urlApi + "marca";
-            successMsg = "Marca adicionada com sucesso";
-            break;
-        case "1":
-            data.marcaId = $("#marcaSelect").val();
-            data.nome = $("#modelo").val();
-            url = urlApi + "modelo";
-            successMsg = "Modelo adicionado com sucesso";
-            break;
-        case "2":
-            data.nome = $("#tipo").val();
-            url = urlApi + "tipo";
-            successMsg = "Tipo de veículo adicionado com sucesso";
-            break;
-    }
-
-    //make AJAX request
-    $("#marca_form").validate();
-    if ($("marca_form").valid()) {
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: data,
-            dataType: "json", //if received a response from the server
-            success: function (response) {
-                swal("Pronto!", successMsg, "success");
-            }
-        });
-    }
-    //Empty all fields
-    $(':input', '#marca_form').not(':button, :submit, :reset').val('').removeAttr('checked').removeAttr('selected');
-    //Reload Material Form
-    Materialize.updateTextFields();
 }
 
 //Fill table marca
@@ -172,7 +97,7 @@ function getMarcaTable() {
             data: "nome"
                 }],
         "columnDefs": [{
-            "width": "20%",
+            "width": "05%;",
             "targets": 0
                 }],
         select: true,
@@ -186,7 +111,7 @@ function getMarcaTable() {
     });
 }
 
-function getMarca(id, inputType) {
+function getMarca(id, input) {
 
     $.ajax({
         type: "GET",
@@ -196,24 +121,29 @@ function getMarca(id, inputType) {
         //if received a response from the server
         success: function (data) {
 
-            if (inputType == "select") {
+            if (input == "select") {
+                
                 $("#marca").empty().html(' ');
                 $('#marca').append($("<option></option>")
                     .attr('value', data.id)
                     .text(data.nome)
                 );
                 $('#marca').material_select();
-                
+
             } else {
 
                 $("#marcaId").val(data.id);
                 $("#marcaNome").val(data.nome);
-            }
+                
+            };
 
-            
+
             //Reload Material Form
             Materialize.updateTextFields();
 
+        },
+        error: function (textStatus, errorThrown) {
+            console.log("errou");
         }
 
     });
@@ -253,11 +183,13 @@ function updateMarca(id) {
                         "As alterações foram salvas com sucesso.",
                         "success");
 
-                    console.log("passou");
                     //Reload dataTable
                     $('#table-marca').DataTable().ajax.reload();
                     $('#modal-marca').modal('close');
 
+                },
+                error: function (textStatus, errorThrown) {
+                    console.log("errou");
                 }
 
             });
@@ -297,6 +229,9 @@ function deleteMarca(id) {
                         $('#table-marca').DataTable().ajax.reload();
                         $('#modal-marca').modal('close');
                     },
+                    error: function (textStatus, errorThrown) {
+                        console.log("errou");
+                    }
 
                 });
 

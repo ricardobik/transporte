@@ -1,32 +1,17 @@
-// Validade Fields materialize.css
-$.validator.setDefaults({
-    errorClass: 'invalid',
-    validClass: "valid",
-    errorPlacement: function (error, element) {
-        $(element)
-            .closest("form")
-            .find("label[for='" + element.attr("id") + "']")
-            .attr('data-error', error.text())
-            .attr('class', 'active');
-
-    },
-    submitHandler: function (form) {
-        console.log('form ok');
-    }
-});
-
 //Rules and Messages to Validate
 $("#modelo_form").validate({
     ignore: [],
     debug: true,
     rules: {
-        nomeModelo: {
-            required: true
+        modeloNome: {
+            required: true,
+            minlength: 3
         }
     },
     messages: {
-        nomeModelo: {
-            required: "O campo nome deve ser preenchido"
+        modeloNome: {
+            required: "O campo nome deve ser preenchido",
+            minlength: jQuery.validator.format("O nome do modelo deve conter ao menos {0} caracteres")
         }
     }
 });
@@ -71,15 +56,12 @@ function getModelosTable(marca) {
 
 }
 
-//TODO VER QUEM CHAMA O FILLMODELO - PROVAVELMENTE O SEARCH
 //function getModelo(data) {
-function getModelo(marca, modelo, inputType) {
-
-    getMarca(marca, inputType);
+function getModelo(id, inputType) {
 
     $.ajax({
         type: "GET",
-        url: urlApi + "modelo/" + modelo,
+        url: urlApi + "modelo/" + id,
         dataType: "json",
 
         //if received a response from the server
@@ -101,7 +83,7 @@ function getModelo(marca, modelo, inputType) {
                 $("#modeloId").val(data.id);
                 $("#modeloNome").val(data.nome);
             }
-
+            
             //Reload Material Form
             Materialize.updateTextFields();
 
@@ -115,8 +97,8 @@ function getModelo(marca, modelo, inputType) {
 
 }
 
-function getModelos(marcaId, modeloId, input) {
-
+function getModelos(marcaId, modeloId) {
+    
     $("#modelo").empty().html(' ');
     $("#modelo").append("<option value='' disabled selected>Escolha o modelo</option>");
     $("#loader").css('display', '');
@@ -144,6 +126,7 @@ function getModelos(marcaId, modeloId, input) {
                     .attr('value', value.id)
                     .text(value.nome)
                 );
+                $("#modelo").attr("disabled", false);
                 $('#modelo').material_select();
 
             });
@@ -230,6 +213,7 @@ function createModelo(data) {
                     "Modelo gravado com sucesso.",
                     "success");
 
+                resetForm($("#modelo_form"));
             },
 
             error: function (textStatus, errorThrown) {

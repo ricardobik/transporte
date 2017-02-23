@@ -1,6 +1,6 @@
 
 //Rules and Messages to Validate
-$("#formVeiculo1").validate({
+$("#veiculo_form_parcial").validate({
     ignore: [],
     debug: true,
     rules: {
@@ -59,8 +59,8 @@ $("#veiculo_form").validate({
 function createVeiculo(data) {
 
     //make AJAX request
-    var validator = $("form").validate();
-    if ($("form").valid()) {
+    var validator = $("#veiculo_form").validate();
+    if ($("#veiculo_form").valid()) {
         $.ajax({
             type: "POST",
             url: urlApi + "veiculo",
@@ -75,7 +75,7 @@ function createVeiculo(data) {
                 slideOut("#cardFirst", 1350, -800, more);
 
                 validator.resetForm();
-                resetForm($('#formVeiculo1'));
+                resetForm($('#veiculo_form_parcial'));
 
                 $("#marca").attr("disabled", true);
                 $("#modelo").attr("disabled", true);
@@ -153,10 +153,12 @@ function getVeiculo(Id) {
             $("#tipo").val(data.tipoid);
             $("#placa").val(data.placa);
 
-            getModelo(data.marcaid, data.modeloid, "select");
+            getMarca(data.marcaid, "select")
+            
+            getModelo(data.modeloid, "select");
 
             getCombustiveis(data.combustivelid);
-
+            
             getSetor(data.setorid, "select");
 
             $("#anofabricacao").val(data.anofabricacao);
@@ -182,8 +184,8 @@ function updateVeiculo(id, data) {
 
 
     //do AJAX request
-    $("#form").validate();
-    if ($("#form").valid()) {
+    $("#veiculo_form").validate();
+    if ($("#veiculo_form").valid()) {
 
         swal({
             title: "Confirmação",

@@ -70,7 +70,7 @@
     </div>
 
     <!-- Modal Structure -->
-    <form method="POST" name="form" action="" id="form">
+    <form method="POST" name="veiculo_form" action="" id="veiculo_form">
         <div id="modal-edit" class="modal modal-fixed-footer">
             <div class="modal-content">
                 <span class="card-title">Editar Veiculo</span>
@@ -222,11 +222,6 @@
             //Load material dropbox
             $('select').material_select();
 
-            //Stop the submit request
-            $("#form").submit(function(e) {
-                e.preventDefault();
-            });
-
             //Enable edit button and set id
             $('.search-page tbody').on('click', 'tr', function() {
                 if ($(this).hasClass('selected')) {
@@ -245,7 +240,7 @@
             $('#callModalEdit').on('click', function() {
                 $("#divDelete").removeClass("hide");
                 $("#divEdit").addClass("hide");
-                $("#form :input").prop("disabled", true);
+                $("#veiculo_form :input").prop("disabled", true);
 
                 ///Get veiculo info to update/delete
                 getVeiculo($update.id);
@@ -258,12 +253,12 @@
             $('#edit').on('click', function() {
                 $("#divDelete").addClass("hide");
                 $("#divEdit").removeClass("hide");
-                $("#form :input").prop("disabled", false);
+                $("#veiculo_form :input").prop("disabled", false);
                 $("#id").prop("disabled", true)
 
                 //Call functions to set select values
+                getModelos($("#marca").val(), $("#modelo").val());
                 getMarcas($("#marca").attr("name"), $("#marca").val());
-                getModelos($("#modelo").attr("name"), $("#marca").val(), $("#modelo").val());
                 getSetores($("setor").val());
 
                 //Reload Material Form
@@ -276,8 +271,7 @@
 
             $('#marca').on('change', function() {
                 //Call functions to set select values
-                getModelos($("#modelo").attr("name"), $("#marca").val(), $("#modelo").val());
-
+                getModelos($("#marca").val(), $("#modelo").val());
                 //Load material dropbox
                 $('select').material_select();
 
@@ -296,7 +290,7 @@
                 data.estadoveiculo = $("#estadoveiculo").val();
                 data.setorid = $("#setor").val();
                 data.info = $("#info").val();
-                
+
                 updateVeiculo($update.id, data);
             });
 

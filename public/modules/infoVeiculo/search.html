@@ -10,6 +10,8 @@
     <link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="/sass/table.css" media="screen" />
 
+     <link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />
+    
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -83,10 +85,10 @@
                             <div class="table-header">
                                 <span class="card-title">Pesquisar Modelo</span>
                                 <div class="actions">
-                                    <select id="marcaSelect" name="marcaSelect" class="left">
+                                    <select id="marca" name="marca" class="left">
                                         <option value="" disabled selected>Escolha a marca</option>
                                     </select>
-                                    <label for="marcaSelect"></label>
+                                    <label for="marca"></label>
                                 </div>
                                 <input id="search-input-modelo" type="text" class="search-header col m3 offset-m1">
                                 <a href="#" id="search-icon" class="waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
@@ -147,7 +149,7 @@
     </div>
 
     <!-- Modal Structure Combustivel-->
-    <form method="POST" name="formCombustivel" action="" id="formCombustivel">
+    <form method="POST" name="combustivel_form" action="" id="combustivel_form">
         <div id="modal-combustivel" class="modal modal-fixed-footer modal-edit">
             <div class="modal-content">
                 <span class="card-title">Editar Combustível</span>
@@ -182,7 +184,7 @@
     </form>
 
     <!-- Modal Structure Marca-->
-    <form method="POST" name="formMarca" action="" id="formMarca">
+    <form method="POST" name="marca_form" action="" id="marca_form">
         <div id="modal-marca" class="modal modal-fixed-footer modal-edit">
             <div class="modal-content">
                 <span class="card-title">Editar Marca</span>
@@ -216,16 +218,15 @@
     </form>
 
     <!-- Modal Structure Modelo-->
-    <form method="POST" name="formModelo" action="" id="formModelo">
+    <form method="POST" name="modelo_form" action="" id="modelo_form">
         <div id="modal-modelo" class="modal modal-fixed-footer modal-edit">
             <div class="modal-content">
                 <span class="card-title">Editar Modelo</span>
                 <div class="row">
 
-
                     <div class="input-field col m12">
-                        <input id="marcaModeloId" name="marcaModeloId" type="text" class="validate" required="">
-                        <label for="marcaModeloId">Marca</label>
+                        <input id="marcaModelo" name="marcaModelo" type="text" class="validate" required="">
+                        <label for="marcaModelo">Marca</label>
                     </div>
 
                     <div class="input-field col s12 m1">
@@ -253,7 +254,7 @@
     </form>
 
     <!-- Modal Structure Tipo-->
-    <form method="POST" name="formTipo" action="" id="formTipo">
+    <form method="POST" name="tipo_form" action="" id="tipo_form">
         <div id="modal-tipo" class="modal modal-fixed-footer modal-edit">
             <div class="modal-content">
                 <span class="card-title">Editar Tipo de Veículo</span>
@@ -273,12 +274,12 @@
 
             </div>
             <div class="modal-footer">
-                <div class="" id="divDeleteModelo">
+                <div class="" id="divDeleteTipo">
                     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="back">Voltar</a>
                     <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="deleteTipo">Deletar</a>
                     <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="editTipo">Editar</a>
                 </div>
-                <div class="hide" id="divEditModelo">
+                <div class="hide" id="divEditTipo">
                     <a href="#!" class="modal-action waves-effect waves-green btn-flat" id="updateTipo">Salvar</a>
                     <a href="#!" class="modal-action waves-effect waves-green btn-flat modal-close" id="cancel">Cancelar</a>
                 </div>
@@ -310,7 +311,7 @@
             getCombustivelTable();
             getMarcaTable();
             getTipoTable();
-            getMarcas(marcaSelect.name);
+            getMarcas($("#marca").attr("name"));
 
             //Call modal form
             $('.modal').modal({
@@ -321,8 +322,8 @@
             $('select').material_select();
 
             //Enable Model after select Brand type
-            $("#marcaSelect").change(function() {
-                getModelosTable($("#marcaSelect").val());
+            $("#marca").change(function() {
+                getModelosTable($("#marca").val());
                 $("#table-modelo").removeClass("hide");
             });
 
@@ -440,14 +441,16 @@
                 $("#divEditModelo").addClass("hide");
                 $("form :input").prop("disabled", true);
 
-                getModelo($update);
+                getModelo($update.marcaId, $update.id);
+//                getMarca();
+
             });
             $('#editModelo').on('click', function() {
                 $("#divDeleteModelo").addClass("hide");
                 $("#divEditModelo").removeClass("hide");
                 $("form :input").prop("disabled", false);
                 $("#modeloId").prop("disabled", true)
-                $("#marcaModeloId").prop("disabled", true)
+                $("#marcaModelo").prop("disabled", true)
 
                 //Reload Material Form
                 Materialize.updateTextFields();

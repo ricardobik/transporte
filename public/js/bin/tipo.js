@@ -1,27 +1,17 @@
-// Validade Fields materialize.css
-$.validator.setDefaults({
-    errorClass: 'invalid',
-    validClass: "valid",
-    errorPlacement: function (error, element) {
-        $(element).closest("form").find("label[for='" + element.attr("id") + "']").attr('data-error', error.text()).attr('class', 'active');
-    },
-    submitHandler: function (form) {
-        console.log('form ok');
-    }
-});
-
 //Rules and Messages to Validate
 $("#tipo_form").validate({
-//    ignore: [],
+    ignore: [],
     debug: true,
     rules: {
-        nomeTipo: {
-            required: true
+        tipoNome: {
+            required: true,
+            minlength: 3
         }
     },
     messages: {
-        nomeTipo: {
-            required: "Digite a marca a ser adicionada"
+        tipoNome: {
+            required: "Digite a marca a ser adicionada",
+            minlength: jQuery.validator.format("O nome do setor deve conter ao menos {0} caracteres")
         }
     }
 });
@@ -59,7 +49,7 @@ function getTipoTable() {
     });
 }
 
-function fillTipo(id) {
+function getTipo(id) {
 
     $.ajax({
         type: "GET",
@@ -79,6 +69,32 @@ function fillTipo(id) {
 
     });
 
+};
+
+//insert into select to create veiculo
+function getTipos() {
+    
+    //Load 
+    $.ajax({
+        url: urlApi + "tipo_veiculo",
+
+        type: 'GET',
+        dataType: 'json',
+        success: function (json) {
+
+            $.each(json, function (key, value) {
+
+                $('#tipo').append(
+                    $("<option></option>")
+                    .attr('value', value.id)
+                    .text(value.nome)
+                );
+                $('#tipo').material_select();
+
+            });
+
+        }
+    });
 };
 
 function updateTipo(id, dados) {
@@ -196,28 +212,4 @@ function createTipo(data) {
 
 };
 
-//insert into select to create veiculo
-function getTipos() {
-    
-    //Load 
-    $.ajax({
-        url: urlApi + "tipo_veiculo",
 
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-
-            $.each(json, function (key, value) {
-
-                $('#tipo').append(
-                    $("<option></option>")
-                    .attr('value', value.id)
-                    .text(value.nome)
-                );
-                $('#tipo').material_select();
-
-            });
-
-        }
-    });
-};

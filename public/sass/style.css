@@ -12,8 +12,8 @@ input[type=number] {
 /*------------------------------------*/
 
 .modal-edit {
-    width: 40% !important;
-    height: 40% !important;
+    width: 50% !important;
+    height: 60% !important;
     /*            overflow-y: hidden !important;*/
     max-height: 95%;
     /*            max-width: 95%;*/

@@ -30,6 +30,8 @@ function resetForm($form) {
         .removeAttr('checked').removeAttr('selected');
 
     $("input:text:first:visible").focus();
+    $('select').prop('selectedIndex', 0);
+    $('select').material_select;
 
     //Reload Material Form
     Materialize.updateTextFields();
@@ -181,3 +183,4 @@ slideOut = function (selector, durationARG, startPosition, first) {
     });
     time += 120;
 };
+

@@ -33,15 +33,15 @@
 
                     <div id="divCombustivel">
                         <!--                        <form method="POST" name="formCombustivel" id="formCombustivel" novalidate="novalidate">-->
-                        <form method="POST" name="formCombustivel" id="formCombustivel" novalidate="novalidate">
+                        <form method="POST" name="combustivel_form" id="combustivel_form" novalidate="novalidate">
 
                             <div class="card-content">
                                 <span class="card-title">Cadastrar combustível</span>
                                 <div class="row">
                                     <div class="input-field col m12 s12">
                                         <i class="material-icons prefix">local_gas_station</i>
-                                        <input id="tipoCombustivel" type="text" class="validate" name="tipoCombustivel">
-                                        <label for="tipoCombustivel">Tipo</label>
+                                        <input id="combustivelTipo" type="text" class="validate" name="combustivelTipo">
+                                        <label for="combustivelTipo">Tipo</label>
                                     </div>
                                 </div>
                             </div>
@@ -52,14 +52,14 @@
                     </div>
 
                     <div id="divMarca">
-                        <form method="POST" name="formMarca" id="formMarca" novalidate="novalidate">
+                        <form method="POST" name="marca_form" id="marca_form" novalidate="novalidate">
                             <div class="card-content">
                                 <span class="card-title">Cadastrar Marca</span>
                                 <div class="row">
                                     <div class="input-field col m12 s12">
                                         <i class="material-icons prefix">directions_car</i>
-                                        <input id="nomeMarca" type="text" class="validate" name="nomeMarca">
-                                        <label for="nomeMarca">Marca</label>
+                                        <input id="marcaNome" type="text" class="validate" name="marcaNome">
+                                        <label for="marcaNome">Marca</label>
                                     </div>
                                 </div>
                             </div>
@@ -71,22 +71,22 @@
 
                     <div id="divModelo">
 
-                        <form method="POST" name="formModelo" id="formModelo" novalidate="novalidate">
+                        <form method="POST" name="modelo_form" id="modelo_form" novalidate="novalidate">
                             <div class="card-content">
                                 <span class="card-title">Cadastrar Modelo</span>
                                 <div class="row">
 
                                     <div class="input-field col m12" id="novoModelo">
-                                        <select id="marcaSelect" name="marcaSelect">
+                                        <select id="marca" name="marca">
                                             <option value="" disabled selected>Escolha a marca</option>
                                         </select>
-                                        <label for="marcaSelect">Marca</label>
+                                        <label for="marca">Marca</label>
                                     </div>
 
                                     <div class="input-field col m12 s12">
                                         <i class="material-icons prefix">directions_car</i>
-                                        <input id="nomeModelo" type="text" class="validate" name="nomeModelo">
-                                        <label for="nomeModelo">Modelo</label>
+                                        <input id="modeloNome" type="text" class="validate" name="modeloNome">
+                                        <label for="modeloNome">Modelo</label>
                                     </div>
                                 </div>
                             </div>
@@ -97,14 +97,14 @@
                     </div>
 
                     <div id="divTipo">
-                        <form method="POST" name="formTipo" id="formTipo" novalidate="novalidate">
+                        <form method="POST" name="tipo_form" id="tipo_form" novalidate="novalidate">
                             <div class="card-content">
                                 <span class="card-title">Cadastrar Tipo</span>
                                 <div class="row">
                                     <div class="input-field col m12 s12">
                                         <i class="material-icons prefix">motorcycle</i>
-                                        <input id="nomeTipo" type="text" class="validate" name="nomeTipo">
-                                        <label for="nomeTipo">Tipo de Veículo</label>
+                                        <input id="tipoNome" type="text" class="validate" name="tipoNome">
+                                        <label for="tipoNome">Tipo de Veículo</label>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
             //Load material select
             $('select').material_select();
 
-            getMarcas(marcaSelect.name);
+            getMarcas($("#marca").attr("name"));
 
             //Load Navbar and dropdown menu
             $('#nav-bar').load("/modules/navbar.html", function() {
@@ -158,31 +158,26 @@
                 $('.dropdown-button').dropdown();
             });
 
-            //Stop the submit request
-            $("#form").submit(function(e) {
-                e.preventDefault();
-            });
-
             //get de form data and save
             $("#createCombustivel").click(function(e) {
                 var data = Object();
-                data.tipo = $("#tipoCombustivel").val();
+                data.tipo = $("#combustivelTipo").val();
                 createCombustivel(data);
             });
             $("#createMarca").click(function(e) {
                 var data = Object();
-                data.nome = $("#nomeMarca").val();
+                data.nome = $("#marcaNome").val();
                 createMarca(data);
             });
             $("#createModelo").click(function(e) {
                 var data = Object();
-                data.marcaId = $("#marcaSelect").val();
-                data.nome = $("#nomeModelo").val();
+                data.marcaId = $("#marca").val();
+                data.nome = $("#modeloNome").val();
                 createModelo(data);
             });
             $("#createTipo").click(function(e) {
                 var data = Object();
-                data.nome = $("#nomeTipo").val();
+                data.nome = $("#tipoNome").val();
                 createTipo(data);
             });
 

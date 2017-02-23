@@ -24,7 +24,7 @@
     <!--    <form method="POST" name="formVeiculo1" action="" id="formVeiculo1" novalidate="novalidate">-->
     <div class="container">
         <div class="row">
-            <form method="POST" name="formVeiculo1" action="" id="formVeiculo1">
+            <form method="POST" name="veiculo_form_parcial" action="" id="veiculo_form_parcial">
                 <!-- Div with submit result -->
                 <div class="card col m8 offset-m2" id="cardFirst">
                     <div class="card-content">
@@ -78,7 +78,7 @@
                 </div>
             </form>
 
-            <form method="POST" name="formVeiculo2" action="" id="formVeiculo2" novalidate="novalidate">
+            <form method="POST" name="veiculo_form" action="" id="veiculo_form" novalidate="novalidate">
                 <!---This is the card actually using the transition. I have it set to opacity:0 to start so it seems invisible--->
                 <div id="more" class="card col m8 offset-m2 hide">
                     <div class="card-content">
@@ -186,8 +186,8 @@
             //Validate first vehicles data
             $("#next").click(function() {
 
-                $("#formVeiculo1").validate();
-                if ($("#formVeiculo1").valid()) {
+                $("#veiculo_form_parcial").validate();
+                if ($("#veiculo_form_parcial").valid()) {
                     slideIn("#more", 1350, -800, cardFirst);
                     //$("#infoSpan").text("Informações do veículo " + $("#marcaid").val());
                     getCombustiveis();
@@ -195,7 +195,7 @@
                 };
             });
 
-          
+
             //modal config
             $('.modal').modal({
                 dismissible: false
@@ -218,8 +218,6 @@
 
             //Load modelos after change Marca
             $("#marca").change(function() {
-
-                $("#modelo").attr("disabled", false);
                 getModelos($("#marca").val());
 
                 //Load material select
@@ -239,9 +237,9 @@
                 data.estadoveiculo = $("#estadoveiculo").val();
                 data.setorid = $("#setor").val();
                 data.info = $("#info").val();
-                
+
                 createVeiculo(data);
-                
+
             });
 
 

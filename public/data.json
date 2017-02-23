@@ -33,12 +33,12 @@
       "id": 6
     },
     {
-      "id": 98,
       "nome": "Haley Parks",
-      "setor": 15,
+      "cnh": "22255444455",
+      "cnh_vencimento": "2016-03-10",
       "telefone": "+55 (954) 562-2677",
-      "cnh": 49542269803,
-      "cnh_vencimento": "2016-03-10"
+      "setor": "15",
+      "id": 98
     },
     {
       "id": 60,
@@ -71,6 +71,22 @@
       "telefone": "19995339466",
       "setor": "2",
       "id": 107
+    },
+    {
+      "nome": "Chewbacca da Silva",
+      "cnh": "22255444455",
+      "cnh_vencimento": "2015-01-01",
+      "telefone": "19995339470",
+      "setor": "3",
+      "id": 108
+    },
+    {
+      "nome": "Chewbacca da Silva",
+      "cnh": "22255444455",
+      "cnh_vencimento": "2015-01-01",
+      "telefone": "19995339470",
+      "setor": "2",
+      "id": 109
     }
   ],
   "combustivel": [
@@ -187,6 +203,10 @@
     {
       "nome": "PINGADO 2017",
       "id": 26
+    },
+    {
+      "nome": "maria josé",
+      "id": 27
     }
   ],
   "marca": [
@@ -281,6 +301,10 @@
     {
       "id": 135,
       "nome": "YAMAHA"
+    },
+    {
+      "id": 256,
+      "nome": "aaaaasdfasdf asphalt 6"
     }
   ],
   "modelo": [
@@ -2741,8 +2765,8 @@
     },
     {
       "id": 781,
-      "marcaId": 27,
-      "nome": "ELEFANTRE"
+      "nome": "ELEFANTRE",
+      "marcaId": "27"
     },
     {
       "id": 833,
@@ -5111,29 +5135,64 @@
     },
     {
       "marcaId": "27",
-      "nome": "fgasdgaqsdf",
+      "nome": "astonmartiniseugay",
       "id": 5029
+    },
+    {
+      "marcaId": "27",
+      "nome": "sgadadseugay",
+      "id": 5030
     }
   ],
   "veiculo": [
     {
-      "tipoid": "0",
-      "placa": "ddd-8394",
-      "marcaid": "3",
-      "modeloid": "",
-      "anofabricacao": "1972",
+      "tipoid": "1",
+      "placa": "DDD-8403",
+      "marcaid": "111",
+      "modeloid": "551",
+      "anofabricacao": "2016",
       "combustivelid": "1",
-      "renavam": "00055599978",
-      "estadoveiculo": "5",
+      "renavam": "00000000010",
+      "estadoveiculo": "4",
       "setorid": "4",
-      "info": "informações relevantes sobre o veículo",
-      "id": 1
+      "info": "informações lokas ",
+      "id": 2
+    },
+    {
+      "tipoid": "0",
+      "placa": "nnn-5263",
+      "marcaid": "5",
+      "modeloid": "111",
+      "anofabricacao": "2016",
+      "combustivelid": "1",
+      "renavam": "00022211133",
+      "estadoveiculo": "5",
+      "setorid": "1",
+      "info": "info",
+      "id": 3
+    },
+    {
+      "tipoid": "1",
+      "placa": "DRM-9990",
+      "marcaid": "1",
+      "modeloid": "1539",
+      "anofabricacao": "1589",
+      "combustivelid": "3",
+      "renavam": "9995556661",
+      "estadoveiculo": "5",
+      "setorid": "1",
+      "info": "ADICIONAIS",
+      "id": 4
     }
   ],
   "tipo_veiculo": [
     {
       "id": 0,
       "nome": "CARRO"
+    },
+    {
+      "nome": "ALFA",
+      "id": 1
     }
   ]
 }

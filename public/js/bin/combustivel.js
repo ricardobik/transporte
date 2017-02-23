@@ -1,32 +1,15 @@
-// Validade Fields materialize.css
-$.validator.setDefaults({
-    errorClass: 'invalid',
-    validClass: "valid",
-    errorPlacement: function (error, element) {
-        $(element)
-            .closest("form")
-            .find("label[for='" + element.attr("id") + "']")
-            .attr('data-error', error.text())
-            .attr('class', 'active');
-
-    },
-    submitHandler: function (form) {
-        console.log('form ok');
-    }
-});
-
 //Rules and Messages to Validate
 $("#combustivel_form").validate({
 //    ignore: [],
     debug: true,
     rules: {
-        tipoCombustivel: {
+        combustivelTipo: {
             required: true,
             minlength: 3
         }
     },
     messages: {
-        tipoCombustivel: {
+        combustivelTipo: {
             required: "Preencha corretamente o campo",
             minlength: jQuery.validator.format("O nome do setor deve conter ao menos {0} caracteres")
         }
@@ -130,7 +113,12 @@ function createCombustivel(data) {
                     "Combustivel gravado com sucesso.",
                     "success");
 
+            resetForm($("#combustivel_form"));
+                
             },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Erro!");
+            }
 
         });
     }

@@ -3,12 +3,16 @@ $("#motorista_form").validate({
     //ignore: [],
     debug: true,
     rules: {
+        nome: {
+          required: true,
+            minlength: 3
+        },
         cnh: {
             required: true,
             rangelength: [11, 11]
         },
         cnh_vencimento: {
-
+            required: true
         },
         setor: {
             required: true
@@ -16,7 +20,8 @@ $("#motorista_form").validate({
     },
     messages: {
         nome: {
-            required: "O campo nome deve ser preenchido"
+            required: "O campo nome deve ser preenchido",
+            minlength: jQuery.validator.format("O nome do motorista deve conter ao menos {0} caracteres")
         },
         cnh: {
             required: "O número da CNH do motorista deve ser prenchido",
@@ -127,8 +132,7 @@ function createMotorista(data) {
                     "success");
 
                 resetForm($("#motorista_form"));
-                $('select').prop('selectedIndex', 0);
-                $("select").material_select;
+                
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("Erro!");
@@ -210,16 +214,13 @@ function getMotoristaTable() {
                 }],
         "columnDefs": [{
             "width": "10%",
-            "targets": 0
+            "targets": 0 
                 }, {
-            "width": "40%",
+            "width": "30%",
             "targets": 1
                 }, {
-            "width": "60%",
+            "width": "30%",
             "targets": 2
-                }, {
-            "width": "50%",
-            "targets": 3
                 }],
         select: true,
         fixedColumns: true,
