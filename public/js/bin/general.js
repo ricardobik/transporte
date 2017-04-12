@@ -31,6 +31,7 @@ function resetForm($form) {
 
     $("input:text:first:visible").focus();
     $('select').prop('selectedIndex', 0);
+        
     $('select').material_select;
 
     //Reload Material Form

@@ -2,9 +2,7 @@
 <html>
 
 <head>
-    <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
+     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/sass/materialize.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
@@ -17,7 +15,7 @@
 
 <body>
 
-    
+
     <!-- Import Navbar -->
     <div id="nav-bar"></div>
 
@@ -95,7 +93,7 @@
 
                     <div class="input-field col m6">
                         <input placeholder="" id="cnh_vencimento" name="cnh_vencimento" type="text" class="validate" required="">
-                        <label for="data de vencimento">Data de Vencimento</label>
+                        <label for="cnh_vencimento">Data de Vencimento</label>
                     </div>
                 </div>
                 <div class="row">
@@ -112,7 +110,7 @@
             <div class="modal-footer">
                 <div class="card-action right-align">
                     <div class="" id="divDelete">
-                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="back">Voltar</a>
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat modal-close" id="back">Voltar</a>
                         <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="delete">Deletar</a>
                         <a href="#!" class="modal-action waves-effect waves-green btn-flat " id="edit">Editar</a>
                     </div>
@@ -144,7 +142,7 @@
         $(document).ready(function() {
 
             var $update;
-
+            
             //Fill Table with Json
             getMotoristaTable();
 
@@ -181,6 +179,7 @@
 
             //Fill modal form
             $('#callModalEdit').on('click', function() {
+
                 $("#divDelete").removeClass("hide");
                 $("#divEdit").addClass("hide");
                 $("form :input").prop("disabled", true);
@@ -192,7 +191,7 @@
                 $("#divDelete").addClass("hide");
                 $("#divEdit").removeClass("hide");
                 $("form :input").prop("disabled", false);
-                $("#motoristaId").prop("disabled", true)
+                $("#motoristaId").prop("disabled", true);
 
                 //Reload Material Form
                 Materialize.updateTextFields();
@@ -210,6 +209,18 @@
             //Delete request
             $('#delete').on('click', function() {
                 deleteMotorista($update.id);
+            });
+
+            //Cancel request
+            $('#cancel').on('click', function() {
+                resetForm($("#motorista_form"));
+                $("#motorista_form").validate().resetForm();
+            });
+
+            //Back request
+            $('#back').on('click', function() {
+                resetForm($("#motorista_form"));
+                $("#motorista_form").validate().resetForm();
             });
 
 

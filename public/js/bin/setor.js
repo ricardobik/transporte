@@ -4,10 +4,19 @@ $("#setor_form").validate({
         nome: {
             required: true,
             minlength: 3
+        },
+        setorNome: {
+            required: true,
+            minlength: 3
         }
     },
     messages: {
         nome: {
+            required: "Preencha com o nome do novo setor",
+            minlength: jQuery.validator.format("O nome do setor deve conter ao menos {0} caracteres")
+
+        },
+        setorNome: {
             required: "Preencha com o nome do novo setor",
             minlength: jQuery.validator.format("O nome do setor deve conter ao menos {0} caracteres")
 
@@ -23,8 +32,8 @@ function getSetorTable() {
         ajax: {
             url: urlApi + "setor",
             contentType: 'application/json; charset=UTF-8',
-            dataType: 'json',
-            dataSrc: ''
+            dataType: 'json'
+            
         },
         columns: [{
             data: "id"
@@ -56,13 +65,13 @@ function getSetor(id, inputType) {
         dataType: "json",
 
         //if received a response from the server
-        success: function (data) {
+        success: function (resp) {
 
             if (inputType == "select") {
                 $("#setor").append(
                     $("<option></option>")
-                    .attr('value', data.id)
-                    .text(data.nome)
+                    .attr('value', resp.data.id)
+                    .text(resp.data.nome)
                     .prop('selected', true)
 
                 );
@@ -70,8 +79,8 @@ function getSetor(id, inputType) {
 
             } else {
 
-                $("#setorId").val(data.id);
-                $("#setorNome").val(data.nome);
+                $("#setorId").val(resp.data.id);
+                $("#setorNome").val(resp.data.nome);
             }
             //Reload Material Form
             Materialize.updateTextFields();
@@ -125,7 +134,7 @@ function deleteSetor(id) {
 function createSetor(data) {
 
     //make AJAX request
-    $("#setor_form").validate();
+    validator = $("#setor_form").validate();
     if ($("#setor_form").valid()) {
         $.ajax({
             type: "POST",
@@ -140,7 +149,8 @@ function createSetor(data) {
                     "success");
 
                 resetForm($("#setor_form"));
-               
+                validator.resetForm();
+
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("Erro!");
@@ -158,7 +168,7 @@ function createSetor(data) {
 function updateSetor(data) {
 
     //do AJAX request
-    $("#setor_form").validate();
+    validator = $("#setor_form").validate();
     if ($("#setor_form").valid()) {
 
         swal({
@@ -186,6 +196,7 @@ function updateSetor(data) {
 
                     //Reload dataTable
                     $('#table-setor').DataTable().ajax.reload();
+                    validator.resetForm();
                     $('#modal-edit').modal('close');
 
                 },
@@ -203,14 +214,18 @@ function updateSetor(data) {
 //Get Setores to fill a select
 function getSetores(id) {
 
+    if (id == "null") {
+        $('#setor').children().remove().end().append('<option value="" disable selected>Selecione o setor</option>');
+    }
+    
     //Load Json setor
     $.ajax({
         url: urlApi + "setor",
         type: 'GET',
         dataType: 'json',
-        success: function (json) {
+        success: function (resp) {
 
-            $.each(json, function (key, value) {
+            $.each(resp.data, function (key, value) {
 
                 $('#setor').append(
                     $("<option></option>")
@@ -218,47 +233,49 @@ function getSetores(id) {
                     .text(value.nome)
                 );
 
-                if (id !== "null") {
-                    $('#setor').find('option[value="' + id + '"]').prop('selected', true);
-                }
-                $('#setor').material_select();
-
-                //Reload Material Form
-                Materialize.updateTextFields();
-
             });
+
+            if (id !== "null") {
+                $('#setor').find('option[value="' + id + '"]').prop('selected', true);
+            }
+
+            $('#setor').material_select();
+
+            //Reload Material Form
+            Materialize.updateTextFields();
         }
     });
 
 }
 
+
 //Get setores and add to select
-function getSetorSelect(id) {
-
-    $.ajax({
-        url: urlApi + "setor",
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-
-            $('#setorid')
-                .find('option')
-                .remove()
-                .end();
-
-            $.each(json, function (key, value) {
-
-                $('#setorid').append(
-                    $("<option></option>")
-                    .attr('value', value.id)
-                    .text(value.nome)
-                );
-
-                $('#setorid').find('option[value="' + id + '"]').prop('selected', true);
-                $('#setorid').material_select();
-
-            });
-
-        }
-    });
-};
+//function getSetorSelect(id) {
+//
+//    $.ajax({
+//        url: urlApi + "setor",
+//        type: 'GET',
+//        dataType: 'json',
+//        success: function (json) {
+//
+//            $('#setorid')
+//                .find('option')
+//                .remove()
+//                .end();
+//
+//            $.each(json, function (key, value) {
+//
+//                $('#setorid').append(
+//                    $("<option></option>")
+//                    .attr('value', value.id)
+//                    .text(value.nome)
+//                );
+//
+//                $('#setorid').find('option[value="' + id + '"]').prop('selected', true);
+//                $('#setorid').material_select();
+//
+//            });
+//
+//        }
+//    });
+//};

@@ -1,10 +1,10 @@
 //Rules and Messages to Validate
 $("#motorista_form").validate({
-    //ignore: [],
-    debug: true,
+    ignore: [],
+    //    debug: true,
     rules: {
         nome: {
-          required: true,
+            required: true,
             minlength: 3
         },
         cnh: {
@@ -33,9 +33,8 @@ $("#motorista_form").validate({
             required: "A data de vencimento da CNH deve ser preenchida"
         },
         setor: {
-            required: "Selecione um setor"
+            required: "Selecione um setor válido"
         }
-
     }
 });
 
@@ -49,15 +48,15 @@ function getMotorista(Id) {
         dataType: "json",
 
         //if received a response from the server
-        success: function (data) {
+        success: function (resp) {
 
-            $("#motoristaId").val(data.id);
-            $("#nome").val(data.nome);
-            $("#cnh").val(data.cnh);
-            $("#cnh_vencimento").val(data.cnh_vencimento);
-            $("#telefone").val(data.telefone);
+            $("#motoristaId").val(resp.data.id);
+            $("#nome").val(resp.data.nome);
+            $("#cnh").val(resp.data.cnh);
+            $("#cnh_vencimento").val(resp.data.cnh_vencimento);
+            $("#telefone").val(resp.data.telefone);
 
-            getSetores(data.setor);
+            getSetores(resp.data.setor);
 
             //Reload Material Form
             Materialize.updateTextFields();
@@ -66,6 +65,7 @@ function getMotorista(Id) {
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Erro!");
+
         }
 
     });
@@ -117,7 +117,8 @@ function deleteMotorista(id) {
 function createMotorista(data) {
 
     //make AJAX request
-    $("#motorista_form").validate();
+    validator = $("#motorista_form").validate();
+
     if ($("#motorista_form").valid()) {
         $.ajax({
             type: "POST",
@@ -132,10 +133,11 @@ function createMotorista(data) {
                     "success");
 
                 resetForm($("#motorista_form"));
-                
+                getSetores("null");
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("Erro!");
+               
             }
 
         });
@@ -149,7 +151,7 @@ function createMotorista(data) {
 function updateMotorista(id, data) {
 
     //do AJAX request
-    $("#motorista_form").validate();
+    validator = $("#motorista_form").validate();
     if ($("#motorista_form").valid()) {
 
         swal({
@@ -177,6 +179,7 @@ function updateMotorista(id, data) {
 
                     //Reload dataTable
                     $('#table-motorista').DataTable().ajax.reload();
+//                    validator.resetForm();
                     $('#modal-edit').modal('close');
 
                 },
@@ -200,8 +203,7 @@ function getMotoristaTable() {
         ajax: {
             url: urlApi + "motorista",
             contentType: 'application/json; charset=UTF-8',
-            dataType: 'json',
-            dataSrc: ''
+            dataType: 'json'
         },
         columns: [{
             data: "id"
@@ -214,7 +216,7 @@ function getMotoristaTable() {
                 }],
         "columnDefs": [{
             "width": "10%",
-            "targets": 0 
+            "targets": 0
                 }, {
             "width": "30%",
             "targets": 1

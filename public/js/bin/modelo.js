@@ -99,6 +99,8 @@ function getModelo(id, inputType) {
 
 function getModelos(marcaId, modeloId) {
     
+    console.log(marcaId, modeloId);
+    
     $("#modelo").empty().html(' ');
     $("#modelo").append("<option value='' disabled selected>Escolha o modelo</option>");
     $("#loader").css('display', '');
@@ -108,9 +110,9 @@ function getModelos(marcaId, modeloId) {
 
         type: 'GET',
         dataType: 'json',
-        success: function (json) {
+        success: function (resp) {
 
-            if (json === '') {
+            if (resp === '') {
                 $("#modelo")
                     .find("option")
                     .remove()
@@ -119,7 +121,7 @@ function getModelos(marcaId, modeloId) {
                     .material_select();
             };
 
-            $.each(json, function (key, value) {
+            $.each(resp.data, function (key, value) {
 
                 $('#modelo').append(
                     $("<option></option>")

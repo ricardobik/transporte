@@ -10,7 +10,7 @@
     <!--Import SweetAlert with google style-->
     <link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
-    
+
     <link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />
 
     <!--Let browser know website is optimized for mobile-->
@@ -51,20 +51,21 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col m6">
-                                    <input id="telefone" type="text" class="validate" name="telefone">
+                                    <input id="telefone" type="text" class="validate" name="telefone" placeholder="(99) 99999 9999"   >
                                     <label for="telefone">Telefone</label>
                                 </div>
                                 <div class="input-field col m6">
                                     <select id="setor" name="setor" required="" aria-required="true">
-                                        <option value="">Escolha o Setor</option>
+<!--                                        <option value="" disabled selected>Escolha o Setor</option>-->
                                     </select>
-                                    <label for="setor"></label>
+                                    <label for="setor" data-class="select"></label>
 
                                 </div>
                             </div>
                         </div>
                         <div class="card-action right-align">
                             <a class="waves-effect waves-light btn" id="submit" name="submit"><i class="material-icons right">send</i>Enviar</a>
+
                         </div>
 
                         <!--action button-->
@@ -108,15 +109,23 @@
             //Load material select
             $('select').material_select();
 
-            //Stop the submit request
-            $("#motorista-form").submit(function(e) {
-                e.preventDefault();
-            });
-
             //get de form data and save
             $("#submit").click(function(e) {
+
+                if ($('#setor').val() == null) {
+                    $('.select-dropdown').removeClass("valid");
+                    $('.select-dropdown').addClass("invalid");
+
+                } else {
+                    $('label[for="setor"]').removeAttr('data-error');
+                    $('.select-dropdown').removeClass("invalid");
+                    $('.select-dropdown').addClass("valid");
+                }
+
                 var data = $("#motorista_form").serializeArray();
                 createMotorista(data);
+
+
             });
 
         });

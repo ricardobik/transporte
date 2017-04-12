@@ -17,27 +17,29 @@ $("#marca_form").validate({
 });
 
 //Get Brands to fill select
-function getMarcas(input, marcaId) {
+function getMarcas(id) {
 
-    input = "#" + input;
+    if (id == "null") {
+        $('#marca').children().remove().end().append('<option value="" disable selected>Selecione a marca</option>');
+    }
 
     $.ajax({
         url: urlApi + "marca/",
         type: 'GET',
         dataType: 'json',
-        success: function (json) {
+        success: function (resp) {
+            
+             $.each(resp.data, function (key, value) {
 
-            $(input)
-                .find('option')
-                .remove()
-                .end();
-
-            $.each(json, function (key, value) {
-                $(input).append($("<option></option>").attr('value', value.id).text(value.nome));
+                $('#marca').append(
+                    $("<option></option>")
+                    .attr('value', value.id)
+                    .text(value.nome)
+                );
             });
 
-            if (marcaId !== undefined) {
-                $(input).find('option[value="' + marcaId + '"]').prop('selected', true);
+            if (id !== "null") {
+                $("#marca").find('option[value="' + id + '"]').prop('selected', true);
             }
 
             //Load material dropbox
@@ -122,7 +124,7 @@ function getMarca(id, input) {
         success: function (data) {
 
             if (input == "select") {
-                
+
                 $("#marca").empty().html(' ');
                 $('#marca').append($("<option></option>")
                     .attr('value', data.id)
@@ -134,7 +136,7 @@ function getMarca(id, input) {
 
                 $("#marcaId").val(data.id);
                 $("#marcaNome").val(data.nome);
-                
+
             };
 
 

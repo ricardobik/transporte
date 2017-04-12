@@ -23,8 +23,7 @@ function getTipoTable() {
         ajax: {
             url: urlApi + "tipo_veiculo",
             contentType: 'application/json; charset=UTF-8',
-            dataType: 'json',
-            dataSrc: ''
+            dataType: 'json'
         },
         columns: [{
             data: "id"
@@ -57,10 +56,10 @@ function getTipo(id) {
         dataType: "json",
 
         //if received a response from the server
-        success: function (data) {
+        success: function (resp) {
 
-            $("#tipoId").val(data.id);
-            $("#tipoNome").val(data.nome);
+            $("#id").val(resp.data.id);
+            $("#nome").val(resp.data.nome);
 
             //Reload Material Form
             Materialize.updateTextFields();
@@ -72,7 +71,11 @@ function getTipo(id) {
 };
 
 //insert into select to create veiculo
-function getTipos() {
+function getTipos(id) {
+    
+    if (id == "null") {
+        $('#tipo').children().remove().end().append('<option value="" disable selected>Selecione o tipo</option>');
+    }
     
     //Load 
     $.ajax({
@@ -80,9 +83,9 @@ function getTipos() {
 
         type: 'GET',
         dataType: 'json',
-        success: function (json) {
+        success: function (resp) {
 
-            $.each(json, function (key, value) {
+            $.each(resp.data, function (key, value) {
 
                 $('#tipo').append(
                     $("<option></option>")
@@ -92,6 +95,10 @@ function getTipos() {
                 $('#tipo').material_select();
 
             });
+            
+            if (id !== "null") {
+                $('#tipo').find('option[value="' + id + '"]').prop('selected', true);
+            }
 
         }
     });

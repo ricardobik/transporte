@@ -1,3 +1,41 @@
+/*With empty fiel validation*/
+
+label[data-class=select]:after {
+  content: attr(data-error);
+  color: #F44336;
+  top: 85px;
+  position: relative;
+  opacity: 1;
+}
+
+
+
+label {
+    width: 100%;
+}
+label:after {
+    -moz-transition-property: all !important;
+    -o-transition-property: all !important;
+    -webkit-transition-property: all !important;
+    transition-property: all !important;
+    font-size: 0.8rem;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    -webkit-transform: none;
+    transform: none;
+}
+
+/*
+label:not(.active):after {
+    -moz-transform: translateY(-140%);
+    -ms-transform: translateY(-140%);
+    -o-transform: translateY(-140%);
+    -webkit-transform: translateY(-140%);
+    transform: translateY(-140%);
+}
+*/
+
 /*Hide the input number button    */
 
 input[type=number]::-webkit-outer-spin-button,
