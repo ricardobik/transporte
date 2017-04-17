@@ -79,8 +79,8 @@ function getSetor(id, inputType) {
 
             } else {
 
-                $("#setorId").val(resp.data.id);
-                $("#setorNome").val(resp.data.nome);
+                $("#id").val(resp.data.id);
+                $("#nome").val(resp.data.nome);
             }
             //Reload Material Form
             Materialize.updateTextFields();

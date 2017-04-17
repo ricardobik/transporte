@@ -32,7 +32,7 @@
                         <div class="row">
                             <div class="input-field col m4" id="divTipo">
                                 <select id="tipo" name="tipo" required="" aria-required="true">
-<!--                                    <option value="" disabled selected>Escolha o tipo</option>-->
+                                    <!--                                    <option value="" disabled selected>Escolha o tipo</option>-->
                                 </select>
                                 <label for="tipo">Tipo</label>
                             </div>
@@ -46,7 +46,7 @@
                         <div class="row">
                             <div class="input-field col m5 s11">
                                 <select id="marca" name="marca" disabled>
-<!--                                    <option value="" disabled selected>Escolha a marca</option>-->
+                                    <!--                                    <option value="" disabled selected>Escolha a marca</option>-->
                                 </select>
                                 <label for="marca">Marca</label>
                             </div>
@@ -62,7 +62,7 @@
 
                             <div class="input-field col s12 m6">
                                 <select id="modelo" name="modelo" disabled>
-<!--                                    <option value="" disabled selected>Escolha o modelo</option>-->
+                                    <!--                                    <option value="" disabled selected>Escolha o modelo</option>-->
                                 </select>
                                 <label for="modelo">Modelo</label>
                             </div>
@@ -114,7 +114,7 @@
                             </div>
                             <div class="input-field col m12">
                                 <select id="setor" name="setor" required="" aria-required="true">
-<!--                                    <option value="" disabled selected>Selecione</option>-->
+                                    <!--                                    <option value="" disabled selected>Selecione</option>-->
                                 </select>
                                 <label for="setor">Setor do veículo</label>
                             </div>
@@ -192,6 +192,10 @@
                     //$("#infoSpan").text("Informações do veículo " + $("#marcaid").val());
                     getCombustiveis();
                     getSetores();
+                    var marca = $("#marca :selected").text();
+                    var modelo = $("#modelo :selected").text();
+                    var placa =     
+                    $("#infoSpan").text("Informações do veículo: " + marca + " " + modelo + " Placa:");
                 };
             });
 
