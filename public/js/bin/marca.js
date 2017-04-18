@@ -121,21 +121,21 @@ function getMarca(id, input) {
         dataType: "json",
 
         //if received a response from the server
-        success: function (data) {
+        success: function (resp) {
 
             if (input == "select") {
 
                 $("#marca").empty().html(' ');
                 $('#marca').append($("<option></option>")
-                    .attr('value', data.id)
-                    .text(data.nome)
+                    .attr('value', resp.data.id)
+                    .text(resp.data.nome)
                 );
                 $('#marca').material_select();
 
             } else {
 
-                $("#marcaId").val(data.id);
-                $("#marcaNome").val(data.nome);
+                $("#id").val(resp.data.id);
+                $("#nome").val(resp.data.nome);
 
             };
 

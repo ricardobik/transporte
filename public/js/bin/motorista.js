@@ -9,7 +9,8 @@ $("#motorista_form").validate({
         },
         cnh: {
             required: true,
-            rangelength: [11, 11]
+            rangelength: [11, 11],
+            digits: true
         },
         cnh_vencimento: {
             required: true
@@ -26,7 +27,7 @@ $("#motorista_form").validate({
         cnh: {
             required: "O número da CNH do motorista deve ser prenchido",
             rangelength: "O número da CNH deve conter onze digitos",
-            number: "O campo CNH só pode conter números"
+            digits: "O campo CNH só pode conter números"
 
         },
         cnh_vencimento: {
@@ -118,7 +119,6 @@ function createMotorista(data) {
 
     //make AJAX request
     validator = $("#motorista_form").validate();
-
     if ($("#motorista_form").valid()) {
         $.ajax({
             type: "POST",

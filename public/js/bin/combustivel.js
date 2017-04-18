@@ -78,9 +78,9 @@ function getCombustiveis() {
 
         type: 'GET',
         dataType: 'json',
-        success: function (json) {
+        success: function (resp) {
 
-            $.each(json, function (key, value) {
+            $.each(resp.data, function (key, value) {
 
                 $('#combustivel').append(
                     $("<option></option>")

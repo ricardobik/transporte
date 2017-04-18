@@ -1,4 +1,3 @@
-
 //Rules and Messages to Validate
 $("#veiculo_form_parcial").validate({
     ignore: [],
@@ -7,10 +6,10 @@ $("#veiculo_form_parcial").validate({
         placa: {
             required: true
         },
-        marcaid: {
+        marca: {
             required: true
         },
-        modeloid: {
+        modelo: {
             required: true
         }
     },
@@ -18,10 +17,10 @@ $("#veiculo_form_parcial").validate({
         placa: {
             required: "O campo placa deve ser preenchido"
         },
-        marcaid: {
+        marca: {
             required: "O campo placa deve ser preenchido"
         },
-        modeloid: {
+        modelo: {
             required: "O campo placa deve ser preenchido"
         }
     }
@@ -30,27 +29,27 @@ $("#veiculo_form_parcial").validate({
 //Rules and Messages to Validate
 $("#veiculo_form").validate({
     ignore: [],
-    debug: true,
+    //    debug: true,
     rules: {
-        placa: {
-            required: true
+        renavam: {
+            required: true,
+            rangelength: [11, 11],
+            digits: true
         },
-        marcaid: {
+        setor: {
             required: true
-        },
-        modeloid: {
-            required: true
+
         }
     },
     messages: {
-        placa: {
-            required: "O campo placa deve ser preenchido"
+        renavam: {
+            required: "Campo Obrigatório",
+            rangelength: "Renavam - 11 digitos",
+            digits: "Somente números"
+
         },
-        marcaid: {
-            required: "O campo placa deve ser preenchido"
-        },
-        modeloid: {
-            required: "O campo placa deve ser preenchido"
+        setor: {
+            required: "Escolha o setor do Veículo"
         }
     }
 });
@@ -74,25 +73,32 @@ function createVeiculo(data) {
                     "success");
                 slideOut("#cardFirst", 1350, -800, more);
 
-                validator.resetForm();
                 resetForm($('#veiculo_form_parcial'));
+                resetForm($('#veiculo_form'));
 
                 $("#marca").attr("disabled", true);
                 $("#modelo").attr("disabled", true);
                 $('select').prop('selectedIndex', 0);
 
-                //Load material dropbox
-                $('select').material_select();
 
                 Materialize.updateTextFields();
+                validator.resetForm();
+                $('#veiculo_form_parcial').validate().resetForm();
+                
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Erro!");
+
             }
 
         });
     }
     //Reload Material Form
     Materialize.updateTextFields();
+    //Load material select
+    $('select').material_select();
 
-}
+};
 
 function getVeiculoTable() {
 
@@ -100,8 +106,7 @@ function getVeiculoTable() {
         ajax: {
             url: urlApi + "veiculo",
             contentType: 'application/json; charset=UTF-8',
-            dataType: 'json',
-            dataSrc: ''
+            dataType: 'json'
         },
         columns: [{
             data: "id"
@@ -147,25 +152,25 @@ function getVeiculo(Id) {
         dataType: "json",
 
         //if received a response from the server
-        success: function (data) {
+        success: function (resp) {
 
-            $("#id").val(data.id);
-            $("#tipo").val(data.tipoid);
-            $("#placa").val(data.placa);
+            $("#id").val(resp.data.id);
+            $("#tipo").val(resp.data.tipoid);
+            $("#placa").val(resp.data.placa);
 
-            getMarca(data.marcaid, "select")
-            
-            getModelo(data.modeloid, "select");
+            getMarca(resp.data.marcaid, "select")
 
-            getCombustiveis(data.combustivelid);
-            
-            getSetor(data.setorid, "select");
+            getModelo(resp.data.modeloid, "select");
 
-            $("#anofabricacao").val(data.anofabricacao);
-            $("#combustivel").val(data.combustivelid);
-            $("#renavam").val(data.renavam);
-            $("#estadoveiculo").val(data.estadoveiculo);
-            $("#info").val(data.info);
+            getCombustiveis(resp.data.combustivelid);
+
+            getSetor(resp.data.setorid, "select");
+
+            $("#anofabricacao").val(resp.data.anofabricacao);
+            $("#combustivel").val(resp.data.combustivelid);
+            $("#renavam").val(resp.data.renavam);
+            $("#estadoveiculo").val(resp.data.estadoveiculo);
+            $("#info").val(resp.data.info);
 
             //Reload Material Form
             Materialize.updateTextFields();

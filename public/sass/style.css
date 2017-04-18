@@ -13,6 +13,7 @@ label[data-class=select]:after {
 label {
     width: 100%;
 }
+
 label:after {
     -moz-transition-property: all !important;
     -o-transition-property: all !important;
@@ -26,7 +27,6 @@ label:after {
     transform: none;
 }
 
-/*
 label:not(.active):after {
     -moz-transform: translateY(-140%);
     -ms-transform: translateY(-140%);
@@ -34,7 +34,6 @@ label:not(.active):after {
     -webkit-transform: translateY(-140%);
     transform: translateY(-140%);
 }
-*/
 
 /*Hide the input number button    */
 

@@ -82,17 +82,15 @@
                 <!---This is the card actually using the transition. I have it set to opacity:0 to start so it seems invisible--->
                 <div id="more" class="card col m8 offset-m2 hide">
                     <div class="card-content">
-                        <span class="card-title" id="infoSpan" name="infoSpan">Informações do veículo </span>
+                        <span class="card-title" id="infoSpan" name="infoSpan"></span>
                         <div class="row">
 
                             <div class="input-field col m3">
                                 <input id="anofabricacao" name="anofabricacao" type="text" class="validate">
-                                <label for="anofabricacao">Ano</label>
+                                <label for="anofabricacao" data-class="select">Ano</label>
                             </div>
                             <div class="input-field col m5 offset-m4" id="divCombustivel">
-                                <select id="combustivel" name="combustivel" required="" aria-required="true">
-                                    <option value="" disabled selected>Selecione</option>
-                                </select>
+                                <select id="combustivel" name="combustivel" required="" aria-required="true"></select>
                                 <label for="combustivel">Combustível</label>
                             </div>
 
@@ -102,7 +100,7 @@
                             </div>
 
                             <div class="input-field col m5 offset-m3">
-                                <select id="estadoveiculo" name="estadoveiculo" required="" aria-required="true">
+                                <select id="estadoveiculo" name="estadoveiculo">
                                     <option value="" disabled selected>Selecione</option>
                                     <option value="5">Ótimo</option>
                                     <option value="4">Bom</option>
@@ -110,13 +108,11 @@
                                     <option value="2">Ruim</option>
                                     <option value="1">Péssimo</option>
                                 </select>
-                                <label for="tipo">Estado atual do veículo</label>
+                                <label for="estadoveiculo">Estado atual do veículo</label>
                             </div>
                             <div class="input-field col m12">
-                                <select id="setor" name="setor" required="" aria-required="true">
-                                    <!--                                    <option value="" disabled selected>Selecione</option>-->
-                                </select>
-                                <label for="setor">Setor do veículo</label>
+                                <select id="setor" name="setor" required="" aria-required="true"></select>
+                                <label for="setor" data-class="select"></label>
                             </div>
 
                             <div class="input-field col m12">
@@ -185,17 +181,30 @@
 
             //Validate first vehicles data
             $("#next").click(function() {
+                
+                if ($('#setor').val() == null) {
+                    $('.select-dropdown').removeClass("valid");
+                    $('.select-dropdown').addClass("invalid");
+
+                } else {
+                    $('label[for="setor"]').removeAttr('data-error');
+                    $('.select-dropdown').removeClass("invalid");
+                    $('.select-dropdown').addClass("valid");
+                }
 
                 $("#veiculo_form_parcial").validate();
                 if ($("#veiculo_form_parcial").valid()) {
                     slideIn("#more", 1350, -800, cardFirst);
                     //$("#infoSpan").text("Informações do veículo " + $("#marcaid").val());
                     getCombustiveis();
-                    getSetores();
+                    getSetores("null");
                     var marca = $("#marca :selected").text();
                     var modelo = $("#modelo :selected").text();
-                    var placa =     
-                    $("#infoSpan").text("Informações do veículo: " + marca + " " + modelo + " Placa:");
+                    var placa = $("#placa").val().toUpperCase();
+                    $("#infoSpan").text("Veículo: " + marca + " " + modelo + " Placa: " + placa);
+                    
+                    var validator = $("#veiculo_form").validate();
+                    validator.resetForm();
                 };
             });
 
@@ -230,6 +239,17 @@
 
             //Create new vehicle
             $("#createVeiculo").click(function() {
+                
+                if ($('#setor').val() == null) {
+                    $('.select-dropdown').removeClass("valid");
+                    $('.select-dropdown').addClass("invalid");
+
+                } else {
+                    $('label[for="setor"]').removeAttr('data-error');
+                    $('.select-dropdown').removeClass("invalid");
+                    $('.select-dropdown').addClass("valid");
+                }
+                
                 var data = new Object();
                 data.tipoid = $("#tipo").val();
                 data.placa = $("#placa").val();

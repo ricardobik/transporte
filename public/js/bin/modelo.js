@@ -65,23 +65,23 @@ function getModelo(id, inputType) {
         dataType: "json",
 
         //if received a response from the server
-        success: function (data) {
+        success: function (resp) {
 
             if (inputType === "select") {
                 $("#modelo").empty().html(' ');
 
                 $('#modelo').append(
                     $("<option></option>")
-                    .attr('value', data.id)
-                    .text(data.nome)
+                    .attr('value', resp.data.id)
+                    .text(resp.data.nome)
                     .prop('selected', true)
                 );
                 $('#modelo').material_select();
                 
             } else {
 
-                $("#modeloId").val(data.id);
-                $("#modeloNome").val(data.nome);
+                $("#modeloId").val(resp.data.id);
+                $("#modeloNome").val(resp.data.nome);
             }
             
             //Reload Material Form
