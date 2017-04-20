@@ -9,7 +9,7 @@
     <!--Import SweetAlert with google style-->
     <link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
-
+    <link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -25,16 +25,14 @@
                 <div class="card material-table">
                     <ul class="tabs">
                         <li class="tab col s3 offset-m1"><a class="active" href="#divCombustivel">COMBUSTIVEL</a></li>
-                        <li class="tab col s2"><a href="#divMarca">MARCA</a></li>
+                        <li class="tab col s2" id="teste"><a href="#divMarca">MARCA</a></li>
                         <li class="tab col s2"><a href="#divModelo">MODELO</a></li>
                         <li class="tab col s2"><a href="#divTipo">TIPO</a></li>
                     </ul>
 
 
                     <div id="divCombustivel">
-                        <!--                        <form method="POST" name="formCombustivel" id="formCombustivel" novalidate="novalidate">-->
                         <form method="POST" name="combustivel_form" id="combustivel_form" novalidate="novalidate">
-
                             <div class="card-content">
                                 <span class="card-title">Cadastrar combustível</span>
                                 <div class="row">
@@ -78,15 +76,14 @@
 
                                     <div class="input-field col m12" id="novoModelo">
                                         <select id="marca" name="marca">
-                                            <option value="" disabled selected>Escolha a marca</option>
                                         </select>
                                         <label for="marca">Marca</label>
                                     </div>
 
                                     <div class="input-field col m12 s12">
                                         <i class="material-icons prefix">directions_car</i>
-                                        <input id="modeloNome" type="text" class="validate" name="modeloNome">
-                                        <label for="modeloNome">Modelo</label>
+                                        <input id="modelo" type="text" class="validate" name="modeloNome">
+                                        <label for="modelo">Modelo</label>
                                     </div>
                                 </div>
                             </div>
@@ -113,8 +110,6 @@
                             </div>
                         </form>
                     </div>
-
-
 
                     <!--action button-->
                     <div class="fixed-action-btn horizontal">
@@ -147,10 +142,21 @@
     <script>
         $(document).ready(function() {
 
+            $("#modelo").attr("disabled", true);
+
+            //Enable select Marca after select vehicle type
+            $("#marca").change(function() {
+                if ($("#marca").val() == "") {
+                    $("#modelo").attr("disabled", true);
+                } else {
+                    $("#modelo").attr("disabled", false)
+                }
+            });
+
+            getMarcas("null");
+
             //Load material select
             $('select').material_select();
-
-            getMarcas($("#marca").attr("name"));
 
             //Load Navbar and dropdown menu
             $('#nav-bar').load("/modules/navbar.html", function() {

@@ -50,9 +50,13 @@ function goCreate() {
     location.href = createUrl;
 }
 
-function goMotoristaCreate() {
+function goInfoVeiculo(div) {
+    
+    
     //location.href = createUrl;
-    location.href = getUrl.protocol + "//" + getUrl.host + "/" + path[1] + "modules/motorista/create.html";
+    location.href = getUrl.protocol + "//" + getUrl.host + "/" + path[1] + "/infoveiculo/create.html#" + div;
+    
+    console.log(div);
 }
 
 function goSetorCreate() {

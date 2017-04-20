@@ -39,6 +39,9 @@ $("#veiculo_form").validate({
         setor: {
             required: true
 
+        },
+        placa: {
+            required: true
         }
     },
     messages: {
@@ -50,6 +53,9 @@ $("#veiculo_form").validate({
         },
         setor: {
             required: "Escolha o setor do Veículo"
+        },
+        placa: {
+            required: "O campo placa deve ser preenchido"
         }
     }
 });
@@ -84,7 +90,7 @@ function createVeiculo(data) {
                 Materialize.updateTextFields();
                 validator.resetForm();
                 $('#veiculo_form_parcial').validate().resetForm();
-                
+
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("Erro!");

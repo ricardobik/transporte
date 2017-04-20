@@ -3,13 +3,13 @@ $("#modelo_form").validate({
     ignore: [],
     debug: true,
     rules: {
-        modeloNome: {
+        modelo: {
             required: true,
             minlength: 3
         }
     },
     messages: {
-        modeloNome: {
+        modelo: {
             required: "O campo nome deve ser preenchido",
             minlength: jQuery.validator.format("O nome do modelo deve conter ao menos {0} caracteres")
         }
@@ -99,7 +99,6 @@ function getModelo(id, inputType) {
 
 function getModelos(marcaId, modeloId) {
     
-    console.log(marcaId, modeloId);
     
     $("#modelo").empty().html(' ');
     $("#modelo").append("<option value='' disabled selected>Escolha o modelo</option>");

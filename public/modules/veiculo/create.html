@@ -32,7 +32,6 @@
                         <div class="row">
                             <div class="input-field col m4" id="divTipo">
                                 <select id="tipo" name="tipo" required="" aria-required="true">
-                                    <!--                                    <option value="" disabled selected>Escolha o tipo</option>-->
                                 </select>
                                 <label for="tipo">Tipo</label>
                             </div>
@@ -45,9 +44,7 @@
                         </div>
                         <div class="row">
                             <div class="input-field col m5 s11">
-                                <select id="marca" name="marca" disabled>
-                                    <!--                                    <option value="" disabled selected>Escolha a marca</option>-->
-                                </select>
+                                <select id="marca" name="marca" disabled></select>
                                 <label for="marca">Marca</label>
                             </div>
 
@@ -61,13 +58,11 @@
                             </div>
 
                             <div class="input-field col s12 m6">
-                                <select id="modelo" name="modelo" disabled>
-                                    <!--                                    <option value="" disabled selected>Escolha o modelo</option>-->
-                                </select>
+                                <select id="modelo" name="modelo" disabled></select>
                                 <label for="modelo">Modelo</label>
                             </div>
                         </div>
-                        <a class="" name="callModalEdit" id="callModalEdit" href="#modal">Não encontrou marca ou modelo específico? Cadastre aqui</a>
+                        <a class="" name="callInfoVeiculo" id="callInfoVeiculo" href="javascripti:void(0)" onclick="javascript:goInfoVeiculo('divMarca'); return false;" >Não encontrou marca ou modelo específico? Cadastre aqui</a>
                     </div>
                     <div class="card-action right-align">
 
@@ -181,7 +176,7 @@
 
             //Validate first vehicles data
             $("#next").click(function() {
-                
+
                 if ($('#setor').val() == null) {
                     $('.select-dropdown').removeClass("valid");
                     $('.select-dropdown').addClass("invalid");
@@ -202,7 +197,7 @@
                     var modelo = $("#modelo :selected").text();
                     var placa = $("#placa").val().toUpperCase();
                     $("#infoSpan").text("Veículo: " + marca + " " + modelo + " Placa: " + placa);
-                    
+
                     var validator = $("#veiculo_form").validate();
                     validator.resetForm();
                 };
@@ -239,7 +234,7 @@
 
             //Create new vehicle
             $("#createVeiculo").click(function() {
-                
+
                 if ($('#setor').val() == null) {
                     $('.select-dropdown').removeClass("valid");
                     $('.select-dropdown').addClass("invalid");
@@ -249,7 +244,7 @@
                     $('.select-dropdown').removeClass("invalid");
                     $('.select-dropdown').addClass("valid");
                 }
-                
+
                 var data = new Object();
                 data.tipoid = $("#tipo").val();
                 data.placa = $("#placa").val();
