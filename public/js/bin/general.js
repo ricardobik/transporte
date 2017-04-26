@@ -189,3 +189,21 @@ slideOut = function (selector, durationARG, startPosition, first) {
     time += 120;
 };
 
+/**
+ * Get an array of indexes for columns that have the given class name.
+ *
+ * @param columns list of DataTables column objects
+ * @param className name of the class to look for
+ * @returns array of indexes
+ */
+function getColumnIndexesWithClass( columns, className ) {
+    var indexes = [];
+    $.each( columns, function( index, columnInfo ) {
+        // note: doesn't attempt to support multiple class names on a column
+        if( columnInfo.className == className ) {
+            indexes.push( index );
+        }
+    } );
+ 
+    return indexes;
+}

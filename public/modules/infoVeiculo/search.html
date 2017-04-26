@@ -10,8 +10,8 @@
     <link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="/sass/table.css" media="screen" />
 
-     <link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />
-    
+    <link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />
+
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -44,8 +44,8 @@
                             <table id="table-combustivel" class="search-page">
                                 <thead>
                                     <tr>
-                                        <th> ID </th>
-                                        <th> NOME </th>
+                                        <th class="combIdCol"> ID </th>
+                                        <th class="combNomeCol"> NOME </th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -68,8 +68,8 @@
                             <table id="table-marca" class="search-page">
                                 <thead>
                                     <tr>
-                                        <th> ID </th>
-                                        <th> NOME </th>
+                                        <th class="marcaIdCol"> ID </th>
+                                        <th class="marcaNomeCol"> NOME </th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -97,7 +97,6 @@
                                 <thead>
                                     <tr>
                                         <th> ID </th>
-                                        <th> MARCA </th>
                                         <th> MODELO </th>
                                     </tr>
                                 </thead>
@@ -294,7 +293,8 @@
     <script type="text/javascript" src="/js/bin/sweetalert.min.js"></script>
 
     <!--Import DataTables-->
-    <script type="text/javascript" src="/js/bin/jquery.dataTables.min.js"></script>
+    <!--    <script type="text/javascript" src="/js/bin/jquery.dataTables.min.js"></script>-->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
     <script type="text/javascript" src="/js/bin/general.js"></script>
     <script type="text/javascript" src="/js/bin/combustivel.js"></script>
@@ -407,6 +407,7 @@
 
                 getCombustivel($update.id);
             });
+            
             $('#editCombustivel').on('click', function() {
                 $("#divDeleteCombustivel").addClass("hide");
                 $("#divEditCombustivel").removeClass("hide");
@@ -423,7 +424,7 @@
                 $("#divEditMarca").addClass("hide");
                 $("form :input").prop("disabled", true);
 
-                getMarca($update.id);
+                getMarca($update.id, "modal");
             });
             $('#editMarca').on('click', function() {
                 $("#divDeleteMarca").addClass("hide");
@@ -440,11 +441,11 @@
                 $("#divDeleteModelo").removeClass("hide");
                 $("#divEditModelo").addClass("hide");
                 $("form :input").prop("disabled", true);
-
-                getModelo($update.marcaId, $update.id);
-//                getMarca();
-
+                
+                $("#marcaModelo").val($("#marca :selected").text());
+                getModelo($update.id);
             });
+            
             $('#editModelo').on('click', function() {
                 $("#divDeleteModelo").addClass("hide");
                 $("#divEditModelo").removeClass("hide");
@@ -461,9 +462,9 @@
                 $("#divDeleteTipo").removeClass("hide");
                 $("#divEditTipo").addClass("hide");
                 $("form :input").prop("disabled", true);
-                getTipo($update.id);
+                getTipo($update.id, "update");
             });
-            
+
             $('#editTipo').on('click', function() {
                 $("#divDeleteTipo").addClass("hide");
                 $("#divEditTipo").removeClass("hide");

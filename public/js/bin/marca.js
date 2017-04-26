@@ -6,10 +6,18 @@ $("#marca_form").validate({
         marcaNome: {
             required: true,
             minlength: 3
+        },
+        nome: {
+            required: true,
+            minlength: 3
         }
     },
     messages: {
         marcaNome: {
+            required: "Digite a marca a ser adicionada",
+            minlength: jQuery.validator.format("O nome do setor deve conter ao menos {0} caracteres")
+        },
+        nome: {
             required: "Digite a marca a ser adicionada",
             minlength: jQuery.validator.format("O nome do setor deve conter ao menos {0} caracteres")
         }
@@ -28,8 +36,8 @@ function getMarcas(id) {
         type: 'GET',
         dataType: 'json',
         success: function (resp) {
-            
-             $.each(resp.data, function (key, value) {
+
+            $.each(resp.data, function (key, value) {
 
                 $('#marca').append(
                     $("<option></option>")
@@ -87,23 +95,24 @@ function getMarcaTable() {
 
     //Populates Table with Json
     tableMarca = $('table#table-marca').DataTable({
+
         ajax: {
             url: urlApi + "marca",
             contentType: 'application/json; charset=UTF-8',
-            dataType: 'json',
-            dataSrc: ''
+            dataType: 'json'
         },
         columns: [{
             data: "id"
                 }, {
             data: "nome"
                 }],
-        "columnDefs": [{
-            "width": "05%;",
-            "targets": 0
-                }],
+        columnDefs: [
+            {
+                width: '20%',
+                targets: 'marcaIdCol'
+            }
+        ],
         select: true,
-        fixedColumns: true,
         lengthChange: false,
         pageLength: 5,
         dom: 'lrti<"right"p>',
@@ -111,6 +120,7 @@ function getMarcaTable() {
             url: "../../doc/Portuguese-Brasil.json"
         }
     });
+    
 }
 
 function getMarca(id, input) {
@@ -132,11 +142,11 @@ function getMarca(id, input) {
                 );
                 $('#marca').material_select();
 
+            } else if (input =="modal") {
+                $("#marcaModal").val(resp.data.nome);
             } else {
-
                 $("#id").val(resp.data.id);
                 $("#nome").val(resp.data.nome);
-
             };
 
 

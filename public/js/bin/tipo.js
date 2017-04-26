@@ -6,12 +6,20 @@ $("#tipo_form").validate({
         tipoNome: {
             required: true,
             minlength: 3
+        },
+        nome: {
+            required: true,
+            minlength: 3
         }
     },
     messages: {
         tipoNome: {
-            required: "Digite a marca a ser adicionada",
-            minlength: jQuery.validator.format("O nome do setor deve conter ao menos {0} caracteres")
+            required: "Digite o tipo de veículo a ser adicionada",
+            minlength: jQuery.validator.format("O tipo de veículo deve conter ao menos {0} caracteres")
+        },
+        nome: {
+            required: "Digite o tipo de veículo a ser adicionada",
+            minlength: jQuery.validator.format("O tipo de veículo deve conter ao menos {0} caracteres")
         }
     }
 });
@@ -30,15 +38,13 @@ function getTipoTable() {
                 }, {
             data: "nome"
                 }],
-        "columnDefs": [{
-            "width": "10%",
-            "targets": 0
-                }, {
-            "width": "40%",
-            "targets": 1
-                }],
+        columnDefs: [
+            {
+                width: 10,
+                targets: 0
+            }
+        ],
         select: true,
-        fixedColumns: true,
         lengthChange: false,
         pageLength: 5,
         dom: 'lrti<"right"p>',
@@ -48,7 +54,7 @@ function getTipoTable() {
     });
 }
 
-function getTipo(id) {
+function getTipo(id, input) {
 
     $.ajax({
         type: "GET",
@@ -57,6 +63,11 @@ function getTipo(id) {
 
         //if received a response from the server
         success: function (resp) {
+            
+            if (input === "update") {
+                $("#tipoId").val(resp.data.id);
+            $("#tipoNome").val(resp.data.nome);
+            }
 
             $("#id").val(resp.data.id);
             $("#nome").val(resp.data.nome);
@@ -153,7 +164,6 @@ function updateTipo(id, dados) {
 
 };
 
-//Delete function
 function deleteTipo(id) {
     swal({
             title: "Tem certeza?",

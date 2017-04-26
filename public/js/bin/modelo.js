@@ -6,10 +6,18 @@ $("#modelo_form").validate({
         modelo: {
             required: true,
             minlength: 3
+        },
+        modeloNome: {
+            required: true,
+            minlength: 3
         }
     },
     messages: {
         modelo: {
+            required: "O campo nome deve ser preenchido",
+            minlength: jQuery.validator.format("O nome do modelo deve conter ao menos {0} caracteres")
+        },
+        modeloNome: {
             required: "O campo nome deve ser preenchido",
             minlength: jQuery.validator.format("O nome do modelo deve conter ao menos {0} caracteres")
         }
@@ -17,30 +25,24 @@ $("#modelo_form").validate({
 });
 
 //Fill table with all modelos
-function getModelosTable(marca) {
+function getModelosTable(id) {
 
     //Populates Table with Json
     tableModelo = $('table#table-modelo').DataTable({
         destroy: true,
         ajax: {
-            url: urlApi + "marca/" + marca + "/modelo",
+            url: urlApi + "marca/" + id + "/modelo",
             contentType: 'application/json; charset=UTF-8',
-            dataType: 'json',
-            dataSrc: ''
+            dataType: 'json'
         },
         columns: [{
             data: "id"
                 }, {
-            data: "marcaId"
-                }, {
             data: "nome"
                 }],
         "columnDefs": [{
-            "width": "10%",
+            "width": "20%",
             "targets": 0
-                }, {
-            "width": "40%",
-            "targets": 1
                 }],
         select: true,
         fixedColumns: true,
@@ -77,13 +79,13 @@ function getModelo(id, inputType) {
                     .prop('selected', true)
                 );
                 $('#modelo').material_select();
-                
+
             } else {
 
                 $("#modeloId").val(resp.data.id);
                 $("#modeloNome").val(resp.data.nome);
             }
-            
+
             //Reload Material Form
             Materialize.updateTextFields();
 
@@ -98,8 +100,7 @@ function getModelo(id, inputType) {
 }
 
 function getModelos(marcaId, modeloId) {
-    
-    
+
     $("#modelo").empty().html(' ');
     $("#modelo").append("<option value='' disabled selected>Escolha o modelo</option>");
     $("#loader").css('display', '');

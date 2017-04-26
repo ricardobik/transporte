@@ -1,6 +1,6 @@
 //Rules and Messages to Validate
 $("#combustivel_form").validate({
-//    ignore: [],
+    //    ignore: [],
     debug: true,
     rules: {
         combustivelTipo: {
@@ -18,17 +18,17 @@ $("#combustivel_form").validate({
 
 //Fill combustivel imput to update/delete
 function getCombustivel(id, inputType) {
- 
+
     $.ajax({
         type: "GET",
         url: urlApi + "combustivel/" + id,
         dataType: "json",
 
         //if received a response from the server
-        success: function (data) {
+        success: function (resp) {
 
-            $("#combustivelId").val(data.id);
-            $("#combustivelTipo").val(data.tipo);
+            $("#combustivelId").val(resp.data.id);
+            $("#combustivelTipo").val(resp.data.tipo);
 
             //Reload Material Form
             Materialize.updateTextFields();
@@ -46,20 +46,20 @@ function getCombustivelTable() {
         ajax: {
             url: urlApi + "combustivel",
             contentType: 'application/json; charset=UTF-8',
-            dataType: 'json',
-            dataSrc: ''
+            dataType: 'json'
         },
         columns: [{
             data: "id"
                 }, {
             data: "tipo"
                 }],
-        "columnDefs": [{
-            "width": "20%",
-            "targets": 0
-                }],
+        columnDefs: [
+            {
+                width: '20%',
+                targets: 'combIdCol'
+            }
+        ],
         select: true,
-        fixedColumns: true,
         lengthChange: false,
         pageLength: 5,
         dom: 'lrti<"right"p>',
@@ -71,7 +71,7 @@ function getCombustivelTable() {
 
 //insert into select to create veiculo
 function getCombustiveis() {
-    
+
     //Load Json marca
     $.ajax({
         url: urlApi + "combustivel",
@@ -113,8 +113,8 @@ function createCombustivel(data) {
                     "Combustivel gravado com sucesso.",
                     "success");
 
-            resetForm($("#combustivel_form"));
-                
+                resetForm($("#combustivel_form"));
+
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("Erro!");
@@ -133,7 +133,7 @@ function updateCombustivel(id, dados) {
     var data = new Object();
     data.tipo = $("#combustivelTipo").val();
     data.id = id;
-    
+
     //do AJAX request
     $("#combustivel_form").validate();
     if ($("#combustivel_form").valid()) {
@@ -154,7 +154,7 @@ function updateCombustivel(id, dados) {
                 url: urlApi + "combustivel/" + id,
                 data: data,
                 dataType: "json",
- 
+
                 //if received a response from the server
                 success: function (response) {
                     swal("Pronto!",
@@ -216,11 +216,3 @@ function deleteCombustivel(id) {
         });
 
 };
-
-
-
-
-
-
-
-

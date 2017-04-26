@@ -5295,6 +5295,16 @@
     {
       "marcaId": "",
       "id": 5034
+    },
+    {
+      "marcaId": "",
+      "nome": "",
+      "id": 5038
+    },
+    {
+      "marcaId": "256",
+      "nome": "Gayyyyy",
+      "id": 5039
     }
   ],
   "veiculo": [
@@ -5492,6 +5502,19 @@
       "setorid": "4",
       "info": "",
       "id": 16
+    },
+    {
+      "tipoid": "1",
+      "placa": "fff-9999",
+      "marcaid": "27",
+      "modeloid": "1521",
+      "anofabricacao": "1982",
+      "combustivelid": "1",
+      "renavam": "88899988899",
+      "estadoveiculo": "5",
+      "setorid": "5",
+      "info": "",
+      "id": 17
     }
   ],
   "tipo_veiculo": [
