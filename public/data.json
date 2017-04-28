@@ -5517,6 +5517,29 @@
       "id": 17
     }
   ],
+  "usuario": [
+    {
+      "nome": "ricardo rodrigo teixeira",
+      "admin": "true",
+      "usuario": "ricardobik",
+      "senha": "olha lá",
+      "id": 4
+    },
+    {
+      "nome": "ricardo rodrigo teixeira",
+      "admin": "on",
+      "usuario": "ricccc",
+      "senha": "alfa",
+      "id": 5
+    },
+    {
+      "nome": "ricardo rodrigo teixeira",
+      "admin": "false",
+      "usuario": "ricardobik",
+      "senha": "funfa",
+      "id": 6
+    }
+  ],
   "tipo_veiculo": [
     {
       "id": 0,

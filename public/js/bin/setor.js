@@ -246,36 +246,6 @@ function getSetores(id) {
         }
     });
 
-}
+};
+ 
 
-
-//Get setores and add to select
-//function getSetorSelect(id) {
-//
-//    $.ajax({
-//        url: urlApi + "setor",
-//        type: 'GET',
-//        dataType: 'json',
-//        success: function (json) {
-//
-//            $('#setorid')
-//                .find('option')
-//                .remove()
-//                .end();
-//
-//            $.each(json, function (key, value) {
-//
-//                $('#setorid').append(
-//                    $("<option></option>")
-//                    .attr('value', value.id)
-//                    .text(value.nome)
-//                );
-//
-//                $('#setorid').find('option[value="' + id + '"]').prop('selected', true);
-//                $('#setorid').material_select();
-//
-//            });
-//
-//        }
-//    });
-//};
