@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import qunit.css-->
+    <link type="text/css" rel="stylesheet" href="https://code.jquery.com/qunit/qunit-git.css" media="screen,projection" />
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
+    <!--Import SweetAlert with google style-->
+    <link type="text/css" rel="stylesheet" href="/sass/sweetalert.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="/sass/themes/google/google.css" media="screen,projection" />
+    <!--    <link type="text/css" rel="stylesheet" href="/sass/style.css" media="screen,projection" />-->
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+    <!-- Import Navbar -->
+    <div id="nav-bar"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Usuário</span>
+                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Setor</span>
+                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Veículo</span>
+                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Dados de Veículo</span>
+                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4 offset-m4">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Motorista</span>
+                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <!--    <script type="text/javascript" src="/js/bin/materialize.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/js/bin/sweetalert.min.js"></script>
+
+    <!--Import JUnit tests-->
+    <script type="text/javascript" src="https://code.jquery.com/qunit/qunit-2.1.1.js"></script>
+
+    <script type="text/javascript" src="/js/bin/general.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+
+            //Load Navbar and dropdown menu
+            $('#nav-bar').load("/modules/navbar.html", function() {
+                $(".button-collapse").sideNav();
+                $('.dropdown-button').dropdown();
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>

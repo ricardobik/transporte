@@ -188,7 +188,7 @@ function createUsuario(data) {
 };
 
 //Update function
-function updateusuario(data) {
+function updateUsuario(data) {
 
     //do AJAX request
     validator = $("#usuario_form").validate();

@@ -29,7 +29,7 @@
       "cnh": "25431185760",
       "cnh_vencimento": "2015-10-20",
       "telefone": "+55 (856) 508-3053",
-      "setor": "20",
+      "setor": "25",
       "id": 6
     },
     {
@@ -5526,18 +5526,9 @@
       "id": 4
     },
     {
+      "id": 6,
       "nome": "ricardo rodrigo teixeira",
-      "admin": "on",
-      "usuario": "ricccc",
-      "senha": "alfa",
-      "id": 5
-    },
-    {
-      "nome": "ricardo rodrigo teixeira",
-      "admin": "false",
-      "usuario": "ricardobik",
-      "senha": "funfa",
-      "id": 6
+      "usuario": "ricardobik2019"
     }
   ],
   "tipo_veiculo": [
